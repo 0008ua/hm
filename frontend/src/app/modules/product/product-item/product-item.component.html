@@ -1,0 +1,25 @@
+<div class="product" fxLayout="column">
+  <img class="product__picture" fxFlex [src]="product.picture" alt="product picture">
+  <div *ngIf="product.name" class="product__name" fxFlex>
+    {{product.name}}
+  </div>
+  <div class="product__icons container" fxFlex fxLayoutAlign="center end">
+    <div class="row" fxLayout="row" fxFlex>
+      <div class="cell" fxFlex fxLayoutAlign="center">
+        <span>
+          <i class="far fa-eye"></i>
+          <span class="item">1025</span>
+        </span>
+
+
+      </div>
+      <div class="cell" fxFlex fxLayoutAlign="center">
+        <span>
+          <i class="fa fa-calendar"></i>
+          <span class="item">25.02.2020</span>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,187 @@
+@import "./styles/grid";
+
+// initial reset
+html {
+  font-size: 14px;
+  box-sizing: border-box;
+  // fonts for all not material elements
+  font-family: $mainFontFamily;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+  // &.link span {
+  //   &.type1 {
+  //     @include mat-typography-level-to-styles($config, subheading-2);
+  //     span,
+  //     mat-icon {
+  //       vertical-align: middle;
+  //     }
+  //   }
+  //   &.type2 {
+  //     @include mat-typography-level-to-styles($config, body-1);
+  //     span,
+  //     mat-icon {
+  //       vertical-align: middle;
+  //     }
+  //   }
+  // }
+}
+
+// main block - header + main + footer
+// elements
+.toolbar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  &__logo {
+    padding: 0 16px;
+  }
+
+  &_header {
+    @include gt-md {
+      height: 130px;
+      padding: 32px 16px 16px 16px;
+    }
+    @include md {
+      height: 100px;
+      padding: 32px 16px 16px 16px;
+    }
+    @include sm {
+      height: 64px;
+      padding: 8px 16px;
+    }
+    @include xs {
+      padding: 8px 16px;
+      height: 56px;
+    }
+  }
+  &_footer {
+    @include gt-xs {
+      height: 64px;
+      padding: 8px 16px;
+    }
+    @include xs {
+      height: 56px;
+      padding: 8px 16px;
+    }
+  }
+}
+
+.sidenav {
+  width: 250px;
+  &__logo {
+    padding: 16px;
+  }
+  &__links {
+    padding: 16px;
+  }
+}
+
+main {
+  @include gt-md {
+    min-height: calc(100vh - 194px); // footer 64px + toolbar 130px
+  }
+  @include md {
+    min-height: calc(100vh - 164px); // footer 64px + toolbar 100px
+  }
+  @include sm {
+    min-height: calc(100vh - 128px); // footer 64px + toolbar 64px
+  }
+  @include xs {
+    min-height: calc(100vh - 112px); // footer 56px + toolbar 56px
+  }
+}
+
+.google-button {
+  color: rgba(0, 0, 0, 0.54);
+  font-family: Roboto;
+  // padding: 0 8px !important;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 40px !important;
+  svg {
+    box-sizing: content-box;
+    padding-right: 24px;
+  }
+}
+
+.profile {
+  max-width: 250px;
+}
+
+.product {
+  @include transition(0.3s ease);
+  @include mat-elevation(1);
+
+  &:hover {
+    // @include mat-elevation-transition;
+    @include mat-elevation(8);
+    // @include transition(0.3s ease);
+    // &:hover {
+
+    @include transform(translateX(1px) translateY(1px));
+    opacity: 0.8;
+    // }
+  }
+  border-radius: 15px 15px 5px 5px;
+  background-color: mat-color($background, card);
+  height: 100%;
+  &__picture {
+    border-radius: 15px 15px 0 0;
+    width: 100%;
+    height: auto;
+  }
+  &__name {
+    @include mat-typography-level-to-styles($config, title);
+    @include responsive-padding-h(2);
+    @include responsive-padding-v(1);
+    border-bottom: 1px solid mat-color($foreground, divider);
+
+    //   font: {
+    //   family: mat-font-family($config, caption);
+    //   size: mat-font-size($config, body-1);
+    //   weight: mat-font-weight($config, caption);
+    // }
+  }
+  &__icons {
+    border-radius: 0 0  5px 5px;
+
+    // display: flex;
+    // align-items: flex-end;
+    @include mat-typography-level-to-styles($config, body-1);
+    // @include responsive-padding-h(2);
+    // @include responsive-padding-v(1);
+
+    background-color: mat-color($background, background);
+    color: mat-color($foreground, icon);
+    //   font: {
+    //   family: mat-font-family($config, caption);
+    //   size: mat-font-size($config, body-1);
+    //   weight: mat-font-weight($config, caption);
+    // }
+  }
+}

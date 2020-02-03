@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="row" fxLayout="row">
+    <div *ngFor="let product of products" fxFlex="33.3" class="cell">
+      <app-product-item [product]=product></app-product-item>
+    </div>
+  </div>
+</div>
+
