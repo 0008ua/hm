@@ -1,7 +1,7 @@
 {
   "port": 8082,
   "defaults": {
-    "productPicture": "",
-    "userPicture": ""
+    "productPicture": "default_product",
+    "userPicture": "default_avatar"
   }
 }

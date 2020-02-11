@@ -12,7 +12,7 @@
 module.exports = class DbError extends Error {
   constructor(err) {
     super();
-    this.message = err && err.message ? 'DatabaseError, ' + err.message : 'DatabaseError';
+    this.message = err && err.message ? 'DatabaseError. ' + err.message : 'DatabaseError';
     this.status = err && err.status ? err.status : 400;
     this.code = err && err.code ? err.code : 0;
     this.name = 'DatabaseError';

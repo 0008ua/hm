@@ -168,14 +168,10 @@ main {
     // }
   }
   &__icons {
-    border-radius: 0 0  5px 5px;
-
-    // display: flex;
-    // align-items: flex-end;
+    border-radius: 0 0 5px 5px;
     @include mat-typography-level-to-styles($config, body-1);
     // @include responsive-padding-h(2);
     // @include responsive-padding-v(1);
-
     background-color: mat-color($background, background);
     color: mat-color($foreground, icon);
     //   font: {
@@ -183,5 +179,16 @@ main {
     //   size: mat-font-size($config, body-1);
     //   weight: mat-font-weight($config, caption);
     // }
+  }
+}
+
+.pictureForm {
+  position: relative;
+  min-width: 260px;
+  min-height: 170px;
+  img,
+  mat-spinner,
+  button {
+    position: absolute;
   }
 }

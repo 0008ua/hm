@@ -17,6 +17,12 @@
     <a *ngIf="user._id" mat-button class="" (click)="logout()">
       <span>Logout</span>
     </a>
+
+        <a mat-button class="" [routerLink]="['/', 'dashboard']" [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{exact: false}">
+          <span>Dashboard</span>
+        </a>
+
   </div>
 
 

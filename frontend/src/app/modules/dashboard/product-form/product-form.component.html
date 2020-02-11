@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row" fxLayout="row">
+    <div class="cell" fxFlex="25"></div>
+    <div class="cell" fxFlex="50">
+                      <h2 class="mat-h2">Редагувати</h2>
+
+      <form [formGroup]="form" #f="ngForm" novalidate>
+        <div class="container">
+          <div class="row">
+            <div class="cell" fxFlex="100">
+Артикул: {{_id}}
+            </div>
+            <div class="cell" fxFlex="50" fxLayoutAlign="start center">
+              <label class="item">Публікувати? </label>
+              <mat-radio-group formControlName="display" class="item">
+                <mat-radio-button class="item" #defaultCheckedRadioButton checked value="true">Так</mat-radio-button>
+                <mat-radio-button class="item" value="false">Ні</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="cell" fxFlex="50">
+              <mat-form-field fxFlex>
+                <input matInput placeholder="Назва" formControlName="name">
+                <button mat-button *ngIf="form.get('name').value" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="clearNameField()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div class="cell" fxFlex="100" fxLayoutAlign="center center">
+              <div class="pictureForm" fxLayoutAlign="center center">
+                <img class="pictureForm__picture" *ngIf="form.get('picture').value" src="{{
+                                                                  environment.cloudinary.cloudHost +
+                                                                  environment.cloudinary.cloudName +
+                                                                   '/c_fill,w_260,h_170,f_auto/' + 
+                                                                   form.get('picture').value}}" alt="Picture">
+                <img class="pictureForm__picture" *ngIf="!form.get('picture').value" src="{{
+                                                                  environment.cloudinary.cloudHost +
+                                                                  environment.cloudinary.cloudName +
+                                                                  '/c_fill,w_260,h_170,f_auto/'+
+                                                                  environment.defaults.productPicture}}" alt="Picture">
+                <input #inputPicture type="file" (change)="addPicture($event)"
+                  accept=".jpg, .jpe, .jpeg, .bmp, .webp, .png, .gif, .svg" style="display:none;">
+                <mat-spinner *ngIf="processingLoadPicture" class="addPicture__spinner" [diameter]="24"></mat-spinner>
+                <button mat-icon-button color="primary" *ngIf="!processingLoadPicture" type="button" aria-label="add"
+                  (click)="inputPicture.click();" [disabled]="processingLoadPicture">
+                  <mat-icon *ngIf="!form.get('picture').value && !processingLoadPicture">add</mat-icon>
+                  <mat-icon *ngIf="form.get('picture').value && !processingLoadPicture">redo</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <div class="cell" fxFlex="50" fxLayoutAlign="center">
+              <button mat-raised-button color="primary" (click)="submitForm()" [disabled]="!form.valid || processingLoadPicture">OK</button>
+            </div>
+            <div class="cell" fxFlex="50" fxLayoutAlign="center">
+              <button mat-raised-button (click)="resetForm()" [disabled]="processingLoadPicture">Reset</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

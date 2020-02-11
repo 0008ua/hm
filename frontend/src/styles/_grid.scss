@@ -192,7 +192,7 @@ $space-xs: 8px;
     @include last {
       padding-right: 0;
     }
-    padding: 0 $space-gt-md;
+    padding: 0 calc(#{$space-gt-md}/2);
   }
   @include md {
     @include first {
@@ -201,7 +201,7 @@ $space-xs: 8px;
     @include last {
       padding-right: 0;
     }
-    padding: 0 $space-md;
+    padding: 0 calc(#{$space-md}/2);
   }
   @include sm {
     @include first {
@@ -210,7 +210,7 @@ $space-xs: 8px;
     @include last {
       padding-right: 0;
     }
-    padding: 0 $space-sm;
+    padding: 0 calc(#{$space-sm}/2);
   }
   @include xs {
     padding: 0;

@@ -18,6 +18,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ProductEffects } from './effects/product.effects';
+import { ScreenEffects } from './effects/screen.effects';
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import { ProductEffects } from './effects/product.effects';
         strictActionImmutability: true
       }
     }),
-    EffectsModule.forRoot([AppEffects, UserEffects, ProductEffects]),
+    EffectsModule.forRoot([AppEffects, UserEffects, ProductEffects, ScreenEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [

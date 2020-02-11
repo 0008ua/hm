@@ -8,6 +8,7 @@
     "extends": [
         "google"
     ],
+
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -20,14 +21,6 @@
         "object-curly-spacing": 0,
         "require-jsdoc": 0,
         "camelcase": 0,
-        "variable-name": {
-            "options": [
-                "ban-keywords",
-                "check-format",
-                "allow-leading-underscore",
-                "allow-snake-case"
-            ]
-        },
         "max-len": [
             2,
             {

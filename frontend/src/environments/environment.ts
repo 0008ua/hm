@@ -4,7 +4,15 @@
 
 export const environment = {
   production: false,
-  host: 'https://localhost:8082'
+  host: 'https://localhost:8082',
+  cloudinary: {
+    cloudName: 'hd1oejweg',
+    cloudHost: 'https://res.cloudinary.com',
+  },
+  defaults: {
+    productPicture: 'default_product',
+    userPicture: 'default_avatar',
+  }
 };
 
 /*

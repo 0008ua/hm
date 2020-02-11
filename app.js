@@ -9,10 +9,12 @@ const passport = require('./server/config/passport');
 const csrf = require('csurf');
 
 const { router } = require('./server/routes');
-const { userRouter } = require('./server/routes/user');
-const { productRouter } = require('./server/routes/product');
+const userRouter = require('./server/routes/userRouter');
+const productRouter = require('./server/routes/productRouter');
+const catalogRouter = require('./server/routes/catalogRouter');
+const sharedRouter = require('./server/routes/sharedRouter');
 
-const { errorHandler, ClientError }= require('./server/errors');
+const { errorHandler, ClientError } = require('./server/errors');
 const { sessionCookie } = require('./server/config/session');
 const { setCSRFCookie, setFrontendAuthCookie } = require('./server/middlewares');
 
@@ -27,7 +29,7 @@ app.set('view engine', 'pug');
 // app.use(logger('dev'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // check cookie, add req.csrfToken(),
@@ -52,18 +54,20 @@ app.use(setFrontendAuthCookie);
  */
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
-app.use('/api', (req, res, next) => 
+app.use('/api/catalog', catalogRouter);
+app.use('/api/shared', sharedRouter);
+app.use('/api', (req, res, next) =>
   next(new ClientError({
-    message: 'Wrong api4',
+    message: 'Wrong api',
     status: '404',
-  }))
+  })),
 );
 /**
  * all not-apis, 404 will be handled at frontend
  */
 app.use('/', router);
 
-app.use('*', function (req, res) {
+app.use('*', function(req, res) {
   res.redirect('/');
 });
 

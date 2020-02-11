@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
-import { IUser } from './interfaces';
+import { IUser, PictureTypes } from './interfaces';
 import { Store } from '@ngrx/store';
 import { State } from './reducers';
 import { GetUser } from './actions/user.actions';
 import { FbService } from './services/fb.service';
+import { LoadScreens } from './actions/screen.actions';
+import { ScreenState } from './reducers/screen.reducer';
+
 declare let FB: any;
 
 @Component({
@@ -14,6 +17,7 @@ declare let FB: any;
 })
 export class AppComponent implements OnInit {
   user: IUser;
+  link: any;
   constructor(
     private userService: UserService,
     private store: Store<State>,
@@ -24,6 +28,8 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new GetUser());
     this.store.select('auth')
       .subscribe(store => this.user = store.user);
+
+    this.store.dispatch(new LoadScreens());
   }
 
   // api() {

@@ -12,7 +12,7 @@
 module.exports = class ServerError extends Error {
   constructor(err) {
     super();
-    this.message = err && err.message ? 'Internal Server Error ' + err.message : 'Internal Server Error';
+    this.message = err && err.message ? 'Internal Server Error. ' + err.message : 'Internal Server Error';
     this.status = err && err.status ? err.status : 500;
     this.code = err && err.code ? err.code : 0;
     this.name = 'ServerError';

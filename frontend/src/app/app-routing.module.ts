@@ -9,6 +9,10 @@ const routes: Routes = [
     loadChildren: './modules/user/user.module#UserModule',
   },
   {
+    path: 'dashboard',
+    loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+  },
+  {
     path: '',
     loadChildren: './modules/product/product.module#ProductModule',
     pathMatch: 'full'

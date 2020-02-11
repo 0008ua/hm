@@ -13,7 +13,7 @@ module.exports = class ClientError extends Error {
   constructor(err) {
     super();
     console.log('error ', err);
-    this.message = err && err.message ? 'Client error, ' + err.message : 'Bad request';
+    this.message = err && err.message ? 'Client error. ' + err.message : 'Bad request';
     this.status = err && err.status ? err.status : 400;
     this.code = err && err.code ? err.code : 0;
     this.name = 'ClientError';
