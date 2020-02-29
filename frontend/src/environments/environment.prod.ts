@@ -2,7 +2,7 @@ import { PictureTypes, ScreenTypes, SortTypes } from 'src/app/interfaces';
 
 export const environment = {
   production: true,
-  host: 'https://hmade-staging.herokuapp.com/',
+  host: 'https://hmade-staging.herokuapp.com',
   cloudinary: {
     cloudName: 'hd1oejweg',
     cloudHost: 'https://res.cloudinary.com',
