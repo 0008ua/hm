@@ -1,4 +1,4 @@
-@import './mixins';
+@import "./mixins";
 
 $space-gt-md: 12px;
 $space-md: 12px;
@@ -20,8 +20,6 @@ $space-xs: 8px;
   }
 }
 
-
-
 // @mixin responsive-padding {
 //   @include gt-md {
 //     padding: $space-gt-md;
@@ -39,7 +37,7 @@ $space-xs: 8px;
 
 // x - scale parameter
 @mixin responsive-padding($x) {
-    @include gt-md {
+  @include gt-md {
     padding: calc(#{$x} * #{$space-gt-md});
   }
   @include md {
@@ -54,7 +52,7 @@ $space-xs: 8px;
 }
 
 @mixin responsive-padding-v($x) {
-    @include gt-md {
+  @include gt-md {
     padding-top: calc(#{$x} * #{$space-gt-md});
     padding-bottom: calc(#{$x} * #{$space-gt-md});
   }
@@ -73,7 +71,7 @@ $space-xs: 8px;
 }
 
 @mixin responsive-padding-h($x) {
-    @include gt-md {
+  @include gt-md {
     padding-left: calc(#{$x} * #{$space-gt-md});
     padding-right: calc(#{$x} * #{$space-gt-md});
   }
@@ -180,7 +178,7 @@ $space-xs: 8px;
     padding: $space-sm;
   }
   @include xs {
-    padding: $space-xs;
+    padding: $space-xs 0;
   }
 }
 
@@ -192,7 +190,7 @@ $space-xs: 8px;
     @include last {
       padding-right: 0;
     }
-    padding: 0 calc(#{$space-gt-md}/2);
+    padding: 0 calc(#{$space-gt-md}/ 2);
   }
   @include md {
     @include first {
@@ -201,7 +199,7 @@ $space-xs: 8px;
     @include last {
       padding-right: 0;
     }
-    padding: 0 calc(#{$space-md}/2);
+    padding: 0 calc(#{$space-md}/ 2);
   }
   @include sm {
     @include first {
@@ -210,9 +208,15 @@ $space-xs: 8px;
     @include last {
       padding-right: 0;
     }
-    padding: 0 calc(#{$space-sm}/2);
+    padding: 0 calc(#{$space-sm}/ 2);
   }
   @include xs {
-    padding: 0;
+    @include first {
+      padding-left: 0;
+    }
+    @include last {
+      padding-right: 0;
+    }
+    padding: 0 calc(#{$space-xs}/ 2);
   }
 }

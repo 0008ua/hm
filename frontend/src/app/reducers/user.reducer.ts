@@ -13,6 +13,8 @@ export const initialState: UserState = {
 };
 
 export function userReducer(state = initialState, action: UserActions): UserState {
+  // console.log('screen reducer');
+
   switch (action.type) {
 
     // fires and then effect fires on same action to fetch data

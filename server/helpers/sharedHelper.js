@@ -5,16 +5,16 @@ const createJWT = (prefix, sub, expire, secret) => {
   return (
     prefix +
     jwt.sign(
-      {
-        sub,
-        iat: date,
-        exp: date + expire,
-      },
-      secret
+        {
+          sub,
+          iat: date,
+          exp: date + expire,
+        },
+        secret,
     )
   );
-}
+};
 
 module.exports = {
-  createJWT
-}
+  createJWT,
+};

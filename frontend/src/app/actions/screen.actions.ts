@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { PictureTypes } from '../interfaces';
+import { ScreenState } from '../reducers/screen.reducer';
 
 export enum ScreenActionTypes {
   LoadScreens = '[Screen] Load Screens',
@@ -8,14 +9,12 @@ export enum ScreenActionTypes {
 
 export class LoadScreens implements Action {
   readonly type = ScreenActionTypes.LoadScreens;
-  // constructor(public payload: PictureTypes) { }
 }
 
 export class ChangedScreens implements Action {
   readonly type = ScreenActionTypes.ChangedScreens;
-  constructor(public payload: any) { }
+  constructor(public payload: ScreenState) { }
 }
-
 
 export type ScreenActions =
   LoadScreens |

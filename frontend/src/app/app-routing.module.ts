@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Page404Component } from './modules/shared/page404/page404.component';
+import { AuthGuard } from './services/auth.guard';
 
 
 const routes: Routes = [
@@ -11,10 +12,16 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+    canActivate: [AuthGuard],
+    data: { auth: 'manager' },
+  },
+  {
+    path: 'products',
+    loadChildren: './modules/product/product.module#ProductModule',
   },
   {
     path: '',
-    loadChildren: './modules/product/product.module#ProductModule',
+    redirectTo: 'products',
     pathMatch: 'full'
   },
   {

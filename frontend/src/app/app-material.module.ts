@@ -10,11 +10,9 @@ import {
   MatInputModule,
   MatSnackBarModule,
   MatProgressSpinnerModule,
-  // MatBadgeModule
-  // MatGridListModule, MatTabsModule,
-  // MatDialogModule, MatTableModule, MatStepperModule,
-  // MatSelectModule,  MatCheckboxModule, MatMenuModule,
-  // MatExpansionModule, MatListModule, MatAutocompleteModule, MatDividerModule,
+  MatSelectModule,
+  MatButtonToggleModule,
+  MatChipsModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -33,6 +31,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    MatButtonToggleModule,
+    MatChipsModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -47,6 +48,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    MatButtonToggleModule,
+    MatChipsModule,
   ],
 })
 

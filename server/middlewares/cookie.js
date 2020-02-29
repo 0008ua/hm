@@ -5,16 +5,16 @@ const setCSRFCookie = (req, res, next) => {
   const cookieCsrfOptions = {
     httpOnly: false,
     maxAge: 10800000,
-    sameSite: "Strict",
-    path: "/"
+    sameSite: 'Strict',
+    path: '/',
   };
   res.cookie(
-    'XSRF-TOKEN',
-    req.csrfToken(),
-    cookieCsrfOptions
+      'XSRF-TOKEN',
+      req.csrfToken(),
+      cookieCsrfOptions,
   );
   next();
-}
+};
 
 /*
  set cookie to frontend with users credential
@@ -40,19 +40,19 @@ const setFrontendAuthCookie = (req, res, next) => {
     token = createJWT('', null, null, JWTSecret);
   }
   res.cookie(
-    frontendCookieName,
-    token,
-    {
+      frontendCookieName,
+      token,
+      {
       // 'secure': false,
-      httpOnly: false,
-      // maxAge: null,
-      sameSite: 'Strict',
-    }
+        httpOnly: false,
+        // maxAge: null,
+        sameSite: 'Strict',
+      },
   );
   next();
 };
 
 module.exports = {
   setCSRFCookie,
-  setFrontendAuthCookie
-}
+  setFrontendAuthCookie,
+};

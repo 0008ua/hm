@@ -13,6 +13,7 @@ const userRouter = require('./server/routes/userRouter');
 const productRouter = require('./server/routes/productRouter');
 const catalogRouter = require('./server/routes/catalogRouter');
 const sharedRouter = require('./server/routes/sharedRouter');
+const dbRouter = require('./server/routes/dbRouter');
 
 const { errorHandler, ClientError } = require('./server/errors');
 const { sessionCookie } = require('./server/config/session');
@@ -56,6 +57,7 @@ app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/catalog', catalogRouter);
 app.use('/api/shared', sharedRouter);
+app.use('/api/db', dbRouter);
 app.use('/api', (req, res, next) =>
   next(new ClientError({
     message: 'Wrong api',

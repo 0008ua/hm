@@ -1,24 +1,37 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Product } from '../models/product.model';
 import { ProductActions, ProductActionTypes } from '../actions/product.actions';
+import { IProduct } from '../interfaces';
+import { createFeatureSelector, createSelector, State } from '@ngrx/store';
 
 export const productsFeatureKey = 'products';
 
-export interface State extends EntityState<Product> {
+export interface ProductState extends EntityState<IProduct> {
   // additional entities state properties
+  loading: boolean;
 }
 
-export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>();
+export const adapter: EntityAdapter<IProduct> = createEntityAdapter<IProduct>({
+  selectId: (product: IProduct) => product._id
+});
 
-export const initialState: State = adapter.getInitialState({
+export const initialState: ProductState = adapter.getInitialState({
   // additional entity state properties
+  loading: true,
 });
 
 export function reducer(
   state = initialState,
   action: ProductActions
-): State {
+): ProductState {
+  // console.log('product reducer', action.type);
+
   switch (action.type) {
+
+    case ProductActionTypes.LoadingProducts: { // listening on loading state changes
+      return { ...state, loading: action.payload.loading };
+    }
+
+    // entity
     case ProductActionTypes.AddProduct: {
       return adapter.addOne(action.payload.product, state);
     }
@@ -71,3 +84,5 @@ export const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors();
+
+

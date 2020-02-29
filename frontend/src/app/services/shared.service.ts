@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { PictureTypes, ScreenTypes, ProductScreenTypes, MainScreenTypes } from '../interfaces';
+import { ScreenTypes, PictureTypes, IPictureSize, IPictureState } from '../interfaces';
 import { environment } from '../../environments/environment';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { map } from 'rxjs/operators';
@@ -54,13 +54,26 @@ export class SharedService {
     );
   }
 
+  createPictureOptions(productPictureSize: IPictureSize, screenType: ScreenTypes) {
+    // tslint:disable-next-line: max-line-length
+    return `c_fill,w_${productPictureSize[screenType].w},h_${productPictureSize[screenType].h},f_auto/w_${(productPictureSize[screenType].w) * 0.5},g_south_east,x_5,y_5,l_hmade_logo_light_watermark`;
+  }
+
   createPictureLink(pictureType: PictureTypes, screenType: ScreenTypes) {
     switch (pictureType) {
       case PictureTypes.ProductPicture: {
-        return this.cloudinaryUrl + '/' + ProductScreenTypes[screenType];
+        return this.cloudinaryUrl + '/' +
+          this.createPictureOptions(
+            this.environment.cloudinary.pictureSize[PictureTypes.ProductPicture],
+            screenType
+          );
       }
-      case PictureTypes.MainPicture: {
-        return this.cloudinaryUrl + '/' + MainScreenTypes[screenType];
+      case PictureTypes.DashboardProductPicture: {
+        return this.cloudinaryUrl + '/' +
+          this.createPictureOptions(
+            this.environment.cloudinary.pictureSize[PictureTypes.DashboardProductPicture],
+            screenType
+          );
       }
       default: {
         return this.cloudinaryUrl;
@@ -68,26 +81,47 @@ export class SharedService {
     }
   }
 
-
-  pictureLink() {
+  loadScreens() {
     return this.media.asObservable()
       .pipe(
         map((_: MediaChange[]) => {
           const screenState = {} as ScreenState;
+          screenState.pictureLink = {};
+          // link to cloudinary pictures depend on screen size
           for (const pictureType in PictureTypes) {
-            if (PictureTypes.hasOwnProperty(pictureType) && !isNaN(Number(pictureType))) {
+            if (PictureTypes.hasOwnProperty(pictureType)) { //  && !isNaN(Number(pictureType))) {
+              screenState.pictureLink[pictureType] = {} as IPictureState;
               if (this.media.isActive(ScreenTypes.xs)) {
-                screenState[pictureType] = this.createPictureLink(Number(pictureType), ScreenTypes.xs);
+                const { w, h } = this.environment.cloudinary.pictureSize[pictureType][ScreenTypes.xs];
+                screenState.pictureLink[pictureType].size = { w, h };
+                screenState.pictureLink[pictureType].link = this.createPictureLink(pictureType as PictureTypes, ScreenTypes.xs);
               } else if (this.media.isActive(ScreenTypes.sm)) {
-                screenState[pictureType] = this.createPictureLink(Number(pictureType), ScreenTypes.sm);
+                const { w, h } = this.environment.cloudinary.pictureSize[pictureType][ScreenTypes.sm];
+                screenState.pictureLink[pictureType].size = { w, h };
+                screenState.pictureLink[pictureType].link = this.createPictureLink(pictureType as PictureTypes, ScreenTypes.sm);
               } else if (this.media.isActive(ScreenTypes.md)) {
-                screenState[pictureType] = this.createPictureLink(Number(pictureType), ScreenTypes.md);
+                const { w, h } = this.environment.cloudinary.pictureSize[pictureType][ScreenTypes.md];
+                screenState.pictureLink[pictureType].size = { w, h };
+                screenState.pictureLink[pictureType].link = this.createPictureLink(pictureType as PictureTypes, ScreenTypes.md);
               } else {
-                screenState[pictureType] = this.createPictureLink(Number(pictureType), ScreenTypes.xl);
+                const { w, h } = this.environment.cloudinary.pictureSize[pictureType][ScreenTypes.xl];
+                screenState.pictureLink[pictureType].size = { w, h };
+                screenState.pictureLink[pictureType].link = this.createPictureLink(pictureType as PictureTypes, ScreenTypes.xl);
               }
             }
           }
-          console.log('screenState', screenState);
+
+          // portion of pictures to load depend on screen size
+          if (this.media.isActive(ScreenTypes.xs)) {
+            screenState.picturesOnPage = this.environment.defaults.picturesOnPage[ScreenTypes.xs];
+          } else if (this.media.isActive(ScreenTypes.sm)) {
+            screenState.picturesOnPage = this.environment.defaults.picturesOnPage[ScreenTypes.sm];
+          } else if (this.media.isActive(ScreenTypes.md)) {
+            screenState.picturesOnPage = this.environment.defaults.picturesOnPage[ScreenTypes.md];
+          } else {
+            screenState.picturesOnPage = this.environment.defaults.picturesOnPage[ScreenTypes.xl];
+          }
+
           return screenState;
         })
       );

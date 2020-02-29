@@ -30,22 +30,47 @@ a:hover,
 a:active {
   text-decoration: none;
   color: inherit;
-  // &.link span {
-  //   &.type1 {
-  //     @include mat-typography-level-to-styles($config, subheading-2);
-  //     span,
-  //     mat-icon {
-  //       vertical-align: middle;
-  //     }
-  //   }
-  //   &.type2 {
-  //     @include mat-typography-level-to-styles($config, body-1);
-  //     span,
-  //     mat-icon {
-  //       vertical-align: middle;
-  //     }
-  //   }
-  // }
+  @include mat-typography-level-to-styles($config, body-1);
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+@include keyframes(fadeIn) {
+  from {
+    opacity: 0;
+    // transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    // transform: translateY(0);
+  }
+}
+
+@include keyframes(fadeOut) {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animationAppear03s {
+  @include animation(fadeIn 0.3s forwards);
+}
+
+.animationDissappear03s {
+  @include animation(fadeOut 0.3s forwards);
+}
+
+.animationAppear05s {
+  @include animation(fadeIn 0.5s forwards);
+}
+
+.animationAppear1s {
+  @include animation(fadeIn 1s forwards);
 }
 
 // main block - header + main + footer
@@ -134,61 +159,97 @@ main {
 }
 
 .product {
-  @include transition(0.3s ease);
-  @include mat-elevation(1);
-
+  // @include transition(0.3s ease);
+  @include gt-xs {
+    @include mat-elevation(1);
+  }
+  position: relative;
   &:hover {
-    // @include mat-elevation-transition;
-    @include mat-elevation(8);
-    // @include transition(0.3s ease);
-    // &:hover {
-
+    @include mat-elevation(2);
     @include transform(translateX(1px) translateY(1px));
-    opacity: 0.8;
-    // }
+    // opacity: 0.8;
+    .product__name {
+      display: block;
+    }
   }
   border-radius: 15px 15px 5px 5px;
+  @include xs {
+    border-radius: 0;
+  }
   background-color: mat-color($background, card);
   height: 100%;
   &__picture {
     border-radius: 15px 15px 0 0;
+    @include xs {
+      border-radius: 0;
+    }
     width: 100%;
     height: auto;
   }
-  &__name {
+  &__editor {
     @include mat-typography-level-to-styles($config, title);
-    @include responsive-padding-h(2);
-    @include responsive-padding-v(1);
-    border-bottom: 1px solid mat-color($foreground, divider);
-
-    //   font: {
-    //   family: mat-font-family($config, caption);
-    //   size: mat-font-size($config, body-1);
-    //   weight: mat-font-weight($config, caption);
-    // }
-  }
-  &__icons {
-    border-radius: 0 0 5px 5px;
-    @include mat-typography-level-to-styles($config, body-1);
     // @include responsive-padding-h(2);
     // @include responsive-padding-v(1);
+    border-bottom: 1px solid mat-color($foreground, divider);
+  }
+  &__name {
+    border-radius: 15px 15px 0 0;
+    @include xs {
+      border-radius: 0;
+    }
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background-color: rgba(black, 0.3);
+    color: white;
+    @include mat-typography-level-to-styles($config, body-1);
+  }
+  &__inf {
+    // display: none;
+    // position: absolute;
+    // bottom: 0;
+    border-radius: 0 0 5px 5px;
+    // width: 100%;
+    // background-color: rgba(black, 0.5);
+    // color: white;
+    @include mat-typography-level-to-styles($config, body-1);
     background-color: mat-color($background, background);
     color: mat-color($foreground, icon);
-    //   font: {
-    //   family: mat-font-family($config, caption);
-    //   size: mat-font-size($config, body-1);
-    //   weight: mat-font-weight($config, caption);
-    // }
   }
 }
 
 .pictureForm {
   position: relative;
-  min-width: 260px;
-  min-height: 170px;
-  img,
   mat-spinner,
   button {
     position: absolute;
   }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.active {
+  color: mat-color($foreground, icon);
+}
+
+.chips {
+  &_primary {
+    background-color: mat-color($primary) !important;
+    color: white !important;
+  }
+  &_active {
+    background-color: mat-color($accent) !important;
+    color: white !important;
+  }
+  &_loading {
+    background-color: mat-color($background, card) !important;
+    color: white !important;
+  }
+}
+
+.progress-bar {
+  height: 4px;
 }

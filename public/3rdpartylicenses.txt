@@ -112,7 +112,13 @@ THE SOFTWARE.
 
 @angular/material/button
 
+@angular/material/button-toggle
+
 @angular/material/card
+
+@angular/material/chips
+
+@angular/material/core
 
 @angular/material/form-field
 
@@ -123,6 +129,8 @@ THE SOFTWARE.
 @angular/material/progress-spinner
 
 @angular/material/radio
+
+@angular/material/select
 
 @angular/material/sidenav
 
@@ -162,6 +170,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 @ngrx/effects
+MIT
+
+@ngrx/entity
 MIT
 
 @ngrx/store

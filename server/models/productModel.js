@@ -7,8 +7,8 @@ const ProductSchema = new Schema({
     type: String,
     require: true,
   },
-  parents: {
-    type: [String],
+  parent: {
+    type: String,
     require: true,
   },
   picture: {

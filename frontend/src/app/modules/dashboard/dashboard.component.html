@@ -1,1 +1,29 @@
-<app-product-form></app-product-form>
+<mat-sidenav-container fxFlex>
+
+  <!-- [fixedInViewport]="true" [fixedTopGap]="0" [fixedBottomGap]="0" -->
+  <mat-sidenav class="sidenav" #sidenav position="start" opened role="navigation" mode="side">
+    <div fxLayout="column">
+      <div class="sidenav__logo" fxFlex fxLayoutAlign="center start">
+        <a href="">
+          <img src="./assets/images/hmade_logo_light.svg" height="36px" alt="logo">
+        </a>
+      </div>
+
+      <div *ngFor="let dashboardRootMenuItem of dashboardRootMenu" class="sidenav__links" 
+      fxFlex fxLayoutAlign="center center">
+        <a class="" [routerLink]="['/', 'dashboard', dashboardRootMenuItem._id]" [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{exact: false}">
+          <span>{{dashboardRootMenuItem.name}}</span>
+        </a>
+      </div>
+    </div>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container-h container-v">
+      <!-- <app-product-form></app-product-form> -->
+
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

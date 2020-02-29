@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IProduct } from '../interfaces';
 import { Observable, forkJoin, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CatalogService } from './catalog.service';
 
 @Injectable({
@@ -14,6 +14,19 @@ export class ProductService {
     private http: HttpClient,
     private catalogService: CatalogService,
   ) { }
+
+  getProducts(filter: any): Observable<IProduct[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      params: new HttpParams().set('filter', JSON.stringify(filter))
+    };
+    return this.http.get<IProduct[]>(
+      'api/product/get-products/',
+      httpOptions
+    );
+  }
 
   loadProduct(_id: string): Observable<IProduct | null | any> {
     const httpOptions = {
@@ -62,7 +75,7 @@ export class ProductService {
       map(
         result => {
           const { prefix } = result[0];
-
+          console.log('skuList', result[1]);
           const skuList = result[1]
             .map(item => item._id) // create [] from {}
             .filter(item => item.slice(0, 3) === prefix) // take elems with needed prefix
@@ -78,6 +91,7 @@ export class ProductService {
               freeNumber = skuList.length + 1;
             }
           }
+          console.log('freeNumber', freeNumber);
           let sku = freeNumber.toString();
           while (sku.length < 4) {
             sku = '0' + sku;
@@ -87,6 +101,35 @@ export class ProductService {
         },
         err => err
       )
+    );
+  }
+
+  getProductsByParent(
+    parent: string,
+    collection: string,
+    displayFilter?: boolean,
+    sort?: number,
+    skip?: number,
+    limit?: number
+  ): Observable<[{ total: { totalProductsLength: number }, products: IProduct[] }]> {
+    if (!displayFilter) {
+      displayFilter = false;
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      params: new HttpParams()
+        .set('parent', parent)
+        .set('displayFilter', displayFilter + '')
+        .set('collection', collection)
+        .set('sort', sort + '')
+        .set('skip', skip + '')
+        .set('limit', limit + '')
+    };
+    return this.http.get<[{ total: { totalProductsLength: number }, products: IProduct[] }]>(
+      'api/product/get-products-by-parent',
+      httpOptions
     );
   }
 }

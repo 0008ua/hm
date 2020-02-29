@@ -5,6 +5,7 @@ import { Action } from '@ngrx/store';
 import { ScreenActionTypes, LoadScreens, ChangedScreens } from '../actions/screen.actions';
 import { switchMap, map } from 'rxjs/operators';
 import { SharedService } from '../services/shared.service';
+import { LoadApp, LoadAppProductsSuccess } from '../actions/app.actions';
 
 
 
@@ -12,18 +13,19 @@ import { SharedService } from '../services/shared.service';
 export class ScreenEffects {
 
   @Effect()
-  getUser: Observable<Action> = this.actions$.pipe(
+  getScreens: Observable<Action> = this.actions$.pipe(
     ofType(ScreenActionTypes.LoadScreens),
-    // map((action: LoadScreens) => action.payload),
-    switchMap(_ => this.sharedService.pictureLink().pipe(
-      map(link => new ChangedScreens(link))
+    // map((action: LoadScreens) => console.log('action', action)),
+    switchMap(_ => this.sharedService.loadScreens().pipe(
+      switchMap(state => [
+        new ChangedScreens(state),
+        new LoadAppProductsSuccess({limit: state.picturesOnPage})
+      ])
     )),
   );
-
 
   constructor(
     private actions$: Actions,
     private sharedService: SharedService,
     ) {}
-
 }

@@ -1,26 +1,32 @@
 import { Action } from '@ngrx/store';
 import { ScreenActionTypes, ScreenActions } from '../actions/screen.actions';
-import { PictureTypes } from '../interfaces';
+import { PictureTypes, IPictureState } from '../interfaces';
 
 
 export const screenFeatureKey = 'screen';
 
 export interface ScreenState {
-  [PictureTypes.ProductPicture]: string;
-  [PictureTypes.MainPicture]: string;
+  pictureLink: {
+    [key: string]: IPictureState;
+  };
+  picturesOnPage: number;
 }
 
 export const initialState: ScreenState = {
-  [PictureTypes.ProductPicture]: '/',
-  [PictureTypes.MainPicture]: '/',
-
+  pictureLink: {
+    [PictureTypes.ProductPicture]: { link: '/', size: { w: 0, h: 0 } },
+    [PictureTypes.DashboardProductPicture]: { link: '/', size: { w: 0, h: 0 } },
+  },
+  picturesOnPage: 6,
 };
 
-export function screenReducer(state = initialState, action: ScreenActions): ScreenState {
+export function reducer(state = initialState, action: ScreenActions): ScreenState {
   switch (action.type) {
-
     case ScreenActionTypes.ChangedScreens:
       return { ...state, ...action.payload };
+
+    case ScreenActionTypes.LoadScreens:
+      break;
 
     default:
       return state;

@@ -153,10 +153,15 @@ db.getCollection('catalogs')
       // {_id: 'profile', name: 'Профіль', ancestors: ['home', 'system', 'dashboard'], parent: 'dashboard',
       //   auth: 'guest', order: 1, picture: 'catalog'],description: ''},
       {
-        _id: 'product-editor', name: 'Редактор виробів', ancestors: ['home', 'system', 'dashboard'], parent: 'dashboard',
+        _id: 'product-form', name: 'Редактор виробів', ancestors: ['home', 'system', 'dashboard'], parent: 'dashboard',
         auth: 'manager', order: 2, picture: 'catalog', description: '',
         prefix: '', seoTitle: '', seoMeta: '',
       },
+      // {
+      //   _id: 'product-category', name: 'Вибір категорії виробів', ancestors: ['home', 'system', 'dashboard'], parent: 'dashboard',
+      //   auth: 'manager', order: 2, picture: 'catalog', description: '',
+      //   prefix: '', seoTitle: '', seoMeta: '',
+      // },
       {
         _id: 'tools', name: 'Інструменти', ancestors: ['home', 'system', 'dashboard'], parent: 'dashboard',
         auth: 'manager', order: 5, picture: 'catalog', description: '',

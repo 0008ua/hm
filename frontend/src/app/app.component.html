@@ -1,28 +1,22 @@
 <header class="toolbar toolbar_header" fxLayout="row" fxLayoutAlign="center center">
   <div class="toolbar__logo" fxFlex.lt-md="80" fxFlex="25" fxLayoutAlign="start center">
     <a href="">
-      <img src="./assets/images/hmade_logo_light.svg" height="36px" alt="logo">
+      <img src="./assets/images/hmade_logo_dark.svg" height="36px" alt="logo">
     </a>
   </div>
   <div fxFlex fxHide.lt-md="true"></div>
-  <!-- <button (click)="statusFB()">Status</button>
-  <button (click)="api()">api</button>
-  <button (click)="logoutFB()">logout</button>
-  <button (click)="loginFB()">login</button> -->
   <div class="toolbar__links" fxShow="true" fxHide.lt-md="true" fxFlex="25" fxLayoutAlign="center center">
-    <a *ngIf="!user._id" mat-button class="" [routerLink]="['/', 'user', 'login']" [routerLinkActive]="['active']"
-      [routerLinkActiveOptions]="{exact: false}">
+    <a *ngIf="allowTo('notUser')" mat-button class="" [routerLink]="['/', 'user', 'login']"
+      [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
       <span>Login</span>
     </a>
-    <a *ngIf="user._id" mat-button class="" (click)="logout()">
+    <a *ngIf="allowTo('guest')" mat-button class="" (click)="logout()">
       <span>Logout</span>
     </a>
-
-        <a mat-button class="" [routerLink]="['/', 'dashboard']" [routerLinkActive]="['active']"
-          [routerLinkActiveOptions]="{exact: false}">
-          <span>Dashboard</span>
-        </a>
-
+    <a *ngIf="allowTo('user')" mat-button class="" [routerLink]="['/', 'dashboard', 'product-form']"
+      [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
+      <span>Dashboard</span>
+    </a>
   </div>
 
 
@@ -39,29 +33,41 @@
 
     <!-- [fixedInViewport]="true" [fixedTopGap]="0" [fixedBottomGap]="0" -->
     <mat-sidenav class="sidenav" #sidenav position="end" closed role="navigation" mode="over">
-      <div fxLayout="column">
-        <div class="sidenav__logo" fxFlex fxLayoutAlign="center start">
+      <div fxLayout="column" (click)="sidenav.close()">
+        <!-- <div class="sidenav__logo" fxFlex fxLayoutAlign="center start">
           <a href="">
             <img src="./assets/images/hmade_logo_light.svg" height="36px" alt="logo">
           </a>
-        </div>
+        </div> -->
         <div class="sidenav__links" fxFlex fxLayoutAlign="center center">
-          <a class="" [routerLink]="['/', 'user', 'login']" [routerLinkActive]="['active']"
+          <a *ngIf="allowTo('notUser')" class="" [routerLink]="['/', 'user', 'login']" [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{exact: false}">
             <span>Login</span>
           </a>
+
+          <a *ngIf="allowTo('guest')" class="" (click)="logout()">
+            <span>Logout</span>
+          </a>
+          <a *ngIf="allowTo('user')" class="" [routerLink]="['/', 'dashboard', 'product-form']"
+            [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
+            <span>Dashboard</span>
+          </a>
         </div>
+
+        <app-product-nav (sidenavCloseEmitter)="sidenav.close()"></app-product-nav>
       </div>
 
     </mat-sidenav>
     <mat-sidenav-content>
-      <div class="container-h container-v">
-        <router-outlet></router-outlet>
-      </div>
+      <router-outlet></router-outlet>
+
     </mat-sidenav-content>
   </mat-sidenav-container>
 </main>
-<footer class="toolbar toolbar_footer" fxLayout="row" fxLayoutAlign="center center">
-  Footer
-  <div style="font-size: 9px;">{{user | json}}</div>
+<footer class="toolbar toolbar_footer" fxLayout="row">
+  <div class="toolbar__logo" fxLayoutAlign="start center">
+    <a href="">
+      <img src="./assets/images/hmade_logo_dark.svg" height="36px" alt="logo">
+    </a>
+  </div>
 </footer>

@@ -11,7 +11,6 @@ import { AppMaterialModule } from './app-material.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './effects/app.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UserEffects } from './effects/user.effects';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -19,6 +18,9 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ProductEffects } from './effects/product.effects';
 import { ScreenEffects } from './effects/screen.effects';
+import { ProductFormEffects } from './effects/product-form.effects';
+import { AppEffects } from './effects/app.effects';
+import { ProductModule } from './modules/product/product.module';
 
 
 @NgModule({
@@ -34,6 +36,7 @@ import { ScreenEffects } from './effects/screen.effects';
     AppMaterialModule,
 
     SharedModule,
+    ProductModule,
 
     StoreModule.forRoot(reducers, {
       metaReducers,
@@ -42,7 +45,7 @@ import { ScreenEffects } from './effects/screen.effects';
         strictActionImmutability: true
       }
     }),
-    EffectsModule.forRoot([AppEffects, UserEffects, ProductEffects, ScreenEffects]),
+    EffectsModule.forRoot([UserEffects, ProductEffects, ScreenEffects, ProductFormEffects, AppEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [

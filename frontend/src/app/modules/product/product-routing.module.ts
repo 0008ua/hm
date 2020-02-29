@@ -5,10 +5,19 @@ import { ProductComponent } from './product.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':currentCategory',
+    component: ProductComponent,
+  },
+  {
+    path: 'all',
     component: ProductComponent,
     pathMatch: 'full'
-  }
+  },
+  {
+    path: '',
+    redirectTo: 'all',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

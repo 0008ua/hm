@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row" fxLayout="row" fxLayoutAlign="center center">
+    <div class="cell">
+      <mat-button-toggle-group appearance="legacy" aria-label="Sort order" [ngModel]="sortToggle"
+        (ngModelChange)="onToggle($event)">
+        <mat-button-toggle [value]="SortTypes.Views">Популярні</mat-button-toggle>
+        <mat-button-toggle [value]="SortTypes.CreatedAt">Останні</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+</div>
+<!-- <div *ngFor="let category of breadcrumb">
+  <a (click)="navigateTo(category._id, {seoTitle: category.seoTitle, seoMeta: category.seoMeta})"
+    [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> {{category.name}}</a>
+</div> -->
+<div class="container animationAppear05s" *ngIf="!navLoading">
+  <div class="row" fxLayout="row" fxLayoutAlign="center center">
+    <div class="cell">
+      <mat-chip-list aria-label="feed" fxLayoutAlign="center center">
+        <mat-chip *ngFor="let feedItem of feedSiblings" fxFlex="100" fxLayoutAlign="center center"
+          [routerLink]="['/products', feedItem._id]" (click)="sidenavClose()"
+          [queryParams]="{seoTitle: feedItem.seoTitle, seoMeta: feedItem.seoMeta}" [routerLinkActive]="['chips_active']"
+          [routerLinkActiveOptions]="{exact: true}"><span>
+            {{feedItem.name}}
+          </span>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</div>
+<!-- <div>---feed--</div>
+<div *ngFor="let category of feed">
+  <a (click)="navigateTo(category._id, {seoTitle: category.seoTitle, seoMeta: category.seoMeta})"
+    [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> {{category.name}}</a>
+</div>
+<div>---children--</div>
+<div *ngFor="let category of children">
+  <a (click)="navigateTo(category._id, {seoTitle: category.seoTitle, seoMeta: category.seoMeta})"
+    [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"> {{category.name}}</a>
+</div>
+<div>---</div>
+<div *ngFor="let product of products">
+  {{product._id}}
+</div> -->

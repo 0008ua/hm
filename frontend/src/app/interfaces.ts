@@ -23,12 +23,16 @@ export class User implements IUser {
 
 export interface IProduct {
   _id: string;
-  parents: string[];
+  parent: string;
   picture: string;
   name?: string;
   views?: number;
   createdAt?: number;
   display: boolean;
+}
+
+export interface IProductBlanc {
+  blanc: boolean;
 }
 
 export interface ICatalog {
@@ -43,50 +47,53 @@ export interface ICatalog {
   seoTitle: string;
   seoMeta: string;
 }
+export interface ISortOrder {
+  createdAt?: number;
+  views?: number;
+}
+
+export interface ISortQuery {
+  [key: string]: {
+    [key: string]: number
+  } | null;
+}
+
+export enum SortTypes {
+  CreatedAt = 'createdAt',
+  Views = 'views',
+}
+
+
+export interface IPictureSize {
+  [key: string]: {
+    w: number,
+    h: number
+  };
+}
+
+export interface IPictureState {
+  size: {
+    w: number,
+    h: number
+  };
+  link: string;
+}
 
 export enum ScreenTypes {
   'xs' = 'xs',
-  // 'gt-xs' = 'gt-xs',
-  // 'lt-sm' = 'lt-sm',
   'sm' = 'sm',
-  // 'gt-sm' = 'gt-sm',
-  // 'lt-md' = 'lt-md',
   'md' = 'md',
-  // 'gt-md' = 'gt-md',
-  // 'lt-xl' = 'lt-xl',
   'xl' = 'xl',
-  // 'gt-xl' = 'gt-xl'
 }
+
+// export enum PictureTypes {
+//   ProductPicture,
+//   DashboardProductPicture,
+//   PopupProductPicture
+// }
 
 export enum PictureTypes {
-  ProductPicture,
-  MainPicture
-}
-
-export enum ProductScreenTypes {
-  'xs' = 'c_fill,w_590,h_443,f_auto/w_295,g_south_east,x_5,y_5,l_hmade_logo_light_watermark',
-  // 'gt-xs' = '',
-  // 'lt-sm' = '',
-  'sm' = 'c_fill,w_460,h_345,f_auto/w_230,g_south_east,x_5,y_5,l_hmade_logo_light_watermark',
-  // 'gt-sm' = '',
-  // 'lt-md' = '',
-  'md' = 'c_fill,w_400,h_300,f_auto/w_200,g_south_east,x_5,y_5,l_hmade_logo_light_watermark',
-  // 'gt-md' = '',
-  // 'lt-xl' = '',
-  'xl' = 'c_fill,w_400,h_300,f_auto/w_200,g_south_east,x_5,y_5,l_hmade_logo_light_watermark',
-  // 'gt-xl' = ''
-}
-
-export enum MainScreenTypes {
-  'xs' = 'c_fill,w_590,h_443,f_auto/w_295,g_north_west,x_5,y_5,l_hmade_logo_light_watermark',
-  // 'gt-xs' = '',
-  // 'lt-sm' = '',
-  'sm' = 'c_fill,w_460,h_345,f_auto/w_230,g_north_west,x_5,y_5,l_hmade_logo_light_watermark',
-  // 'gt-sm' = '',
-  // 'lt-md' = '',
-  'md' = 'c_fill,w_400,h_300,f_auto/w_200,g_north_west,x_5,y_5,l_hmade_logo_light_watermark',
-  // 'gt-md' = '',
-  // 'lt-xl' = '',
-  'xl' = 'c_fill,w_400,h_300,f_auto/w_200,g_north_west,x_5,y_5,l_hmade_logo_light_watermark',
-  // 'gt-xl' = ''
+  ProductPicture = 'ProductPicture',
+  DashboardProductPicture = 'DashboardProductPicture',
+  PopupProductPicture = 'PopupProductPicture'
 }
