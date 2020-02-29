@@ -2,7 +2,7 @@ import { PictureTypes, ScreenTypes, SortTypes } from 'src/app/interfaces';
 
 export const environment = {
   production: true,
-  host: '',
+  host: 'https://hmade-staging.herokuapp.com/',
   cloudinary: {
     cloudName: 'hd1oejweg',
     cloudHost: 'https://res.cloudinary.com',
@@ -83,7 +83,7 @@ export const environment = {
     casual: ['casual']
   },
   sortQueries: {
-    CreatedAt: { CreatedAt: -1 },
-    Views: { Views: -1, CreatedAt: -1 },
+    CreatedAt: { createdAt: -1 },
+    Views: { views: -1, createdAt: -1 },
   }
 };

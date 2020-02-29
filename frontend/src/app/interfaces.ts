@@ -59,8 +59,8 @@ export interface ISortQuery {
 }
 
 export enum SortTypes {
-  CreatedAt = 'createdAt',
-  Views = 'views',
+  CreatedAt = 'CreatedAt',
+  Views = 'Views',
 }
 
 

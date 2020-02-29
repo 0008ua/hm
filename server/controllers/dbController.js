@@ -74,6 +74,7 @@ itemsByParents = () => (req, res, next) => {
     query = {
       parent: { $in: parents },
     };
+  sortQuery = { $sort: sort };
 
   switch (collection) {
     case 'products':

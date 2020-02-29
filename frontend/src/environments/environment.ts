@@ -11,56 +11,56 @@ export const environment = {
     cloudName: 'hd1oejweg',
     cloudHost: 'https://res.cloudinary.com',
     pictureSize: {
-      [PictureTypes.ProductPicture]: {
-        [ScreenTypes.xs]: {
+      ProductPicture: {
+        xs: {
           w: 590,
           h: 443
         },
-        [ScreenTypes.sm]: {
+        sm: {
           w: 460,
           h: 345
         },
-        [ScreenTypes.md]: {
+        md: {
           w: 400,
           h: 300
         },
-        [ScreenTypes.xl]: {
+        xl: {
           w: 400,
           h: 300
         }
       },
-      [PictureTypes.DashboardProductPicture]: {
-        [ScreenTypes.xs]: {
+      DashboardProductPicture: {
+        xs: {
           w: 590,
           h: 443
         },
-        [ScreenTypes.sm]: {
+        sm: {
           w: 460,
           h: 345
         },
-        [ScreenTypes.md]: {
+        md: {
           w: 400,
           h: 300
         },
-        [ScreenTypes.xl]: {
+        xl: {
           w: 400,
           h: 300
         }
       },
-      [PictureTypes.PopupProductPicture]: {
-        [ScreenTypes.xs]: {
+      PopupProductPicture: {
+        xs: {
           w: 590,
           h: 443
         },
-        [ScreenTypes.sm]: {
+        sm: {
           w: 900,
           h: 675
         },
-        [ScreenTypes.md]: {
+        md: {
           w: 1100,
           h: 825
         },
-        [ScreenTypes.xl]: {
+        xl: {
           w: 1100,
           h: 825
         }
@@ -71,10 +71,10 @@ export const environment = {
     productPicture: 'default_product',
     userPicture: 'default_avatar',
     picturesOnPage: {
-      [ScreenTypes.xs]: 6,
-      [ScreenTypes.sm]: 6,
-      [ScreenTypes.md]: 9,
-      [ScreenTypes.xl]: 9
+      xs: 6,
+      sm: 6,
+      md: 9,
+      xl: 9
     }
   },
   permissions: {
@@ -86,10 +86,94 @@ export const environment = {
     guest: ['casual', 'guest'],
     casual: ['casual']
   },
+
   sortQueries: {
-    [SortTypes.CreatedAt]: { [SortTypes.CreatedAt] : -1},
-    [SortTypes.Views]: { [SortTypes.Views]: -1, [SortTypes.CreatedAt]: -1 },
+    CreatedAt: { createdAt: -1 },
+    Views: { views: -1, createdAt: -1 },
   }
+  // cloudinary: {
+  //   cloudName: 'hd1oejweg',
+  //   cloudHost: 'https://res.cloudinary.com',
+  //   pictureSize: {
+  //     [PictureTypes.ProductPicture]: {
+  //       [ScreenTypes.xs]: {
+  //         w: 590,
+  //         h: 443
+  //       },
+  //       [ScreenTypes.sm]: {
+  //         w: 460,
+  //         h: 345
+  //       },
+  //       [ScreenTypes.md]: {
+  //         w: 400,
+  //         h: 300
+  //       },
+  //       [ScreenTypes.xl]: {
+  //         w: 400,
+  //         h: 300
+  //       }
+  //     },
+  //     [PictureTypes.DashboardProductPicture]: {
+  //       [ScreenTypes.xs]: {
+  //         w: 590,
+  //         h: 443
+  //       },
+  //       [ScreenTypes.sm]: {
+  //         w: 460,
+  //         h: 345
+  //       },
+  //       [ScreenTypes.md]: {
+  //         w: 400,
+  //         h: 300
+  //       },
+  //       [ScreenTypes.xl]: {
+  //         w: 400,
+  //         h: 300
+  //       }
+  //     },
+  //     [PictureTypes.PopupProductPicture]: {
+  //       [ScreenTypes.xs]: {
+  //         w: 590,
+  //         h: 443
+  //       },
+  //       [ScreenTypes.sm]: {
+  //         w: 900,
+  //         h: 675
+  //       },
+  //       [ScreenTypes.md]: {
+  //         w: 1100,
+  //         h: 825
+  //       },
+  //       [ScreenTypes.xl]: {
+  //         w: 1100,
+  //         h: 825
+  //       }
+  //     }
+  //   }
+  // },
+  // defaults: {
+  //   productPicture: 'default_product',
+  //   userPicture: 'default_avatar',
+  //   picturesOnPage: {
+  //     [ScreenTypes.xs]: 6,
+  //     [ScreenTypes.sm]: 6,
+  //     [ScreenTypes.md]: 9,
+  //     [ScreenTypes.xl]: 9
+  //   }
+  // },
+  // permissions: {
+  //   admin: ['casual', 'guest', 'user', 'manager', 'admin', 'google', 'facebook'],
+  //   manager: ['casual', 'guest', 'user', 'manager', 'google', 'facebook'],
+  //   user: ['casual', 'guest', 'user', 'google', 'facebook'],
+  //   google: ['casual', 'guest', 'user', 'google'],
+  //   facebook: ['casual', 'guest', 'user', 'facebook'],
+  //   guest: ['casual', 'guest'],
+  //   casual: ['casual']
+  // },
+  // sortQueries: {
+  //   [SortTypes.CreatedAt]: { [SortTypes.CreatedAt] : -1},
+  //   [SortTypes.Views]: { [SortTypes.Views]: -1, [SortTypes.CreatedAt]: -1 },
+  // }
 };
 
 /*
