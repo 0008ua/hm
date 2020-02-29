@@ -35,7 +35,7 @@ router.get('/auth/facebook/redirect',
 );
 
 
-// 1step: on google authenticate buntton press
+// 1step: on google authenticate button press
 router.get('/auth/google',
 
     // 2step: passport redirects to google 'chose account' window

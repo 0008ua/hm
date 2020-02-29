@@ -178,6 +178,21 @@ $space-xs: 8px;
     padding: $space-sm;
   }
   @include xs {
+    padding: $space-xs;
+  }
+}
+
+.cell__main-page {
+  @include gt-md {
+    padding: $space-gt-md;
+  }
+  @include md {
+    padding: $space-md;
+  }
+  @include sm {
+    padding: $space-sm;
+  }
+  @include xs {
     padding: $space-xs 0;
   }
 }

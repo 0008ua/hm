@@ -1,5 +1,3 @@
-import { PictureTypes, ScreenTypes, SortTypes } from 'src/app/interfaces';
-
 export const environment = {
   production: true,
   host: 'https://hmade-staging.herokuapp.com',

@@ -158,11 +158,10 @@ main {
   max-width: 250px;
 }
 
+
 .product {
   // @include transition(0.3s ease);
-  @include gt-xs {
-    @include mat-elevation(1);
-  }
+    // @include mat-elevation(1);
   position: relative;
   &:hover {
     @include mat-elevation(2);
