@@ -89,7 +89,6 @@ export const environment = {
   sortQueries: {
     [SortTypes.CreatedAt]: { [SortTypes.CreatedAt] : -1},
     [SortTypes.Views]: { [SortTypes.Views]: -1, [SortTypes.CreatedAt]: -1 },
-    [SortTypes.Null]: null,
   }
 };
 
