@@ -27,10 +27,10 @@ const routes: Routes = [
         path: 'redirection-after-oauth',
         component: RedirectionAfterOauthComponent,
       },
-      {
-        path: '',
-        component: Page404Component
-      },
+      // {
+      //   path: '',
+      //   component: Page404Component
+      // },
     ]
   },
   // {
