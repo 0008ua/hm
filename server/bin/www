@@ -38,8 +38,6 @@ if (process.env.NODE_ENV === 'development') {
   server = http.createServer(app);
 }
 
-
-
 /**
  * Listen on provided port, on all network interfaces.
  */
