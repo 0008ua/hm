@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  host: 'https://hmade-staging.herokuapp.com',
+  host: 'http://hmade-staging.herokuapp.com',
   cloudinary: {
     cloudName: 'hd1oejweg',
     cloudHost: 'https://res.cloudinary.com',
