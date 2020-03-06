@@ -13,6 +13,7 @@ import {
   MatSelectModule,
   MatButtonToggleModule,
   MatChipsModule,
+  MatDialogModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -34,6 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSelectModule,
     MatButtonToggleModule,
     MatChipsModule,
+    MatDialogModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -51,6 +53,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSelectModule,
     MatButtonToggleModule,
     MatChipsModule,
+    MatDialogModule,
   ],
 })
 

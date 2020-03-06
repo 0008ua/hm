@@ -28,15 +28,14 @@ export class ProductService {
     );
   }
 
-  loadProduct(_id: string): Observable<IProduct | null | any> {
+  getProduct(_id: string): Observable<IProduct | null | any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      // params: new HttpParams().set('_id', _id)
     };
     return this.http.get<IProduct | null | any>(
-      'api/product/load-product/' + _id,
+      'api/product/get-product/' + _id,
       httpOptions
     );
   }
@@ -91,7 +90,6 @@ export class ProductService {
               freeNumber = skuList.length + 1;
             }
           }
-          console.log('freeNumber', freeNumber);
           let sku = freeNumber.toString();
           while (sku.length < 4) {
             sku = '0' + sku;
@@ -104,31 +102,55 @@ export class ProductService {
     );
   }
 
-  getProductsByParent(
-    parent: string,
-    collection: string,
-    displayFilter?: boolean,
-    sort?: number,
-    skip?: number,
-    limit?: number
-  ): Observable<[{ total: { totalProductsLength: number }, products: IProduct[] }]> {
-    if (!displayFilter) {
-      displayFilter = false;
-    }
+  // getProductsByParent(
+  //   parent: string,
+  //   collection: string,
+  //   displayFilter?: boolean,
+  //   sort?: number,
+  //   skip?: number,
+  //   limit?: number
+  // ): Observable<[{ total: { totalProductsLength: number }, products: IProduct[] }]> {
+  //   if (!displayFilter) {
+  //     displayFilter = false;
+  //   }
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //     }),
+  //     params: new HttpParams()
+  //       .set('parent', parent)
+  //       .set('displayFilter', displayFilter + '')
+  //       .set('collection', collection)
+  //       .set('sort', sort + '')
+  //       .set('skip', skip + '')
+  //       .set('limit', limit + '')
+  //   };
+  //   return this.http.get<[{ total: { totalProductsLength: number }, products: IProduct[] }]>(
+  //     'api/product/get-products-by-parent',
+  //     httpOptions
+  //   );
+  // }
+
+  incViews(_id: string): Observable<IProduct> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-      }),
-      params: new HttpParams()
-        .set('parent', parent)
-        .set('displayFilter', displayFilter + '')
-        .set('collection', collection)
-        .set('sort', sort + '')
-        .set('skip', skip + '')
-        .set('limit', limit + '')
+      })
     };
-    return this.http.get<[{ total: { totalProductsLength: number }, products: IProduct[] }]>(
-      'api/product/get-products-by-parent',
+    return this.http.put<IProduct>(
+      'api/product/inc-views/' + _id,
+      httpOptions
+    );
+  }
+
+  deleteProduct(_id: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.delete<any>(
+      'api/product/delete/' + _id,
       httpOptions
     );
   }

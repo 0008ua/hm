@@ -63,9 +63,6 @@ export class AppEffects {
       return this.catalogService.getChildren(combinedStoreWithPayload.currentCategory)
       .pipe(
       switchMap((children: ICatalog[]) => {
-        console.log('this.environment.sortQueries', this.environment.sortQueries);
-        console.log('combinedStoreWithPayload.sort', combinedStoreWithPayload.sort);
-        console.log('this.environment.sortQueries[combinedStoreWithPayload.sort]', this.environment.sortQueries[combinedStoreWithPayload.sort]);
         if (combinedStoreWithPayload.currentCategory === 'products') {
           // if root
           return this.dbService.allItems('products',

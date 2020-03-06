@@ -1,29 +1,29 @@
 <mat-sidenav-container fxFlex>
-
-  <!-- [fixedInViewport]="true" [fixedTopGap]="0" [fixedBottomGap]="0" -->
-  <mat-sidenav class="sidenav" #sidenav position="start" opened role="navigation" mode="side">
-    <div fxLayout="column">
-      <div class="sidenav__logo" fxFlex fxLayoutAlign="center start">
-        <a href="">
-          <img src="./assets/images/hmade_logo_light.svg" height="36px" alt="logo">
-        </a>
-      </div>
-
-      <div *ngFor="let dashboardRootMenuItem of dashboardRootMenu" class="sidenav__links" 
-      fxFlex fxLayoutAlign="center center">
-        <a class="" [routerLink]="['/', 'dashboard', dashboardRootMenuItem._id]" [routerLinkActive]="['active']"
-          [routerLinkActiveOptions]="{exact: false}">
-          <span>{{dashboardRootMenuItem.name}}</span>
-        </a>
+  <mat-sidenav class="sidenav" #dashboardSidenav position="start" closed role="navigation" mode="side" (click)="dashboardSidenav.close()">
+    <div class="container">
+      <div class="row" fxLayout="row">
+        <div class="cell" *ngFor="let dashboardRootMenuItem of dashboardRootMenu" fxFlex="100" fxLayoutAlign="center">
+          <a class="" [routerLink]="['/', 'dashboard', dashboardRootMenuItem._id]" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}">
+            <span>{{dashboardRootMenuItem.name}}</span>
+          </a>
+        </div>
       </div>
     </div>
-
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="container-h container-v">
-      <!-- <app-product-form></app-product-form> -->
-
-      <router-outlet></router-outlet>
+      <div class="container">
+        <div class="row">
+          <div class="cell" fxShow="true" fxFlex="100" fxLayoutAlign="start center">
+            <button mat-button (click)="dashboardSidenav.toggle()" aria-label="Menu">
+              <span *ngIf="dashboardSidenav.opened"><i class="fas fa-chevron-left"></i></span>
+              <span *ngIf="!dashboardSidenav.opened"><i class="fas fa-ellipsis-h"></i></span>
+            </button>
+          </div>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

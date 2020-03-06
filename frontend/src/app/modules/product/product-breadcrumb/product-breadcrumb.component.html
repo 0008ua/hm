@@ -1,35 +1,62 @@
-<div class="container" fxLayoutAlign="start center">
-  <div class="row" fxLayout="row">
-    <div class="cell">
+<div class="br-menu container-v">
+  <a class="br-menu__item br-menu__item_home" [routerLink]="['/products', 'all']" [routerLinkActive]="['']"
+    [routerLinkActiveOptions]="{exact: true}">
+    <span>
+      <i class="item fa fa-home"></i>
+    </span>
+  </a>
+  <ng-container *ngIf="!navLoading">
+    <a *ngFor="let breadcrumbItem of breadcrumb" class="br-menu__item br-menu__item_current animationAppear05s"
+      [routerLink]="['/products', breadcrumbItem._id]"
+      [queryParams]="{seoTitle: breadcrumbItem.seoTitle, seoMeta: breadcrumbItem.seoMeta}" [routerLinkActive]="['']"
+      [routerLinkActiveOptions]="{exact: true}">
+      <span>
+        <!-- <i class="fas fa-check-double"></i> -->
+        <span>{{breadcrumbItem.name}}</span>
+      </span>
+    </a>
+  </ng-container>
+  <ng-container *ngIf="!navLoading">
+    <a *ngFor="let child of feedChildren" class="br-menu__item br-menu__item_feed animationAppear05s"
+      [routerLink]="['/products', child._id]" [queryParams]="{seoTitle: child.seoTitle, seoMeta: child.seoMeta}"
+      [routerLinkActive]="['br-menu__item_active']" [routerLinkActiveOptions]="{exact: true}">
+      <span>{{child.name}}</span>
+    </a>
+  </ng-container>
 
-      <mat-chip-list aria-label="Breadcrumb">
+</div>
 
-          <mat-chip [routerLink]="['/products', 'all']" [routerLinkActive]="['chips_active']"
-            [routerLinkActiveOptions]="{exact: true}">
-            <span>
-              <i class="item fa fa-home"></i>
-            </span>
-          </mat-chip>
-        <div *ngIf="!navLoading" class="animationAppear05s">
-          <mat-chip *ngFor="let breadcrumbItem of breadcrumb" [routerLink]="['/products', breadcrumbItem._id]"
-            [queryParams]="{seoTitle: breadcrumbItem.seoTitle, seoMeta: breadcrumbItem.seoMeta}"
-            [routerLinkActive]="['chips_active']" [routerLinkActiveOptions]="{exact: true}">
-            <span>
-              <span class="item">{{breadcrumbItem.name}}</span>
-              <i class="fas fa-angle-right"></i>
-            </span>
-          </mat-chip>
-        </div>
-
-        <div *ngIf="!navLoading" class="animationAppear05s">
-
-          <mat-chip class="chips_primary" *ngFor="let child of feedChildren" [routerLink]="['/products', child._id]"
-            [queryParams]="{seoTitle: child.seoTitle, seoMeta: child.seoMeta}" [routerLinkActive]="['chips-active']"
-            [routerLinkActiveOptions]="{exact: true}">
-            <span>{{child.name}}</span>
-          </mat-chip>
-        </div>
-      </mat-chip-list>
-    </div>
+<!-- 
+<div class="container">
+  <div class="row">
+    <div class="cell">---</div>
   </div>
 </div>
+<div class="row" fxLayout="row">
+  <mat-chip-list class="cell" aria-label="Breadcrumb">
+    <mat-chip [routerLink]="['/products', 'all']" [routerLinkActive]="['chips_active']"
+      [routerLinkActiveOptions]="{exact: true}">
+      <span>
+        <i class="item fa fa-home"></i>
+      </span>
+    </mat-chip>
+    <ng-container *ngIf="!navLoading">
+      <mat-chip *ngFor="let breadcrumbItem of breadcrumb" class="animationAppear05s"
+        [routerLink]="['/products', breadcrumbItem._id]"
+        [queryParams]="{seoTitle: breadcrumbItem.seoTitle, seoMeta: breadcrumbItem.seoMeta}"
+        [routerLinkActive]="['chips_active']" [routerLinkActiveOptions]="{exact: true}">
+        <span>
+          <span class="item">{{breadcrumbItem.name}}</span>
+          <i class="fas fa-angle-right"></i>
+        </span>
+      </mat-chip>
+    </ng-container>
+    <ng-container *ngIf="!navLoading">
+      <mat-chip class="chips_primary animationAppear05s" *ngFor="let child of feedChildren"
+        [routerLink]="['/products', child._id]" [queryParams]="{seoTitle: child.seoTitle, seoMeta: child.seoMeta}"
+        [routerLinkActive]="['chips-active']" [routerLinkActiveOptions]="{exact: true}">
+        <span>{{child.name}}</span>
+      </mat-chip>
+    </ng-container>
+  </mat-chip-list>
+</div> -->

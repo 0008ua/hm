@@ -4,7 +4,7 @@ const ServerError = require('./serverError');
 const DbError = require('./dbError');
 // const errorHandler = require('./errorHandler')
 
-function errorHandler (err, req, res, next) {
+const errorHandler = (err, req, res, next) => {
   console.log('error', req.app.get('env') === 'development' ? err : {});
 
   if (err.code === 'EBADCSRFTOKEN') {
@@ -52,5 +52,10 @@ function errorHandler (err, req, res, next) {
   res.render('error');
 };
 
-module.exports = { ClientError, ServerError, DbError, errorHandler };
+module.exports = {
+  ClientError,
+  ServerError,
+  DbError,
+  errorHandler,
+};
 

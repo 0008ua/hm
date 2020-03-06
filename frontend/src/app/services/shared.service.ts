@@ -75,6 +75,13 @@ export class SharedService {
             screenType
           );
       }
+      case PictureTypes.ModalProductPicture: {
+        return this.cloudinaryUrl + '/' +
+          this.createPictureOptions(
+            this.environment.cloudinary.pictureSize[PictureTypes.ModalProductPicture],
+            screenType
+          );
+      }
       default: {
         return this.cloudinaryUrl;
       }
@@ -103,6 +110,10 @@ export class SharedService {
                 const { w, h } = this.environment.cloudinary.pictureSize[pictureType][ScreenTypes.md];
                 screenState.pictureLink[pictureType].size = { w, h };
                 screenState.pictureLink[pictureType].link = this.createPictureLink(pictureType as PictureTypes, ScreenTypes.md);
+              } else if (this.media.isActive(ScreenTypes.lg)) {
+                const { w, h } = this.environment.cloudinary.pictureSize[pictureType][ScreenTypes.lg];
+                screenState.pictureLink[pictureType].size = { w, h };
+                screenState.pictureLink[pictureType].link = this.createPictureLink(pictureType as PictureTypes, ScreenTypes.lg);
               } else {
                 const { w, h } = this.environment.cloudinary.pictureSize[pictureType][ScreenTypes.xl];
                 screenState.pictureLink[pictureType].size = { w, h };
@@ -118,6 +129,8 @@ export class SharedService {
             screenState.picturesOnPage = this.environment.defaults.picturesOnPage[ScreenTypes.sm];
           } else if (this.media.isActive(ScreenTypes.md)) {
             screenState.picturesOnPage = this.environment.defaults.picturesOnPage[ScreenTypes.md];
+          } else if (this.media.isActive(ScreenTypes.lg)) {
+            screenState.picturesOnPage = this.environment.defaults.picturesOnPage[ScreenTypes.lg];
           } else {
             screenState.picturesOnPage = this.environment.defaults.picturesOnPage[ScreenTypes.xl];
           }

@@ -1,18 +1,27 @@
 <div *ngIf="product" class="product" fxLayout="column">
-  <img class="product__picture" fxFlex [src]="productPicture.link + '/' + product.picture" alt="product picture">
-  <div *ngIf="product.name" class="product__name">
-    <div class="container">
-      <div class="row" fxLayout="row" fxFlex>
-        <div class="cell" fxFlex fxLayoutAlign="center">
-          <span>{{product.name}}</span>
-        </div>
-      </div>
+  <img class="product__picture" fxFlex (click)="openDialog()"
+  [src]="productPicture.link + '/' + product.picture" alt="product picture">
+
+  <div *ngIf="allowTo('manager')" class="product__editor" fxLayout="row">
+    <button mat-button (click)="edit()" fxFlex>Редагувати</button>
+    <button mat-button (click)="deleteProduct()" fxFlex>Видалити</button>
+  </div>
+  <div class="product__info" fxLayout="row">
+    <div class="cell product__info-main" fxFlex="50">
+      <p>
+        <i class="item far fa-eye"></i>
+        <span class="item">{{product.views}}</span>
+      </p>
+      <p>
+        <i class="item fa fa-calendar"></i>
+        <span class="item">{{product.createdAt | date: 'dd-MM-yy'}}</span>
+      </p>
+    </div>
+    <div class="cell product__info-name" fxFlex="50" fxLayoutAlign="center center">
+      <span>{{product.name}}</span>
     </div>
   </div>
-  <div *ngIf="allowTo('manager')" class="product__editor" fxFlex>
-    <button mat-button (click)="edit()">edit</button>
-  </div>
-  <div class="product__inf">
+  <!-- <div class="product__inf">
     <div class="container">
       <div class="row" fxLayout="row" fxFlex>
         <div class="cell" fxFlex="35" fxLayoutAlign="center">
@@ -29,5 +38,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

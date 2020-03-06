@@ -51,6 +51,21 @@ $space-xs: 8px;
   }
 }
 
+@mixin responsive-padding-x($top, $right, $bottom, $left) {
+  @include gt-md {
+    padding: calc(#{$top} * #{$space-gt-md}) calc(#{$right} * #{$space-gt-md}) calc(#{$bottom} * #{$space-gt-md}) calc(#{$left} * #{$space-gt-md})
+  }
+  @include md {
+    padding: calc(#{$top} * #{$space-md}) calc(#{$right} * #{$space-md}) calc(#{$bottom} * #{$space-md}) calc(#{$left} * #{$space-md})
+  }
+  @include sm {
+    padding: calc(#{$top} * #{$space-sm}) calc(#{$right} * #{$space-sm}) calc(#{$bottom} * #{$space-sm}) calc(#{$left} * #{$space-sm})
+  }
+  @include xs {
+    padding: calc(#{$top} * #{$space-xs}) calc(#{$right} * #{$space-xs}) calc(#{$bottom} * #{$space-xs}) calc(#{$left} * #{$space-xs})
+  }
+}
+
 @mixin responsive-padding-v($x) {
   @include gt-md {
     padding-top: calc(#{$x} * #{$space-gt-md});
@@ -103,29 +118,32 @@ $space-xs: 8px;
     padding: $space-xs;
   }
 
-  &_column {
+  &-column {
     height: 100%;
   }
+
+  // additional to container, add top and bottom padding
+  &-v {
+    @include gt-xs {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }
+  // additional to container, add left and right padding
+  &-h {
+    @include gt-md {
+      padding-left: 64px;
+      padding-right: 64px;
+    }
+    @include md {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  }
 }
 
-// additional to container, add top and bottom padding
-.container-v {
-  @include gt-xs {
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
-}
-
-// additional to container, add left and right padding
-.container-h {
-  @include gt-md {
-    padding-left: 64px;
-    padding-right: 64px;
-  }
-  @include md {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
+.h-100 {
+  height: 100%;
 }
 
 .row {
@@ -148,6 +166,7 @@ $space-xs: 8px;
 
 .column {
   display: flex;
+  flex-wrap: wrap;
 
   @include gt-md {
     margin: -($space-gt-md);

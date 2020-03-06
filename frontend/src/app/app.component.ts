@@ -7,7 +7,8 @@ import { GetUser } from './actions/user.actions';
 import { FbService } from './services/fb.service';
 import { LoadScreens } from './actions/screen.actions';
 import { ScreenState } from './reducers/screen.reducer';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 declare let FB: any;
 
@@ -19,14 +20,28 @@ declare let FB: any;
 export class AppComponent implements OnInit {
   user: IUser;
   link: any;
+  productsUrl: boolean;
+
   constructor(
     private userService: UserService,
     private store: Store<State>,
     private router: Router,
-    // private fbService: FbService
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map((event: NavigationEnd) => {
+        if (event.url.split('/')[1] === 'products' || event.url.split('/')[1] === '') {
+          this.productsUrl = true;
+        } else {
+          this.productsUrl = false;
+        }
+      }),
+    ).subscribe(x => x);
+
+
     this.store.dispatch(new GetUser());
     this.store.select('auth')
       .subscribe(store => this.user = store.user);

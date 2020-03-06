@@ -18,11 +18,6 @@ allItems = () => (req, res, next) => {
 
   sortQuery = { $sort: sort };
 
-  console.log('query', query);
-  console.log('sort', sortQuery);
-  console.log('skip', skip);
-  console.log('limit', limit);
-
   switch (collection) {
     case 'products':
       ProductModel.aggregate([
@@ -59,7 +54,7 @@ allItems = () => (req, res, next) => {
 
 itemsByParents = () => (req, res, next) => {
   const displayFilter = req.query.display;
-  let sort = JSON.parse(req.query.sort);
+  const sort = JSON.parse(req.query.sort);
   const skip = +req.query.skip || 0;
   const limit = +req.query.limit || 12;
   const parents = JSON.parse(req.query.parents);

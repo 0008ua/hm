@@ -4,22 +4,21 @@
       <img src="./assets/images/hmade_logo_dark.svg" height="36px" alt="logo">
     </a>
   </div>
-  <div fxFlex fxHide.lt-md="true"></div>
-  <div class="toolbar__links" fxShow="true" fxHide.lt-md="true" fxFlex="25" fxLayoutAlign="center center">
-    <a *ngIf="allowTo('notUser')" mat-button class="" [routerLink]="['/', 'user', 'login']"
+  <div fxFlex fxHide.lt-md="true">
+  </div>
+  <div fxShow="true" fxHide.lt-md="true" fxFlex="25" fxLayoutAlign="center center">
+    <!-- <a *ngIf="allowTo('notUser')" mat-button [routerLink]="['/', 'user', 'login']"
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
       <span>Login</span>
-    </a>
-    <a *ngIf="allowTo('guest')" mat-button class="" (click)="logout()">
+    </a> -->
+    <a *ngIf="allowTo('guest')" mat-button (click)="logout()">
       <span>Logout</span>
     </a>
-    <a *ngIf="allowTo('user')" mat-button class="" [routerLink]="['/', 'dashboard', 'product-form']"
+    <a *ngIf="allowTo('user')" mat-button [routerLink]="['/', 'dashboard', 'product-form']"
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
       <span>Dashboard</span>
     </a>
   </div>
-
-
 
   <div class="toolbar__menu-button" fxShow="true" fxHide.gt-sm="true" fxFlex="20" fxLayoutAlign="end center">
     <button mat-button (click)="sidenav.toggle()" aria-label="Menu">
@@ -33,34 +32,35 @@
 
     <!-- [fixedInViewport]="true" [fixedTopGap]="0" [fixedBottomGap]="0" -->
     <mat-sidenav class="sidenav" #sidenav position="end" closed role="navigation" mode="over">
-      <div fxLayout="column" (click)="sidenav.close()">
-        <!-- <div class="sidenav__logo" fxFlex fxLayoutAlign="center start">
-          <a href="">
-            <img src="./assets/images/hmade_logo_light.svg" height="36px" alt="logo">
-          </a>
-        </div> -->
-        <div class="sidenav__links" fxFlex fxLayoutAlign="center center">
-          <a *ngIf="allowTo('notUser')" class="" [routerLink]="['/', 'user', 'login']" [routerLinkActive]="['active']"
-            [routerLinkActiveOptions]="{exact: false}">
-            <span>Login</span>
-          </a>
-
-          <a *ngIf="allowTo('guest')" class="" (click)="logout()">
-            <span>Logout</span>
-          </a>
-          <a *ngIf="allowTo('user')" class="" [routerLink]="['/', 'dashboard', 'product-form']"
-            [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
-            <span>Dashboard</span>
-          </a>
+      <div class="container">
+        <div class="row" fxLayout="row" (click)="sidenav.close()">
+          <div class="cell" fxFlex="100" fxLayoutAlign="center">
+            <a *ngIf="allowTo('notUser')" [routerLink]="['/', 'user', 'login']" [routerLinkActive]="['active']"
+              [routerLinkActiveOptions]="{exact: false}">
+              <span>Login</span>
+            </a>
+          </div>
+          <div class="cell" fxFlex="100" fxLayoutAlign="center">
+            <a *ngIf="allowTo('guest')" (click)="logout()">
+              <span>Logout</span>
+            </a>
+          </div>
+          <div class="cell" fxFlex="100" fxLayoutAlign="center">
+            <a *ngIf="allowTo('user')" [routerLink]="['/', 'dashboard', 'product-form']" [routerLinkActive]="['active']"
+              [routerLinkActiveOptions]="{exact: false}">
+              <span>Dashboard</span>
+            </a>
+          </div>
+          <div *ngIf="productsUrl" class="cell" fxFlex="100" fxLayoutAlign="center">
+            <app-product-nav (sidenavCloseEmitter)="sidenav.close()"></app-product-nav>
+          </div>
         </div>
-
-        <app-product-nav (sidenavCloseEmitter)="sidenav.close()"></app-product-nav>
       </div>
+
 
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet></router-outlet>
-
     </mat-sidenav-content>
   </mat-sidenav-container>
 </main>

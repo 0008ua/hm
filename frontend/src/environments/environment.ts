@@ -21,12 +21,16 @@ export const environment = {
           h: 345
         },
         md: {
-          w: 400,
-          h: 300
+          w: 300,
+          h: 225
+        },
+        lg: {
+          w: 360,
+          h: 270
         },
         xl: {
-          w: 400,
-          h: 300
+          w: 360,
+          h: 270
         }
       },
       DashboardProductPicture: {
@@ -39,24 +43,32 @@ export const environment = {
           h: 345
         },
         md: {
-          w: 400,
-          h: 300
+          w: 300,
+          h: 225
+        },
+        lg: {
+          w: 360,
+          h: 270
         },
         xl: {
-          w: 400,
-          h: 300
+          w: 360,
+          h: 270
         }
       },
-      PopupProductPicture: {
+      ModalProductPicture: {
         xs: {
           w: 590,
           h: 443
         },
         sm: {
-          w: 900,
-          h: 675
+          w: 760,
+          h: 570
         },
         md: {
+          w: 760,
+          h: 570
+        },
+        lg: {
           w: 1100,
           h: 825
         },
@@ -74,7 +86,8 @@ export const environment = {
       xs: 6,
       sm: 6,
       md: 9,
-      xl: 9
+      lg: 12,
+      xl: 15
     }
   },
   permissions: {
@@ -91,89 +104,6 @@ export const environment = {
     CreatedAt: { createdAt: -1 },
     Views: { views: -1, createdAt: -1 },
   }
-  // cloudinary: {
-  //   cloudName: 'hd1oejweg',
-  //   cloudHost: 'https://res.cloudinary.com',
-  //   pictureSize: {
-  //     [PictureTypes.ProductPicture]: {
-  //       [ScreenTypes.xs]: {
-  //         w: 590,
-  //         h: 443
-  //       },
-  //       [ScreenTypes.sm]: {
-  //         w: 460,
-  //         h: 345
-  //       },
-  //       [ScreenTypes.md]: {
-  //         w: 400,
-  //         h: 300
-  //       },
-  //       [ScreenTypes.xl]: {
-  //         w: 400,
-  //         h: 300
-  //       }
-  //     },
-  //     [PictureTypes.DashboardProductPicture]: {
-  //       [ScreenTypes.xs]: {
-  //         w: 590,
-  //         h: 443
-  //       },
-  //       [ScreenTypes.sm]: {
-  //         w: 460,
-  //         h: 345
-  //       },
-  //       [ScreenTypes.md]: {
-  //         w: 400,
-  //         h: 300
-  //       },
-  //       [ScreenTypes.xl]: {
-  //         w: 400,
-  //         h: 300
-  //       }
-  //     },
-  //     [PictureTypes.PopupProductPicture]: {
-  //       [ScreenTypes.xs]: {
-  //         w: 590,
-  //         h: 443
-  //       },
-  //       [ScreenTypes.sm]: {
-  //         w: 900,
-  //         h: 675
-  //       },
-  //       [ScreenTypes.md]: {
-  //         w: 1100,
-  //         h: 825
-  //       },
-  //       [ScreenTypes.xl]: {
-  //         w: 1100,
-  //         h: 825
-  //       }
-  //     }
-  //   }
-  // },
-  // defaults: {
-  //   productPicture: 'default_product',
-  //   userPicture: 'default_avatar',
-  //   picturesOnPage: {
-  //     [ScreenTypes.xs]: 6,
-  //     [ScreenTypes.sm]: 6,
-  //     [ScreenTypes.md]: 9,
-  //     [ScreenTypes.xl]: 9
-  //   }
-  // },
-  // permissions: {
-  //   admin: ['casual', 'guest', 'user', 'manager', 'admin', 'google', 'facebook'],
-  //   manager: ['casual', 'guest', 'user', 'manager', 'google', 'facebook'],
-  //   user: ['casual', 'guest', 'user', 'google', 'facebook'],
-  //   google: ['casual', 'guest', 'user', 'google'],
-  //   facebook: ['casual', 'guest', 'user', 'facebook'],
-  //   guest: ['casual', 'guest'],
-  //   casual: ['casual']
-  // },
-  // sortQueries: {
-  //   [SortTypes.CreatedAt]: { [SortTypes.CreatedAt] : -1},
-  //   [SortTypes.Views]: { [SortTypes.Views]: -1, [SortTypes.CreatedAt]: -1 },
-  // }
 };
 
 /*

@@ -21,6 +21,8 @@ import { ScreenEffects } from './effects/screen.effects';
 import { ProductFormEffects } from './effects/product-form.effects';
 import { AppEffects } from './effects/app.effects';
 import { ProductModule } from './modules/product/product.module';
+import { ModalComponent } from './modules/shared/modal/modal.component';
+import { ModalConfirmComponent } from './modules/shared/modal-confirm/modal-confirm.component';
 
 
 @NgModule({
@@ -51,6 +53,10 @@ import { ProductModule } from './modules/product/product.module';
   providers: [
     CookieService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+  ],
+  entryComponents: [
+    ModalComponent,
+    ModalConfirmComponent,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  host: 'https://hmade-staging.herokuapp.com',
+  host: 'https://hmade.work',
   cloudinary: {
     cloudName: 'hd1oejweg',
     cloudHost: 'https://res.cloudinary.com',
@@ -15,12 +15,16 @@ export const environment = {
           h: 345
         },
         md: {
-          w: 400,
-          h: 300
+          w: 300,
+          h: 225
+        },
+        lg: {
+          w: 360,
+          h: 270
         },
         xl: {
-          w: 400,
-          h: 300
+          w: 360,
+          h: 270
         }
       },
       DashboardProductPicture: {
@@ -33,15 +37,19 @@ export const environment = {
           h: 345
         },
         md: {
-          w: 400,
-          h: 300
+          w: 300,
+          h: 225
+        },
+        lg: {
+          w: 360,
+          h: 270
         },
         xl: {
-          w: 400,
-          h: 300
+          w: 360,
+          h: 270
         }
       },
-      PopupProductPicture: {
+      ModalProductPicture: {
         xs: {
           w: 590,
           h: 443
@@ -51,6 +59,10 @@ export const environment = {
           h: 675
         },
         md: {
+          w: 1100,
+          h: 825
+        },
+        lg: {
           w: 1100,
           h: 825
         },
@@ -68,7 +80,8 @@ export const environment = {
       xs: 6,
       sm: 6,
       md: 9,
-      xl: 9
+      lg: 12,
+      xl: 15
     }
   },
   permissions: {
@@ -80,6 +93,7 @@ export const environment = {
     guest: ['casual', 'guest'],
     casual: ['casual']
   },
+
   sortQueries: {
     CreatedAt: { createdAt: -1 },
     Views: { views: -1, createdAt: -1 },

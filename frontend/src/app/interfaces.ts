@@ -31,10 +31,6 @@ export interface IProduct {
   display: boolean;
 }
 
-export interface IProductBlanc {
-  blanc: boolean;
-}
-
 export interface ICatalog {
   _id: string;
   name: string;
@@ -83,17 +79,12 @@ export enum ScreenTypes {
   'xs' = 'xs',
   'sm' = 'sm',
   'md' = 'md',
+  'lg' = 'lg',
   'xl' = 'xl',
 }
-
-// export enum PictureTypes {
-//   ProductPicture,
-//   DashboardProductPicture,
-//   PopupProductPicture
-// }
 
 export enum PictureTypes {
   ProductPicture = 'ProductPicture',
   DashboardProductPicture = 'DashboardProductPicture',
-  PopupProductPicture = 'PopupProductPicture'
+  ModalProductPicture = 'ModalProductPicture'
 }

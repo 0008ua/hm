@@ -1,0 +1,15 @@
+<div class="conntainer">
+  <div class="row" fxLayout="row">
+    <div class="cell">
+      <h3 class="mat-h3">{{data.message}}</h3>
+    </div>
+  </div>
+  <div class="row" fxLayout="row" fxLayoutAlign="space-around">
+    <div class="cell">
+      <button mat-button (click)="onClose(true, data.payload)" aria-label="Yes">Так</button>
+    </div>
+    <div class="cell">
+      <button mat-raised-button (click)="onClose(false, null)" aria-label="No">Ні</button>
+    </div>
+  </div>
+</div>

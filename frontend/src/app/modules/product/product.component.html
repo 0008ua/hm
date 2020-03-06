@@ -1,43 +1,44 @@
-<div *ngIf="topProgressBarActive" class="progress-bar">
+<div class="progress-bar">
   <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 </div>
-
-<div class="container-h container-v">
+<div class="container-h">
   <div class="container">
-
     <div class="row" fxLayout="row">
-      <div class="container" fxFlex="100">
-        <div class="row" fxLayout="row">
-          <div class="cell" fxFlex="100">
-            <app-product-breadcrumb></app-product-breadcrumb>
-          </div>
-        </div>
+      <div class="cell" fxFlex="100">
+        <app-product-breadcrumb></app-product-breadcrumb>
       </div>
-      <div class="container" fxHide.lt-md fxFlex.md="22" fxFlex.gt-md="20">
-        <div class="row" fxLayout="row">
-          <div class="cell" fxFlex="100">
-            <app-product-nav></app-product-nav>
-          </div>
-        </div>
+
+      <div class="cell" fxHide.lt-md fxFlex.md="20" fxFlex.gt-md="15">
+        <router-outlet></router-outlet>
+
       </div>
-      <div class="container" fxFlex.lt-md="100" fxFlex.md="78" fxFlex.gt-md="80">
+      <div class="cell" fxFlex.lt-md="100" fxFlex.md="80" fxFlex.gt-md="85">
         <div class="row" fxLayout="row">
-
-
-          <div *ngFor="let product of products" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33.3" fxFlex.gt-md="33.3"
-            class="cell__main-page">
+          <div *ngFor="let product of products" class="cell__main-page animationAppear05s" fxFlex.xs="100"
+            fxFlex.sm="50" fxFlex.md="33.3" fxFlex.lg="25" fxFlex.xl="20">
             <app-product-item [product]="product" [loading]="loading"></app-product-item>
           </div>
-
         </div>
       </div>
-
-
-
     </div>
   </div>
-
 </div>
+<!-- <div class="container-h">
+  <div class="container">
+    <div class="row" fxLayout="row">
+
+      <div class="container" fxHide.lt-md fxFlex.md="20" fxFlex.gt-md="15">
+        <div class="row" fxLayout="row">
+          <div class="cell" fxFlex="100">
+          </div>
+        </div>
+      </div>
+      <div class="container">
+      
+      </div>
+    </div>
+  </div>
+</div> -->
 
 <div *ngIf="!topProgressBarActive" class="progress-bar">
   <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>

@@ -44,14 +44,17 @@ export class ProductComponent implements OnInit {
         }
         this.store.dispatch(new LoadAppNav({ currentCategory: this.currentCategory }));
         this.store.dispatch(new LoadingProducts({ loading: true }));
-        this.store.dispatch(new LoadAppProducts({ currentCategory: this.currentCategory, ProductsAction: LoadProducts, skip: 0 }));
+        this.store.dispatch(new LoadAppProducts({
+          currentCategory: this.currentCategory,
+          ProductsAction: LoadProducts,
+          skip: 0 }));
       });
   }
   ngOnInit() {
 
     this.store.select(selectProductLoadingAndEntities)
       .subscribe((productsStore) => {
-        this.products = productsStore.products;
+        this.compareChanges(productsStore.products);
         this.loading = productsStore.loading;
       });
 
@@ -61,9 +64,34 @@ export class ProductComponent implements OnInit {
       });
   }
 
+  compareChanges(newProducts: IProduct[]) {
+    let theSame = true;
+
+    if (!this.products.length && newProducts.length) {
+      this.products = newProducts;
+      return;
+    }
+
+    for (let i = 0; i < this.products.length; i++) {
+      if (!newProducts[i]
+        || this.products[i]._id !== newProducts[i]._id
+        || this.products[i].views !== newProducts[i].views) {
+        theSame = false;
+        break;
+      }
+    }
+
+    if (theSame) {
+      this.products.push(...newProducts.slice(this.products.length));
+    } else {
+      this.products = newProducts;
+    }
+  }
+
   // Listening of page bottom reached
   @HostListener('window:scroll', ['$event'])
   onScroll(event): void {
+    this.topProgressBarActive = true;
     if ((window.innerHeight + pageYOffset) >= document.body.offsetHeight - 300) {
       this.topProgressBarActive = false;
       if (

@@ -21,7 +21,7 @@ export class ProductFormEffects {
     switchMap(payload => {
       if (payload._id) {
         // edit existing product
-        return this.productService.loadProduct(payload._id)
+        return this.productService.getProduct(payload._id)
           .pipe(
             map(product => new LoadProductFormsSuccess(product))
           );

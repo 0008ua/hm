@@ -5,48 +5,20 @@ getProducts = (req, res, next) => {
   const filter = JSON.parse(req.query.filter);
 
   ProductModel.find(filter)
-      .then(
-          (products) => {
-            console.log('products', products);
-            res.status(200).json(products);
-          },
-      )
-      .catch(
-          (err) => {
-            next(new ClientError(err));
-          },
-      );
+      .then( (products) =>res.status(200).json(products))
+      .catch( (err) => next(new ClientError(err)));
 };
 
-loadProduct = (req, res, next) => {
+getProduct = (req, res, next) => {
   const _id = req.params._id;
 
   ProductModel.findById(_id)
-      .then(
-          (product) => {
-            console.log('product', product);
-            res.status(200).json(product);
-          },
-      )
-      .catch(
-          (err) => {
-            console.log('err', new ClientError(err));
-            next(new ClientError(err));
-          },
-      );
-};
-
-loadProducts = (req, res, next) => {
-
-};
-
-addProduct = (req, res, next) => {
-
+      .then((product) => res.status(200).json(product))
+      .catch((err) =>next(new ClientError(err)));
 };
 
 upsertProduct = (req, res, next) => {
   const product = req.body;
-  console.log('product', product);
   ProductModel.findOneAndUpdate(
       { _id: product._id },
       { $set: product },
@@ -112,16 +84,38 @@ getProductsByParent = (req, res, next) => {
           .catch((err) => next(new DbError()));
       break;
     default:
-      return next(new ClientError({message: 'Немає такої колекції ' + collection}));
+      return next(new ClientError({ message: 'Немає такої колекції ' + collection }));
   }
+};
+
+incViews = (req, res, next) => {
+  const _id = req.params._id;
+  ProductModel.findOneAndUpdate(
+      { _id },
+      { $inc: { views: 1 } },
+      {
+        upsert: false, // Create a document if one isn't found.
+        useFindAndModify: false,
+        new: true, // Return the document after updates are applied
+      },
+  )
+      .then((product) => res.status(200).send(product))
+      .catch((err) => next(new DbError(err)));
+};
+
+deleteProduct = (req, res, next) => {
+  const _id = req.params._id;
+  ProductModel.deleteOne({ _id })
+      .then((result) => res.status(200).send(result))
+      .catch((err) => next(new DbError(err)));
 };
 
 module.exports = {
   getProducts,
-  loadProduct,
-  loadProducts,
-  addProduct,
+  getProduct,
   upsertProduct,
   getSkuList,
   getProductsByParent,
+  incViews,
+  deleteProduct,
 };

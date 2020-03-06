@@ -1,6 +1,9 @@
 const { setCSRFCookie, setFrontendAuthCookie } = require('./cookie');
+const { authentication, authorization } = require('./shared');
 
 module.exports = {
   setCSRFCookie,
-  setFrontendAuthCookie
+  setFrontendAuthCookie,
+  authentication,
+  authorization,
 };

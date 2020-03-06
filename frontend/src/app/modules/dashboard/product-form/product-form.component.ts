@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormGroup, FormArray, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { SharedService } from 'src/app/services/shared.service';
@@ -44,6 +45,7 @@ export class ProductFormComponent implements OnInit {
     private store: Store<State>,
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
   ) { }
 
   ngOnInit() {
@@ -185,11 +187,12 @@ export class ProductFormComponent implements OnInit {
       this.processingLoadPicture = false;
     } else {
       this.sharedService.uploadPicture(file, 'product', [
-        { width: 1100, height: 825, crop: 'fill', fetch_format: 'auto' },
-        { width: 900, height: 675, crop: 'fill', fetch_format: 'auto' },
-        { width: 590, height: 443, crop: 'fill', fetch_format: 'auto' },
-        { width: 460, height: 345, crop: 'fill', fetch_format: 'auto' },
-        { width: 400, height: 300, crop: 'fill', fetch_format: 'auto' },
+        { width: 1100, height: 825, crop: 'fill', fetch_format: 'auto' }, // popup - lg, xl
+        { width: 760, height: 570, crop: 'fill', fetch_format: 'auto' }, // popp up - sm, md
+        { width: 590, height: 443, crop: 'fill', fetch_format: 'auto' }, // xs
+        { width: 460, height: 345, crop: 'fill', fetch_format: 'auto' }, // sm
+        { width: 360, height: 270, crop: 'fill', fetch_format: 'auto' }, // lg, xl
+        { width: 300, height: 225, crop: 'fill', fetch_format: 'auto' }, // md
       ])
         .subscribe(public_id => {
           this.productForm.get('picture').setValue(public_id);
@@ -225,5 +228,9 @@ export class ProductFormComponent implements OnInit {
   // reset to initial values
   resetProductForm() {
     this.store.dispatch(new ResetProductForms());
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
