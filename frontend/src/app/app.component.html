@@ -46,7 +46,7 @@
             </a>
           </div>
           <div class="cell" fxFlex="100" fxLayoutAlign="center">
-            <a *ngIf="allowTo('user')" [routerLink]="['/', 'dashboard', 'product-form']" [routerLinkActive]="['active']"
+            <a *ngIf="allowTo('manager')" [routerLink]="['/', 'dashboard', 'product-form']" [routerLinkActive]="['active']"
               [routerLinkActiveOptions]="{exact: false}">
               <span>Dashboard</span>
             </a>

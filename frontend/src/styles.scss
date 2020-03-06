@@ -310,16 +310,15 @@ mat-chip span {
   height: 4px;
 }
 
-
 .br-menu {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   &__item {
     @include responsive-padding-x(0.5, 1, 0.5, 1);
     border-radius: 10px 10px 0 0;
     background-color: mat-color($background, card);
     color: mat-color($foreground, text);
-    margin: 0 3px;
+    margin: 3px;
     text-align: center;
     &_home {
       border-bottom: 2px solid mat-color($accent);
