@@ -34,12 +34,12 @@
     <mat-sidenav class="sidenav" #sidenav position="end" closed role="navigation" mode="over">
       <div class="container">
         <div class="row" fxLayout="row" (click)="sidenav.close()">
-          <div class="cell" fxFlex="100" fxLayoutAlign="center">
+          <!-- <div class="cell" fxFlex="100" fxLayoutAlign="center">
             <a *ngIf="allowTo('notUser')" [routerLink]="['/', 'user', 'login']" [routerLinkActive]="['active']"
               [routerLinkActiveOptions]="{exact: false}">
               <span>Login</span>
             </a>
-          </div>
+          </div> -->
           <div class="cell" fxFlex="100" fxLayoutAlign="center">
             <a *ngIf="allowTo('guest')" (click)="logout()">
               <span>Logout</span>
