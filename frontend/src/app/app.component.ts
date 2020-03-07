@@ -8,7 +8,10 @@ import { FbService } from './services/fb.service';
 import { LoadScreens } from './actions/screen.actions';
 import { ScreenState } from './reducers/screen.reducer';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { filter, map, combineLatest, mergeMap } from 'rxjs/operators';
+import { filter, map, mergeMap } from 'rxjs/operators';
+import { Title, Meta } from '@angular/platform-browser';
+import { combineLatest } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 declare let gtag: Function;
 
@@ -27,6 +30,8 @@ export class AppComponent implements OnInit {
     private store: Store<State>,
     private router: Router,
     private route: ActivatedRoute,
+    private titleService: Title,
+    private metaService: Meta
   ) { }
 
   ngOnInit() {
@@ -38,42 +43,42 @@ export class AppComponent implements OnInit {
         } else {
           this.productsUrl = false;
         }
+    //   })
+    //   );
+    // $routerEvents.subscribe(_ => _);
+        gtag('config', 'UA-151728431-1',
+          {
+            page_path: event.urlAfterRedirects
+          }
+        );
+      }),
+      map(() => this.route),
+      map((route) => {
+        while (route.firstChild) {
+          route = route.firstChild;
+        }
+        return route;
+      }),
+      filter(route => route.outlet === 'primary'));
+
+    combineLatest(
+      $routerEvents.pipe(mergeMap((route) => route.queryParamMap)), // query params
+      $routerEvents.pipe(mergeMap((route) => route.data)) // routing.module data
+    )
+      .subscribe((result) => {
+        const paramMap = result[0];
+        const data = result[1];
+
+        // prioryty: 1. embeded to router 2. passed as queryParams 3.default values
+        const seoTitle = data.dataTitle || paramMap.get('seoTitle') || environment.seoTitle;
+        const seoMeta = data.dataMeta || paramMap.get('seoMeta') || environment.seoMeta;
+
+        this.titleService.setTitle(seoTitle);
+        const tag = { name: 'description', content: seoMeta };
+        const attributeSelector = 'name="description"';
+        this.metaService.removeTag(attributeSelector);
+        this.metaService.addTag(tag, false);
       })
-      );
-    $routerEvents.subscribe(_ => _);
-    //     gtag('config', 'UA-151728431-1',
-    //       {
-    //         page_path: event.urlAfterRedirects
-    //       }
-    //     );
-    //   }),
-    //   map(() => this.route),
-    //   map((route) => {
-    //     while (route.firstChild) {
-    //       route = route.firstChild;
-    //     }
-    //     return route;
-    //   }),
-    //   filter(route => route.outlet === 'primary'));
-
-    // combineLatest(
-    //   $routerEvents.pipe(mergeMap((route) => route.queryParamMap)), // query params
-    //   $routerEvents.pipe(mergeMap((route) => route.data)) // routing.module data
-    // )
-    //   .subscribe((result) => {
-    //     const paramMap = result[0];
-    //     const data = result[1];
-
-    //     // prioryty: 1. embeded to router 2. passed as queryParams 3.default values
-    //     const seoTitle = data.dataTitle || paramMap.get('seoTitle') || config.seoTitle;
-    //     const seoMeta = data.dataMeta || paramMap.get('seoMeta') || config.seoMeta;
-
-    //     this.titleService.setTitle(seoTitle);
-    //     const tag = { name: 'description', content: seoMeta };
-    //     const attributeSelector = 'name="description"';
-    //     this.metaService.removeTag(attributeSelector);
-    //     this.metaService.addTag(tag, false);
-    //   }); x => x);
 
 
     this.store.dispatch(new GetUser());
