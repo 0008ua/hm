@@ -57,6 +57,8 @@ export class ProductFormComponent implements OnInit {
       display: new FormControl('', [Validators.required]),
     });
 
+    console.log('productForm.get', this.productForm.get('picture').pristine);
+
     this.store.select('productForm')
       .subscribe((store: ProductFormState) => {
         this.state = store;
@@ -197,6 +199,7 @@ export class ProductFormComponent implements OnInit {
         .subscribe(public_id => {
           this.productForm.get('picture').setValue(public_id);
           this.processingLoadPicture = false;
+          this.productForm.get('picture').markAsDirty();
         },
           err => this.matSnackBar.open(err.error.message, '', { duration: 2000 })
         );

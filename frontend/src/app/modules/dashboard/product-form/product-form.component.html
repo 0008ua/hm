@@ -1,114 +1,100 @@
-<!-- <div class="container">
-  <div class="row" fxLayout="row">
-    <div class="cell" fxFlex="50">
-      <span>Редагувати</span>
-    </div>
-    <div class="cell" fxFlex="50">
-      <span>Редагувати</span>
-    </div>
-    <div class="cell" fxFlex="50">
-      <span>Редагувати</span>
-    </div>
-    <div class="cell" fxFlex="50">
-      <div class="row" fxLayout="row">
-        <div class="cell" fxFlex="50">
-          <span>Редагувати</span>
+<div class="row" fxLayout="row">
+  <div class="cell" fxHide.lt-md fxFlex="25"></div>
+  <div class="cell" fxFlex.lt-md="100" fxFlex.gt-sm="50">
+    <form [formGroup]="productForm" #productFormDirective="ngForm" novalidate>
+      <div class="row">
+        <div class="cell_full-width" fxFlex="100" fxLayoutAlign="center center"
+          (click)="!processingLoadPicture ? inputPictureDirective.click() : null">
+          <div class="pictureForm" fxLayoutAlign="center center">
+            <img class="pictureForm__picture" *ngIf="productForm.get('picture').value"
+              src="{{ productPicture.link + '/' + productForm.get('picture').value}}" alt="Picture">
+            <img class="pictureForm__picture" *ngIf="!productForm.get('picture').value"
+              src="{{ productPicture.link + '/' + environment.defaults.productPicture}}" alt="Picture">
+            <input #inputPictureDirective type="file" (change)="addPicture($event)"
+              accept=".jpg, .jpe, .jpeg, .bmp, .webp, .png, .gif, .svg" style="display:none;">
+            <mat-spinner *ngIf="processingLoadPicture" class="addPicture__spinner" [diameter]="24"></mat-spinner>
+            <button mat-mini-fab color="primary" *ngIf="!processingLoadPicture" type="button" aria-label="add"
+              (click)="inputPictureDirective.click()" [disabled]="processingLoadPicture">
+              <mat-icon *ngIf="!processingLoadPicture && !productForm.get('picture').dirty">add</mat-icon>
+              <mat-icon *ngIf="!processingLoadPicture && productForm.get('picture').dirty">redo</mat-icon>
+            </button>
+          </div>
         </div>
-        <div class="cell" fxFlex="50">
-          <span>Редагувати</span>
+        <div class="cell" fxFlex="100">
+          <div class="container-v">
+            <div class="row">
+              <div formArrayName="parents" class="cell" fxFlex="50"
+                *ngFor="let categoryBlock of productForm.get('parents')['controls']; let i = index">
+                <mat-form-field fxFlex>
+                  <mat-select placeholder="Категорія" formControlName="{{i}}" required
+                    (selectionChange)="onSelectCategory($event, i)">
+                    <mat-option *ngFor="let child of children[i]" [value]="child._id">
+                      {{child.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="categoryBlock.hasError('required')">*</mat-error>
+                </mat-form-field>
+
+
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
-  <div class="row" fxLayout="row">
-    <div class="cell" fxHide.lt-md fxFlex="25"></div>
-    <div class="cell" fxFlex.lt-md="100" fxFlex.gt-sm="50">
-      <form [formGroup]="productForm" #productFormDirective="ngForm" novalidate>
-        <div class="row">
-
-          <div class="cell" fxFlex="100">
-            <h2 class="mat-h2">Редагувати</h2>
-          </div>
-
-          <div class="cell" fxFlex="50">
-            <span class="mat-body1">Артикул</span>
-
-          </div>
-
-          <div class="cell" fxFlex="50">
-            <span class="mat-body2">{{this.productForm.get('_id').value}}</span>
-          </div>
-
-          <div class="cell" fxFlex="100">
-            <mat-form-field fxFlex>
-              <input matInput placeholder="Назва" formControlName="name">
-              <button mat-button *ngIf="productForm.get('name').value" matSuffix mat-icon-button aria-label="Clear"
-                (click)="clearNameField()">
-                <mat-icon>close</mat-icon>
-              </button>
-            </mat-form-field>
-          </div>
-
-          <div class="cell" fxFlex="100">
+        <div class="cell" fxFlex="100">
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Назва" formControlName="name">
+            <button mat-button *ngIf="productForm.get('name').value" matSuffix mat-icon-button aria-label="Clear"
+              (click)="clearNameField()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="cell" fxFlex="100">
+          <div class="container-v">
             <div class="row">
               <label class="cell" fxFlex>Публікувати? </label>
-              <mat-radio-group formControlName="display" class="cell" fxFlex>
+              <mat-radio-group formControlName="display" class="cell" fxFlex fxLayoutAlign="center center">
                 <mat-radio-button class="item" [value]="true">Так</mat-radio-button>
                 <mat-radio-button class="item" [value]="false">Ні</mat-radio-button>
               </mat-radio-group>
             </div>
           </div>
-
-          <div class="cell" fxFlex="100">
+        </div>
+        <div class="cell" fxFlex="100">
+          <div class="container-v">
             <div class="row">
-              <div formArrayName="parents" class="cell" fxFlex="50"
-                *ngFor="let categoryBlock of productForm.get('parents')['controls']; let i = index">
-                <mat-select placeholder="Виберіть категорію" formControlName="{{i}}" required
-                  (selectionChange)="onSelectCategory($event, i)">
-                  <mat-option *ngFor="let child of children[i]" [value]="child._id">
-                    {{child.name}}
-                  </mat-option>
-                </mat-select>
+              <div class="cell" fxFlex="50">
+                <span class="mat-body1">Артикул</span>
               </div>
-            </div>
-          </div>
-
-          <div class="cell" fxFlex="100" fxLayoutAlign="center center">
-            <div class="pictureForm" fxLayoutAlign="center center">
-              <img class="pictureForm__picture" *ngIf="productForm.get('picture').value"
-                src="{{ productPicture.link + '/' +
-                                                                                       productForm.get('picture').value}}" alt="Picture">
-              <img class="pictureForm__picture" *ngIf="!productForm.get('picture').value"
-                src="{{ productPicture.link + '/' +
-                                                                                      environment.defaults.productPicture}}" alt="Picture">
-              <input #inputPictureDirective type="file" (change)="addPicture($event)"
-                accept=".jpg, .jpe, .jpeg, .bmp, .webp, .png, .gif, .svg" style="display:none;">
-              <mat-spinner *ngIf="processingLoadPicture" class="addPicture__spinner" [diameter]="24"></mat-spinner>
-              <button mat-mini-fab color="primary" *ngIf="!processingLoadPicture" type="button" aria-label="add"
-                (click)="inputPictureDirective.click();" [disabled]="processingLoadPicture">
-                <mat-icon *ngIf="!productForm.get('picture').value && !processingLoadPicture">add</mat-icon>
-                <mat-icon *ngIf="productForm.get('picture').value && !processingLoadPicture">redo</mat-icon>
-              </button>
-            </div>
-          </div>
-
-          <div class="cell" fxFlex="50" fxLayoutAlign="center">
-            <button mat-raised-button color="primary" (click)="submitProductForm()" fxFlex
-              [disabled]="!productForm.valid || processingLoadPicture">OK</button>
-          </div>
-          <div class="cell" fxFlex="50" fxLayoutAlign="center">
-            <div class="row">
-              <div class="cell" fxFlex="50" fxLayoutAlign="center">
-                <button mat-raised-button (click)="resetProductForm()" [disabled]="processingLoadPicture">Reset</button>
-              </div>
-              <div class="cell" fxFlex="50" fxLayoutAlign="center">
-                <button mat-raised-button (click)="goBack()">Назад</button>
+              <div class="cell" fxFlex="50" fxLayoutAlign="center center">
+                <span class="mat-body2">{{this.productForm.get('_id').value}}</span>
               </div>
             </div>
           </div>
         </div>
-      </form>
-    </div>
+        <div class="cell" fxFlex="100">
+          <div class="container-v">
+            <div class="row">
+              <div class="cell" fxFlex="50" fxLayoutAlign="center">
+                <button mat-raised-button color="primary" (click)="submitProductForm()" fxFlex
+                  [disabled]="!productForm.valid || processingLoadPicture">OK</button>
+              </div>
+              <div class="cell" fxFlex="50" fxLayoutAlign="center">
+                <div class="row">
+                  <div class="cell" fxFlex="50" fxLayoutAlign="center">
+                    <button mat-raised-button (click)="resetProductForm()"
+                      [disabled]="processingLoadPicture">Reset</button>
+                  </div>
+                  <div class="cell" fxFlex="50" fxLayoutAlign="center">
+                    <button mat-raised-button (click)="goBack()">Назад</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
+</div>

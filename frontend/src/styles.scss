@@ -124,6 +124,20 @@ span {
 
 .sidenav {
   width: 250px;
+  @include responsive-padding-v(3);
+  @include responsive-padding-h(1);
+  @include gt-md {
+    height: calc(100vh - 130px); // footer 64px + toolbar 130px
+  }
+  @include md {
+    height: calc(100vh - 100px); // footer 64px + toolbar 100px
+  }
+  @include sm {
+    height: calc(100vh - 64px); // footer 64px + toolbar 64px
+  }
+  @include xs {
+    height: calc(100vh - 56px); // footer 56px + toolbar 56px
+  }
 }
 
 // .dashboard {
@@ -151,6 +165,7 @@ main {
 }
 
 .google-button {
+  width: 100%;
   color: rgba(0, 0, 0, 0.54);
   font-family: Roboto;
   // padding: 0 8px !important;
@@ -165,6 +180,7 @@ main {
 }
 
 a.fb {
+  width: 100%;
   font-family: Lucida Grande, Helvetica Neue, Helvetica, Arial, sans-serif;
   display: inline-block;
   font-size: 14px;
@@ -307,7 +323,10 @@ mat-chip span {
 }
 
 .progress-bar {
-  height: 4px;
+  height: 3px;
+  mat-progress-bar {
+    height: 3px;
+  }
 }
 
 .br-menu {
@@ -321,10 +340,12 @@ mat-chip span {
     margin: 3px;
     text-align: center;
     &_home {
+      background-color: mat-color($background, hover);
       border-bottom: 2px solid mat-color($accent);
       color: mat-color($foreground, icon);
     }
     &_current {
+      background-color: mat-color($background, hover);
       border-bottom: 2px solid mat-color($accent);
       &_active {
         border-bottom: 2px solid mat-color($accent);

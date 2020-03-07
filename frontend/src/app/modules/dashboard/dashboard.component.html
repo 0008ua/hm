@@ -3,9 +3,12 @@
     <div class="container">
       <div class="row" fxLayout="row">
         <div class="cell" *ngFor="let dashboardRootMenuItem of dashboardRootMenu" fxFlex="100" fxLayoutAlign="center">
-          <a class="" [routerLink]="['/', 'dashboard', dashboardRootMenuItem._id]" [routerLinkActive]="['active']"
+          <a [routerLink]="['/', 'dashboard', dashboardRootMenuItem._id]" [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{exact: false}">
-            <span>{{dashboardRootMenuItem.name}}</span>
+                  <span>
+                    <i class="item fas fa-spa"></i>
+                    <span class="item">{{dashboardRootMenuItem.name}}</span>
+                  </span>
           </a>
         </div>
       </div>
@@ -18,7 +21,7 @@
           <div class="cell" fxShow="true" fxFlex="100" fxLayoutAlign="start center">
             <button mat-button (click)="dashboardSidenav.toggle()" aria-label="Menu">
               <span *ngIf="dashboardSidenav.opened"><i class="fas fa-chevron-left"></i></span>
-              <span *ngIf="!dashboardSidenav.opened"><i class="fas fa-ellipsis-h"></i></span>
+              <span *ngIf="!dashboardSidenav.opened"><i class="fas fa-chevron-right"></i></span>
             </button>
           </div>
         </div>

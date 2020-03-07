@@ -8,9 +8,9 @@ import { FbService } from './services/fb.service';
 import { LoadScreens } from './actions/screen.actions';
 import { ScreenState } from './reducers/screen.reducer';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, combineLatest, mergeMap } from 'rxjs/operators';
 
-declare let FB: any;
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.router.events.pipe(
+    const $routerEvents = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
         if (event.url.split('/')[1] === 'products' || event.url.split('/')[1] === '') {
@@ -38,8 +38,42 @@ export class AppComponent implements OnInit {
         } else {
           this.productsUrl = false;
         }
-      }),
-    ).subscribe(x => x);
+      })
+      );
+    $routerEvents.subscribe(_ => _);
+    //     gtag('config', 'UA-151728431-1',
+    //       {
+    //         page_path: event.urlAfterRedirects
+    //       }
+    //     );
+    //   }),
+    //   map(() => this.route),
+    //   map((route) => {
+    //     while (route.firstChild) {
+    //       route = route.firstChild;
+    //     }
+    //     return route;
+    //   }),
+    //   filter(route => route.outlet === 'primary'));
+
+    // combineLatest(
+    //   $routerEvents.pipe(mergeMap((route) => route.queryParamMap)), // query params
+    //   $routerEvents.pipe(mergeMap((route) => route.data)) // routing.module data
+    // )
+    //   .subscribe((result) => {
+    //     const paramMap = result[0];
+    //     const data = result[1];
+
+    //     // prioryty: 1. embeded to router 2. passed as queryParams 3.default values
+    //     const seoTitle = data.dataTitle || paramMap.get('seoTitle') || config.seoTitle;
+    //     const seoMeta = data.dataMeta || paramMap.get('seoMeta') || config.seoMeta;
+
+    //     this.titleService.setTitle(seoTitle);
+    //     const tag = { name: 'description', content: seoMeta };
+    //     const attributeSelector = 'name="description"';
+    //     this.metaService.removeTag(attributeSelector);
+    //     this.metaService.addTag(tag, false);
+    //   }); x => x);
 
 
     this.store.dispatch(new GetUser());

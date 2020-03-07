@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1583505510796,
+  "timestamp": 1583572929916,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -8,22 +8,22 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/5-es2015.a2f86563a4cd02343b75.js",
-        "/5-es5.a2f86563a4cd02343b75.js",
-        "/6-es2015.4b3efc2dc10c6a59c1ac.js",
-        "/6-es5.4b3efc2dc10c6a59c1ac.js",
-        "/7-es2015.ef337fed37d90b2fb236.js",
-        "/7-es5.ef337fed37d90b2fb236.js",
+        "/5-es2015.1eedf3af0c446893f4bc.js",
+        "/5-es5.1eedf3af0c446893f4bc.js",
+        "/6-es2015.aab872df92b0bf9ca36b.js",
+        "/6-es5.aab872df92b0bf9ca36b.js",
+        "/7-es2015.10c980f7cd199cef589b.js",
+        "/7-es5.10c980f7cd199cef589b.js",
         "/favicon.ico",
         "/index.html",
-        "/main-es2015.b990fee54af56856ff74.js",
-        "/main-es5.b990fee54af56856ff74.js",
+        "/main-es2015.1aab9db2731444ffaf82.js",
+        "/main-es5.1aab9db2731444ffaf82.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.2987770fde9daa1d8a2e.js",
         "/polyfills-es5.ef4b1e1fc703b3ff76e3.js",
-        "/runtime-es2015.916588f4aea704f6b951.js",
-        "/runtime-es5.916588f4aea704f6b951.js",
-        "/styles.b943d4f8c1ebe7aab228.css"
+        "/runtime-es2015.98435099e0ce31f091b3.js",
+        "/runtime-es5.98435099e0ce31f091b3.js",
+        "/styles.ca9f385b0dc16bfbc457.css"
       ],
       "patterns": []
     },
@@ -49,12 +49,12 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/5-es2015.a2f86563a4cd02343b75.js": "d95561c7fa59d38cf1ca04d0a93278eb8b42b7d0",
-    "/5-es5.a2f86563a4cd02343b75.js": "2af90895c22d6536d22c32ac6729de5bfaae531a",
-    "/6-es2015.4b3efc2dc10c6a59c1ac.js": "39177f33df9e70a1c8827ebe109e88327778f642",
-    "/6-es5.4b3efc2dc10c6a59c1ac.js": "39177f33df9e70a1c8827ebe109e88327778f642",
-    "/7-es2015.ef337fed37d90b2fb236.js": "d08f582c0f358cdd3a3356f565f2855ac957110a",
-    "/7-es5.ef337fed37d90b2fb236.js": "aae5d3029a0956625dbca8d2f0bf7eaaf85f58e9",
+    "/5-es2015.1eedf3af0c446893f4bc.js": "884a270c0d21315bba01dfc7a49445300ab4c8d8",
+    "/5-es5.1eedf3af0c446893f4bc.js": "b3fba5ca7e321166fde591f24ddddd59693f6235",
+    "/6-es2015.aab872df92b0bf9ca36b.js": "6fc9c564f964f53657c56a9af0d6d8fe45b30422",
+    "/6-es5.aab872df92b0bf9ca36b.js": "6fc9c564f964f53657c56a9af0d6d8fe45b30422",
+    "/7-es2015.10c980f7cd199cef589b.js": "75813a81815ef7dc7f62c37947cbbfe692ecd35c",
+    "/7-es5.10c980f7cd199cef589b.js": "2e4bb910aa0a9598227e1653e229ee32be44b220",
     "/assets/icons/icon-128x128.png": "f4add257111f856b15292518b01b1a7a3e491f9e",
     "/assets/icons/icon-144x144.png": "1652aa9c18fc3967d2d82c438240405e8eb6a5b1",
     "/assets/icons/icon-152x152.png": "920a38cd367caa60a2e5cf08feb153c79ef97591",
@@ -67,15 +67,15 @@
     "/assets/images/hmade_logo_light.svg": "41855ebb46f02b658a3ff27e919f57973d4928a4",
     "/assets/images/loading.svg": "e515b13cc79c383c3fe0594e593cc24b669ca81c",
     "/favicon.ico": "3581640704ffb32dca6a10acca86bcca2471514a",
-    "/index.html": "cc9e9ee73b15ccc093cebaf2d28b28b71955f571",
-    "/main-es2015.b990fee54af56856ff74.js": "da60be248406b9e71c20ee9b60dd3d0146f3e4e9",
-    "/main-es5.b990fee54af56856ff74.js": "d762d268b2773c42d06183c8a36d913a4f468c78",
+    "/index.html": "0350607de3a244ecadf5a337ae56b05f902b9352",
+    "/main-es2015.1aab9db2731444ffaf82.js": "e6cdc3f11e021d8fa685822d52969b8446b16883",
+    "/main-es5.1aab9db2731444ffaf82.js": "8685a8877c5d027e307472bebcf4c687f089595b",
     "/manifest.webmanifest": "b6656e8121a0278c41a1ace1ff3000eb1ba29796",
     "/polyfills-es2015.2987770fde9daa1d8a2e.js": "cf5cbfa9134716054fb479ab21362146cdf1f2ff",
     "/polyfills-es5.ef4b1e1fc703b3ff76e3.js": "6bff0c03e05bb347d213ad1b3674045eb892d189",
-    "/runtime-es2015.916588f4aea704f6b951.js": "d30085c0a8acb4d6e714b4856a3745d71c0d5fe7",
-    "/runtime-es5.916588f4aea704f6b951.js": "512fc916b4a8072697cf8b72eb4df85fe448083b",
-    "/styles.b943d4f8c1ebe7aab228.css": "74420e3df5429aa5e3d7b95c57760448f025083c"
+    "/runtime-es2015.98435099e0ce31f091b3.js": "13451754c5a6106848120d6fbe785c8d3f5770f1",
+    "/runtime-es5.98435099e0ce31f091b3.js": "29a931ecaaa39867f0a5cfc854b5c5e78f568b02",
+    "/styles.ca9f385b0dc16bfbc457.css": "7f8cadc4f61e9950760e6336f72d1b9a15283749"
   },
   "navigationUrls": [
     {

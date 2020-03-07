@@ -11,12 +11,19 @@
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
       <span>Login</span>
     </a> -->
-    <a *ngIf="allowTo('guest')" mat-button (click)="logout()">
-      <span>Logout</span>
-    </a>
+
     <a *ngIf="allowTo('user')" mat-button [routerLink]="['/', 'dashboard', 'product-form']"
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
-      <span>Dashboard</span>
+      <span>
+        <i class="item fas fa-cogs"></i>
+        <span class="item">Налаштування</span>
+      </span>
+    </a>
+    <a *ngIf="allowTo('guest')" mat-button (click)="logout()">
+      <span>
+        <i class="item fas fa-door-open"></i>
+        <span class="item">Вийти</span>
+      </span>
     </a>
   </div>
 
@@ -34,26 +41,34 @@
     <mat-sidenav class="sidenav" #sidenav position="end" closed role="navigation" mode="over">
       <div class="container">
         <div class="row" fxLayout="row" (click)="sidenav.close()">
-          <!-- <div class="cell" fxFlex="100" fxLayoutAlign="center">
+          <div *ngIf="productsUrl" class="cell" fxFlex="100" fxLayoutAlign="center">
+            <app-product-nav (sidenavCloseEmitter)="sidenav.close()"></app-product-nav>
+          </div>
+          <!-- <div class="cell" fxFlex="100">
             <a *ngIf="allowTo('notUser')" [routerLink]="['/', 'user', 'login']" [routerLinkActive]="['active']"
               [routerLinkActiveOptions]="{exact: false}">
               <span>Login</span>
             </a>
           </div> -->
-          <div class="cell" fxFlex="100" fxLayoutAlign="center">
+          <div class="cell" fxFlex="100">
+            <a *ngIf="allowTo('manager')" [routerLink]="['/', 'dashboard', 'product-form']"
+              [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
+              <span>
+                <i class="item fas fa-cogs"></i>
+                <span class="item">Налаштування</span>
+              </span>
+            </a>
+          </div>
+          <div class="cell" fxFlex="100">
             <a *ngIf="allowTo('guest')" (click)="logout()">
-              <span>Logout</span>
+              <span>
+                <i class="item fas fa-door-open"></i>
+                <span class="item">Вийти</span>
+              </span>
             </a>
           </div>
-          <div class="cell" fxFlex="100" fxLayoutAlign="center">
-            <a *ngIf="allowTo('manager')" [routerLink]="['/', 'dashboard', 'product-form']" [routerLinkActive]="['active']"
-              [routerLinkActiveOptions]="{exact: false}">
-              <span>Dashboard</span>
-            </a>
-          </div>
-          <div *ngIf="productsUrl" class="cell" fxFlex="100" fxLayoutAlign="center">
-            <app-product-nav (sidenavCloseEmitter)="sidenav.close()"></app-product-nav>
-          </div>
+
+
         </div>
       </div>
 

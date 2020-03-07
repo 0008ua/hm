@@ -1,6 +1,6 @@
-<div class="container h-100">
+<div class="container-column">
   <div fxLayout="column" class="column" fxLayoutAlign="center space-around">
-    <div class="cell" fxLayoutAlign="center center" fxFlex>
+    <div class="cell" fxLayoutAlign="center center">
       <a class="google-button" mat-raised-button href="{{host + '/api/user/auth/google'}}"
         aria-label="Sign in with Google">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 48 48">
@@ -22,10 +22,9 @@
         </svg>
         Sign in with Google</a>
     </div>
-    <div class="cell" fxLayoutAlign="center" fxFlex>
+    <div class="cell" fxLayoutAlign="center">
       <div>
-      <a href="{{host + '/api/user/auth/facebook'}}" class="fb connect">Sign in with Facebook</a>
-
+        <a href="{{host + '/api/user/auth/facebook'}}" class="fb connect">Sign in with Facebook</a>
       </div>
     </div>
   </div>

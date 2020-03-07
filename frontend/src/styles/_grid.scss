@@ -117,7 +117,6 @@ $space-xs: 8px;
   @include xs {
     padding: $space-xs;
   }
-
   &-column {
     height: 100%;
   }
@@ -201,7 +200,7 @@ $space-xs: 8px;
   }
 }
 
-.cell__main-page {
+.cell_full-width {
   @include gt-md {
     padding: $space-gt-md;
   }

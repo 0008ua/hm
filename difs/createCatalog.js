@@ -32,6 +32,12 @@ db.getCollection('catalogs')
         seoTitle: 'HandMADE - Іграшки', seoMeta: 'Іграшки ручної роботи, тильди, м\'які іграшки, подарунки для дітей',
       },
       {
+        _id: 'kids', ancestors: ['home', 'common', 'products'], parent: 'products', order: 6,
+        picture: '', prefix: 'kid',
+        name: 'Для немовлят', description: '',
+        seoTitle: 'HandMADE - Для немовлят', seoMeta: 'В\'язання, одяг, шапочка, пінетки, погрумушка, рукавички, іграшки для немовлят',
+      },
+      {
         _id: 'wreaths', ancestors: ['home', 'common', 'products'], parent: 'products', order: 2,
         picture: 'category-wreaths', prefix: 'wrh',
         name: 'Віночки', description: '',
@@ -162,11 +168,6 @@ db.getCollection('catalogs')
       //   auth: 'manager', order: 2, picture: 'catalog', description: '',
       //   prefix: '', seoTitle: '', seoMeta: '',
       // },
-      {
-        _id: 'tools', name: 'Інструменти', ancestors: ['home', 'system', 'dashboard'], parent: 'dashboard',
-        auth: 'manager', order: 5, picture: 'catalog', description: '',
-        prefix: '', seoTitle: '', seoMeta: '',
-      },
       {
         _id: 'login', name: 'Увійти', ancestors: ['home', 'system'], parent: 'system',
         auth: 'casual', order: 2, picture: 'catalog', description: '',
