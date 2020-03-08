@@ -3,8 +3,7 @@
   <div class="cell" fxFlex.lt-md="100" fxFlex.gt-sm="50">
     <form [formGroup]="productForm" #productFormDirective="ngForm" novalidate>
       <div class="row">
-        <div class="cell_full-width" fxFlex="100" fxLayoutAlign="center center"
-          (click)="!processingLoadPicture ? inputPictureDirective.click() : null">
+        <div class="cell_full-width" fxFlex="100" fxLayoutAlign="center center">
           <div class="pictureForm" fxLayoutAlign="center center">
             <img class="pictureForm__picture" *ngIf="productForm.get('picture').value"
               src="{{ productPicture.link + '/' + productForm.get('picture').value}}" alt="Picture">

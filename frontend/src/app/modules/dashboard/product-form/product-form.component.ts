@@ -57,8 +57,6 @@ export class ProductFormComponent implements OnInit {
       display: new FormControl('', [Validators.required]),
     });
 
-    console.log('productForm.get', this.productForm.get('picture').pristine);
-
     this.store.select('productForm')
       .subscribe((store: ProductFormState) => {
         this.state = store;
@@ -84,7 +82,7 @@ export class ProductFormComponent implements OnInit {
       this.removeParents((this.productForm.get('parents') as FormArray).length - 1);
     }
 
-    if (this.inputPictureDirective)  {
+    if (this.inputPictureDirective) {
       this.inputPictureDirective.nativeElement.value = [];
     }
     if (this.productFormDirective) {
