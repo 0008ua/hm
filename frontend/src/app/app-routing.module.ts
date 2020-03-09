@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Page404Component } from './modules/shared/page404/page404.component';
 import { AuthGuard } from './services/auth.guard';
+import { FeedbackComponent } from './modules/shared/feedback/feedback.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,10 @@ const routes: Routes = [
     loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
     canActivate: [AuthGuard],
     data: { auth: 'manager' },
+  },
+  {
+    path: 'feedback',
+    component: FeedbackComponent,
   },
   {
     path: 'products',

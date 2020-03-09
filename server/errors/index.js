@@ -32,7 +32,6 @@ const errorHandler = (err, req, res, next) => {
   }
   // custom client error
   if (err instanceof ClientError) {
-    // console.log('clientError in err handler ', err);
     return res.status(err.status).json(err);
   }
 
@@ -46,7 +45,8 @@ const errorHandler = (err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.comment = 'Something went wrong :(';
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = err;
   // // render the error page
   res.status(err.status || 500);
   res.render('error');
