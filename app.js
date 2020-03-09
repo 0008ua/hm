@@ -50,12 +50,12 @@ app.use(setFrontendAuthCookie);
 // serve files with all cookies
 // app.use(express.static(path.join(__dirname, 'public')));
 
-app.use( (req, res, next) =>
-  next(new ClientError({
-    message: 'Wrong api',
-    status: '404',
-  })),
-);
+// app.use( (req, res, next) =>
+//   next(new ClientError({
+//     message: 'Wrong api',
+//     status: '404',
+//   })),
+// );
 
 /**
  * all apis, api/404 will be handled here
