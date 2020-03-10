@@ -88,3 +88,9 @@ export enum PictureTypes {
   DashboardProductPicture = 'DashboardProductPicture',
   ModalProductPicture = 'ModalProductPicture'
 }
+
+export interface IFeedback {
+  message: string;
+  contacts: string;
+  name: string;
+}

@@ -5,6 +5,7 @@ import { ModalComponent } from './modal/modal.component';
 import { AppMaterialModule } from 'src/app/app-material.module';
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,6 +14,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
   imports: [
     CommonModule,
     AppMaterialModule,
+    ReactiveFormsModule,
   ],
   exports: [
     Page404Component

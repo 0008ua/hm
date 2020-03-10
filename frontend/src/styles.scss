@@ -44,6 +44,10 @@ span {
   vertical-align: baseline;
 }
 
+mat-icon {
+  color: mat-color($primary);
+}
+
 @include keyframes(fadeIn) {
   from {
     opacity: 0;
@@ -139,15 +143,6 @@ span {
     height: calc(100vh - 56px); // footer 56px + toolbar 56px
   }
 }
-
-// .dashboard {
-//   position: relative;
-//   &__menu-button {
-//     position: absolute;
-//     top: 5px;
-//     left: 5px;
-//   }
-// }
 
 main {
   @include gt-md {
@@ -360,4 +355,9 @@ mat-chip span {
       border-bottom: 2px solid mat-color($accent);
     }
   }
+}
+
+.form {
+  border-radius: 10px;
+  @include mat-elevation(2);
 }
