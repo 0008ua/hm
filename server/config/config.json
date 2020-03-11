@@ -48,5 +48,12 @@
     "casual": [
       "casual"
     ]
+  },
+  "mailOptions": {
+    "questionFromSite": {
+      "from": "HMade <questionfromsite@hmade.work>",
+      "to": "info@hmade.work",
+      "subject": "Питання з сайту"
+    }
   }
 }

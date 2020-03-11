@@ -1,11 +1,13 @@
+<div class="progress-bar">
+  <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
+</div>
 <div class="container-h container-v">
   <div class="container">
     <div class="row">
       <div class="cell" fxFlex.gt-xs="10" fxFlex.gt-md="15"></div>
       <div class="cell" fxFlex.gt-xs="80" fxFlex.gt-md="70">
 
-        <form class="form" #feedbackFormDirective="ngForm" [formGroup]="feedbackForm" novalidate
-          (submit)="onFeedbackFormSubmit()">
+        <form class="form" #feedbackFormDirective="ngForm" [formGroup]="feedbackForm" novalidate>
           <div class="container">
 
             <div class="row">
@@ -17,7 +19,7 @@
                 <div class="container-h">
                   <div class="row" fxLayout="row">
                     <div class="cell" fxLayoutAlign="center center">
-                      <mat-icon class="mat-18">mail</mat-icon>
+                      <mat-icon class="mat-18" color="primary">mail</mat-icon>
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
@@ -39,7 +41,7 @@
                 <div class="container-h">
                   <div class="row" fxLayout="row">
                     <div class="cell" fxLayoutAlign="center center">
-                      <mat-icon class="mat-18">account_circle</mat-icon>
+                      <mat-icon class="mat-18" color="primary">account_circle</mat-icon>
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
@@ -59,7 +61,7 @@
                 <div class="container-h">
                   <div class="row" fxLayout="row">
                     <div class="cell" fxLayoutAlign="center center">
-                      <mat-icon class="mat-18">contacts</mat-icon>
+                      <mat-icon class="mat-18" color="primary">contacts</mat-icon>
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
@@ -74,19 +76,19 @@
                 </div>
               </div>
 
-
-
               <!-- <re-captcha [ngClass]="{'display-none':
                       !feedbackForm.get('contacts').valid || !feedbackForm.get('contacts').valid ||
                       !feedbackForm.get('message').valid}" [formControlName]="'recaptcha'" #recaptchaRef
               siteKey="{{environment.recaptchaSiteKey}}">
             </re-captcha> -->
               <div class="cell" fxFlex="100">
-                <div class="container-h" fxLayoutAlign="center">
+                <div class="container-h form__button-wrapper" fxLayoutAlign="center">
                   <button mat-button aria-label="Send message"
-                    [disabled]="!feedbackForm.valid || processing">
-                    <mat-icon *ngIf="!processing">message</mat-icon> Написати мені
+                    [disabled]="!feedbackForm.valid || processing" (click)="onFeedbackFormSubmit()">
+                    <mat-icon color="primary" *ngIf="feedbackForm.valid">message</mat-icon>
+                     Написати мені
                   </button>
+   
                 </div>
               </div>
 

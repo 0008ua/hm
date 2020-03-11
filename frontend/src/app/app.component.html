@@ -14,10 +14,9 @@
 
     <a mat-button [routerLink]="['/', 'feedback']" [routerLinkActive]="['active']"
       [routerLinkActiveOptions]="{exact: false}">
-      <span>
+
         <i class="item far fa-envelope"></i>
         <span class="item">Написати мені</span>
-      </span>
     </a>
     <a *ngIf="allowTo('user')" mat-button [routerLink]="['/', 'dashboard', 'product-form']"
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">

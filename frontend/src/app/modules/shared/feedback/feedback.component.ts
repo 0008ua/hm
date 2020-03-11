@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FormGroup, FormGroupDirective, FormControl, Validators } from '@angular/forms';
 import { IFeedback } from 'src/app/interfaces';
+import { SharedService } from 'src/app/services/shared.service';
+import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-feedback',
@@ -16,9 +19,9 @@ export class FeedbackComponent implements OnInit {
   processing = false;
 
   constructor(
-    // private location: Location,
-    // private ngUserManService: NgUserManService,
-    // private matSnackBar: MatSnackBar,
+    private location: Location,
+    private sharedService: SharedService,
+    private matSnackBar: MatSnackBar,
 
   ) { }
 
@@ -42,26 +45,26 @@ export class FeedbackComponent implements OnInit {
   }
 
   onFeedbackFormSubmit() {
-    // this.processing = true;
-    // this.feedback = this.feedbackForm.value;
-    // this.ngUserManService.sendFeedbackMessage(this.feedback, this.feedbackForm.get('recaptcha').value)
-    //   .subscribe(
-    //     res => {
-    //       // console.log('feedback ', res);
-    //       this.matSnackBar.open('Повідомлення надіслано. Ми зв\'яжемось з вами найближчим часом', '',
-    //         { duration: 5000 });
-    //       this.processing = false;
-    //       this.resetForm();
-    //       this.location.back();
+    this.processing = true;
+    this.feedback = this.feedbackForm.value;
+    this.sharedService.sendFeedbackMessage(this.feedback, 'sddfsdf'
+      //  this.feedbackForm.get('recaptcha').value
+       )
+      .subscribe(
+        res => {
+          this.matSnackBar.open(res, '', { duration: 3000 });
+          console.log('feedback ', res);
+          this.processing = false;
+          this.resetForm();
+          // this.location.back();
 
-    //     },
-    //     err => {
-    //       this.processing = false;
-    //       this.matSnackBar.open('Сталася помилка. Повідомлення не надіслано. Спробуйте пізнше', '',
-    //         { duration: 3000, panelClass: 'warn' });
-    //       // console.log('feedback err ', err);
-    //     }
-    //   );
+        },
+        err => {
+          this.processing = false;
+          console.log('feedback err ', err);
+          this.matSnackBar.open(err.error.message, '', { duration: 3000 });
+        }
+      );
   }
 
   resetForm() {

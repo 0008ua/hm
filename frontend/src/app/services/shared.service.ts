@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { ScreenTypes, PictureTypes, IPictureSize, IPictureState } from '../interfaces';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { ScreenTypes, PictureTypes, IPictureSize, IPictureState, IFeedback } from '../interfaces';
 import { environment } from '../../environments/environment';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { map } from 'rxjs/operators';
@@ -138,6 +138,24 @@ export class SharedService {
           return screenState;
         })
       );
+  }
+
+  sendFeedbackMessage(feedback: IFeedback, recaptcha: string): Observable<string> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      // params: new HttpParams({
+      //   fromObject: {
+      //     recaptcha
+      //   }
+      // })
+    };
+    return this.http.post<string>(
+      'api/shared/send-feedback-message',
+      feedback,
+      httpOptions
+    );
   }
 
 }

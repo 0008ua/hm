@@ -1,5 +1,6 @@
-const { createJWT } = require('./sharedHelper');
+const { createJWT, sendMail } = require('./sharedHelper');
 
 module.exports = {
   createJWT,
+  sendMail,
 };

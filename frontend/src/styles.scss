@@ -42,10 +42,13 @@ a:hover {
 i,
 span {
   vertical-align: baseline;
+  // line-height: 2rem;
 }
 
-mat-icon {
+i.far, i.fas, i.fab {
   color: mat-color($primary);
+  font-size: 1.5rem;
+  // vertical-align: baseline;
 }
 
 @include keyframes(fadeIn) {
@@ -360,4 +363,7 @@ mat-chip span {
 .form {
   border-radius: 10px;
   @include mat-elevation(2);
+  &__button-wrapper {
+    @include responsive-padding-v(1)
+  }
 }
