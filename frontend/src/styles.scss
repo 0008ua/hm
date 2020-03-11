@@ -42,10 +42,10 @@ a:hover {
 i,
 span {
   vertical-align: baseline;
-  // line-height: 2rem;
+  line-height: 20px;
 }
 
-i.far, i.fas, i.fab {
+i.far, i.fas, i.fab, i.fa {
   color: mat-color($primary);
   font-size: 1.5rem;
   // vertical-align: baseline;

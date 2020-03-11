@@ -20,16 +20,12 @@
     </a>
     <a *ngIf="allowTo('user')" mat-button [routerLink]="['/', 'dashboard', 'product-form']"
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
-      <span>
         <i class="item fas fa-cogs"></i>
         <span class="item">Налаштування</span>
-      </span>
     </a>
     <a *ngIf="allowTo('guest')" mat-button (click)="logout()">
-      <span>
         <i class="item fas fa-door-open"></i>
         <span class="item">Вийти</span>
-      </span>
     </a>
   </div>
 
