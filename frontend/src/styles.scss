@@ -364,10 +364,10 @@ mat-chip span {
 }
 
 .form {
-  &__icon {
-    color: mat-color($primary);
-    font-size: mat-font-size($config, title);
-  }
+  // &__icon {
+  //   color: mat-color($primary);
+  //   font-size: mat-font-size($config, title);
+  // }
   border-radius: 10px;
   @include mat-elevation(2);
   &__button-wrapper {
@@ -388,33 +388,64 @@ mat-chip span {
     vertical-align: middle; // align with siblings
   }
   &__icon {
-    color: mat-color($primary);
-    font-size: mat-font-size($config, title);
+    @extend .icon;
+    // color: mat-color($primary);
+    // font-size: mat-font-size($config, title);
+
     // font-family: mat-font-family($config);
     // line-height: mat-line-height($config, title);
     // font-weight: mat-font-weight($config, title);
   }
   &__text {
-    color: mat-color($primary, 800);
-    @include mat-typography-level-to-styles($config, body-1);
+    @extend .icon-text;
+    // color: mat-color($primary, 800);
+    // @include mat-typography-level-to-styles($config, body-1);
   }
   // &:hover {
   //   background-color: mat-color($background, hover);
   // }
   &:disabled {
     .link__icon {
-      color: mat-color($foreground, icon);
+      @extend .icon_disabled;
+      // color: mat-color($foreground, icon);
     }
     .link__text {
-      color: mat-color($foreground, text);
+      @extend .icon-text_disabled;
+      // color: mat-color($foreground, text);
     }
   }
   &_active {
     .link__icon {
-      color: mat-color($accent);
+      @extend .icon_active;
+
+      // color: mat-color($accent);
     }
     .link__text {
-      color: mat-color($accent, 800);
+      @extend .icon-text_active;
+
+      // color: mat-color($accent, 800);
     }
+  }
+}
+
+.icon {
+  color: mat-color($primary);
+  font-size: mat-font-size($config, title);
+  &_disabled {
+    color: mat-color($foreground, icon);
+  }
+  &_active {
+    color: mat-color($accent);
+  }
+}
+
+.icon-text {
+    color: mat-color($primary, 800);
+    @include mat-typography-level-to-styles($config, body-1);
+  &_disabled {
+    color: mat-color($foreground, text);
+  }
+  &_active {
+    color: mat-color($accent, 800);
   }
 }
