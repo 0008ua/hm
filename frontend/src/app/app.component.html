@@ -12,20 +12,19 @@
       <span>Login</span>
     </a> -->
 
-    <a mat-button [routerLink]="['/', 'feedback']" [routerLinkActive]="['active']"
+    <a mat-button class="link" [routerLink]="['/', 'feedback']" [routerLinkActive]="['link_active']"
       [routerLinkActiveOptions]="{exact: false}">
-
-        <i class="item far fa-envelope"></i>
-        <span class="item">Написати мені</span>
+      <i class="link__icon far fa-envelope"></i>
+      <span class="link__text">Написати мені</span>
     </a>
-    <a *ngIf="allowTo('user')" mat-button [routerLink]="['/', 'dashboard', 'product-form']"
-      [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
-        <i class="item fas fa-cogs"></i>
-        <span class="item">Налаштування</span>
+    <a *ngIf="allowTo('user')" mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
+      [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
+      <i class="link__icon fas fa-cogs"></i>
+      <span class="link__text">Dashboard</span>
     </a>
-    <a *ngIf="allowTo('guest')" mat-button (click)="logout()">
-        <i class="item fas fa-door-open"></i>
-        <span class="item">Вийти</span>
+    <a *ngIf="allowTo('guest')" mat-button class="link" (click)="logout()">
+      <i class="link__icon fas fa-door-open"></i>
+      <span class="link__text">Вийти</span>
     </a>
   </div>
 
@@ -53,29 +52,29 @@
             </a>
           </div> -->
           <div class="cell" fxFlex="100">
-            <a [routerLink]="['/', 'feedback']" [routerLinkActive]="['active']"
+            <a mat-button class="link" [routerLink]="['/', 'feedback']" [routerLinkActive]="['link_active']"
               [routerLinkActiveOptions]="{exact: false}">
-              <span>
-                <i class="item far fa-envelope"></i>
-                <span class="item">Написати мені</span>
-              </span>
+
+              <i class="link__icon far fa-envelope"></i>
+              <span class="link__text">Написати мені</span>
+
             </a>
           </div>
           <div class="cell" fxFlex="100">
-            <a *ngIf="allowTo('manager')" [routerLink]="['/', 'dashboard', 'product-form']"
-              [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
-              <span>
-                <i class="item fas fa-cogs"></i>
-                <span class="item">Налаштування</span>
-              </span>
+            <a *ngIf="allowTo('manager')" mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
+              [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
+
+              <i class="link__icon fas fa-cogs"></i>
+              <span class="link__text">Dashboard</span>
+
             </a>
           </div>
           <div class="cell" fxFlex="100">
-            <a *ngIf="allowTo('guest')" (click)="logout()">
-              <span>
-                <i class="item fas fa-door-open"></i>
-                <span class="item">Вийти</span>
-              </span>
+            <a *ngIf="allowTo('guest')" mat-button class="link" (click)="logout()">
+
+              <i class="link__icon fas fa-door-open"></i>
+              <span class="link__text">Вийти</span>
+
             </a>
           </div>
 

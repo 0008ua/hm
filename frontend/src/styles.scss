@@ -31,7 +31,7 @@ a:hover,
 a:active {
   text-decoration: none;
   color: inherit;
-  @include mat-typography-level-to-styles($config, body-1);
+  // @include mat-typography-level-to-styles($config, body-1);
 }
 
 a:hover {
@@ -41,13 +41,16 @@ a:hover {
 // vertical align for fa icons
 i,
 span {
-  vertical-align: baseline;
-  line-height: 20px;
+  // vertical-align: baseline;
+  // line-height: 20px;
 }
 
-i.far, i.fas, i.fab, i.fa {
-  color: mat-color($primary);
-  font-size: 1.5rem;
+i.far,
+i.fas,
+i.fab,
+i.fa {
+  // color: mat-color($primary);
+  // font-size: 1.5rem;
   // vertical-align: baseline;
 }
 
@@ -361,9 +364,57 @@ mat-chip span {
 }
 
 .form {
+  &__icon {
+    color: mat-color($primary);
+    font-size: mat-font-size($config, title);
+  }
   border-radius: 10px;
   @include mat-elevation(2);
   &__button-wrapper {
-    @include responsive-padding-v(1)
+    @include responsive-padding-v(1);
+  }
+}
+
+.link {
+  // vertical-align: middle; // align with siblings
+  // line-height: mat-line-height($config, headline);
+  // height: mat-line-height($config, headline);
+  // @include responsive-padding-h(1.5);
+  // border-radius: 4px;
+  // min-width: 64px;
+  &__icon,
+  &__text {
+    @extend .item;
+    vertical-align: middle; // align with siblings
+  }
+  &__icon {
+    color: mat-color($primary);
+    font-size: mat-font-size($config, title);
+    // font-family: mat-font-family($config);
+    // line-height: mat-line-height($config, title);
+    // font-weight: mat-font-weight($config, title);
+  }
+  &__text {
+    color: mat-color($primary, 800);
+    @include mat-typography-level-to-styles($config, body-1);
+  }
+  // &:hover {
+  //   background-color: mat-color($background, hover);
+  // }
+  &:disabled {
+    .link__icon {
+      color: mat-color($foreground, icon);
+    }
+    .link__text {
+      color: mat-color($foreground, text);
+    }
+  }
+  &_active {
+    .link__icon {
+      color: mat-color($accent);
+    }
+    .link__text {
+      color: mat-color($accent, 800);
+    }
   }
 }

@@ -19,7 +19,8 @@
                 <div class="container-h">
                   <div class="row" fxLayout="row">
                     <div class="cell" fxLayoutAlign="center center">
-                      <mat-icon class="mat-18" color="primary">mail</mat-icon>
+                      <i class="form__icon far fa-envelope"></i>
+                      <!-- <mat-icon class="mat-18" color="primary">mail</mat-icon> -->
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
@@ -41,7 +42,8 @@
                 <div class="container-h">
                   <div class="row" fxLayout="row">
                     <div class="cell" fxLayoutAlign="center center">
-                      <mat-icon class="mat-18" color="primary">account_circle</mat-icon>
+                      <i class="form__icon fas fa-signature"></i>
+                      <!-- <mat-icon class="mat-18" color="primary">account_circle</mat-icon> -->
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
@@ -61,7 +63,8 @@
                 <div class="container-h">
                   <div class="row" fxLayout="row">
                     <div class="cell" fxLayoutAlign="center center">
-                      <mat-icon class="mat-18" color="primary">contacts</mat-icon>
+                      <!-- <mat-icon class="mat-18" color="primary">contacts</mat-icon> -->
+                      <i class="form__icon far fa-address-card"></i>
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
@@ -83,10 +86,12 @@
             </re-captcha> -->
               <div class="cell" fxFlex="100">
                 <div class="container-h form__button-wrapper" fxLayoutAlign="center">
-                  <button mat-button aria-label="Send message"
+                  <button mat-button aria-label="Send message" class="link"
                     [disabled]="!feedbackForm.valid || processing" (click)="onFeedbackFormSubmit()">
-                    <mat-icon color="primary" *ngIf="feedbackForm.valid">message</mat-icon>
-                     Написати мені
+                            <i class="link__icon fas fa-share"></i>
+                            <span class="link__text">Написати</span>
+                    <!-- <mat-icon color="primary" *ngIf="feedbackForm.valid">message</mat-icon>
+                     Написати мені -->
                   </button>
    
                 </div>

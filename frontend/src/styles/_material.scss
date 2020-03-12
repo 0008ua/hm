@@ -12,8 +12,8 @@ $custom-typography: mat-typography-config(
 
 $config: mat-typography-config();
 
-$dark-theme: mat-dark-theme(mat-palette($mat-light-blue), mat-palette($mat-indigo), mat-palette($mat-red));
-$light-theme: mat-light-theme(mat-palette($mat-light-blue), mat-palette($mat-indigo), mat-palette($mat-red));
+$dark-theme: mat-dark-theme(mat-palette($mat-indigo), mat-palette($mat-light-blue), mat-palette($mat-red));
+$light-theme: mat-light-theme(mat-palette($mat-indigo), mat-palette($mat-light-blue), mat-palette($mat-red));
 
 $main-theme: $light-theme;
 @include angular-material-theme($main-theme);
