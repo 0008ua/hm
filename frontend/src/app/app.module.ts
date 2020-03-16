@@ -50,7 +50,6 @@ export function createTranslateLoader(http: HttpClient) {
 
     HttpClientModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'ua',
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),

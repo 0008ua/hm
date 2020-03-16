@@ -24,7 +24,8 @@
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
-                        <textarea rows="5" matInput placeholder="Повідомлення" formControlName="message"
+
+                        <textarea rows="5" matInput placeholder="{{'feedbackForm.message' | translate}}" formControlName="message"
                           required></textarea>
                         <mat-error *ngIf="(feedbackForm.get('message').errors?.minlength ||
                                                                   feedbackForm.get('message').errors?.maxlength ||
@@ -47,7 +48,7 @@
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
-                        <input matInput placeholder="Ваше ім'я" formControlName="name" required>
+                        <input matInput placeholder="{{'feedbackForm.name' | translate}}" formControlName="name" required>
                         <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
                                               feedbackForm.get('name').touched">
                           Введіть ім'я
@@ -68,7 +69,7 @@
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
-                        <input matInput placeholder="Контактний номер або email" formControlName="contacts" required>
+                        <input matInput placeholder="{{'feedbackForm.contacts' | translate}}" formControlName="contacts" required>
                         <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
                                                               feedbackForm.get('contacts').touched">
                           Введіть котактну інформацію
@@ -89,7 +90,7 @@
                   <button mat-button aria-label="Send message" class="link"
                     [disabled]="!feedbackForm.valid || processing" (click)="onFeedbackFormSubmit()">
                             <i class="link__icon fas fa-share"></i>
-                            <span class="link__icon-text">Написати</span>
+                            <span class="link__icon-text">{{'buttons.send' | translate}}</span>
                     <!-- <mat-icon color="primary" *ngIf="feedbackForm.valid">message</mat-icon>
                      Написати мені -->
                   </button>

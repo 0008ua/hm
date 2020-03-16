@@ -4,5 +4,13 @@
   "signin": "Sign in",
   "logout": "Logout",
   "popular": "Popular",
-  "last": "Last"
+  "last": "Last",
+  "feedbackForm": {
+    "message": "Message",
+    "name": "Your name",
+    "contacts": "Your contact number or email"
+  },
+  "buttons": {
+    "send": "Send"
+  }
 }

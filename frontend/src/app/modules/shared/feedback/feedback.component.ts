@@ -5,6 +5,7 @@ import { IFeedback } from 'src/app/interfaces';
 import { SharedService } from 'src/app/services/shared.service';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-feedback',
@@ -22,7 +23,7 @@ export class FeedbackComponent implements OnInit {
     private location: Location,
     private sharedService: SharedService,
     private matSnackBar: MatSnackBar,
-
+    private translate: TranslateService,
   ) { }
 
   ngOnInit() {

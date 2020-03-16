@@ -6,6 +6,7 @@ import { AppMaterialModule } from 'src/app/app-material.module';
 import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -15,6 +16,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AppMaterialModule,
     ReactiveFormsModule,
+    TranslateModule.forChild({
+      extend: true,
+    })
   ],
   exports: [
     Page404Component
