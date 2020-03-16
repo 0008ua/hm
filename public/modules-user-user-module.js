@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-column\">\r\n  <div fxLayout=\"column\" class=\"column\" fxLayoutAlign=\"center space-around\">\r\n    <div class=\"cell\" fxLayoutAlign=\"center center\">\r\n      <a class=\"google-button\" mat-raised-button href=\"{{host + '/api/user/auth/google'}}\"\r\n        aria-label=\"Sign in with Google\">\r\n        <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" width=\"18px\" height=\"18px\" viewBox=\"0 0 48 48\">\r\n          <g>\r\n            <path fill=\"#EA4335\"\r\n              d=\"M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z\">\r\n            </path>\r\n            <path fill=\"#4285F4\"\r\n              d=\"M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z\">\r\n            </path>\r\n            <path fill=\"#FBBC05\"\r\n              d=\"M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z\">\r\n            </path>\r\n            <path fill=\"#34A853\"\r\n              d=\"M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z\">\r\n            </path>\r\n            <path fill=\"none\" d=\"M0 0h48v48H0z\"></path>\r\n          </g>\r\n        </svg>\r\n        Sign in with Google</a>\r\n    </div>\r\n    <div class=\"cell\" fxLayoutAlign=\"center\">\r\n      <div>\r\n        <a href=\"{{host + '/api/user/auth/facebook'}}\" class=\"fb connect\">Sign in with Facebook</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-column\">\n  <div fxLayout=\"column\" class=\"column\" fxLayoutAlign=\"center space-around\">\n    <div class=\"cell\" fxLayoutAlign=\"center center\">\n      <a class=\"google-button\" mat-raised-button href=\"{{host + '/api/user/auth/google'}}\"\n        aria-label=\"Sign in with Google\">\n        <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" width=\"18px\" height=\"18px\" viewBox=\"0 0 48 48\">\n          <g>\n            <path fill=\"#EA4335\"\n              d=\"M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z\">\n            </path>\n            <path fill=\"#4285F4\"\n              d=\"M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z\">\n            </path>\n            <path fill=\"#FBBC05\"\n              d=\"M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z\">\n            </path>\n            <path fill=\"#34A853\"\n              d=\"M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z\">\n            </path>\n            <path fill=\"none\" d=\"M0 0h48v48H0z\"></path>\n          </g>\n        </svg>\n        Sign in with Google</a>\n    </div>\n    <div class=\"cell\" fxLayoutAlign=\"center\">\n      <div>\n        <a href=\"{{host + '/api/user/auth/facebook'}}\" class=\"fb connect\">Sign in with Facebook</a>\n      </div>\n    </div>\n  </div>\n</div>");
 
 /***/ }),
 
@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n  <div class=\"row\" fxLayoutAlign=\"center start\">\r\n    <div class=\"cell\" fxLayoutAlign=\"center\">\r\n      <mat-card class=\"profile\">\r\n        <mat-card-header>\r\n          <mat-card-title>{{user.displayName}}</mat-card-title>\r\n          <mat-card-subtitle>{{user.provider}}</mat-card-subtitle>\r\n        </mat-card-header>\r\n        <img mat-card-image src=\"{{user.photoUrl}}\" alt=\"Users picture\">\r\n\r\n        <mat-card-content>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n\r\n        </mat-card-actions>\r\n      </mat-card>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row\" fxLayoutAlign=\"center start\">\n    <div class=\"cell\" fxLayoutAlign=\"center\">\n      <mat-card class=\"profile\">\n        <mat-card-header>\n          <mat-card-title>{{user.displayName}}</mat-card-title>\n          <mat-card-subtitle>{{user.provider}}</mat-card-subtitle>\n        </mat-card-header>\n        <img mat-card-image src=\"{{user.photoUrl}}\" alt=\"Users picture\">\n\n        <mat-card-content>\n        </mat-card-content>\n        <mat-card-actions>\n\n        </mat-card-actions>\n      </mat-card>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n  <div class=\"row\" fxLayout=\"row\">\r\n    <div class=\"cell\" fxFlex=\"100\">\r\n      <mat-progress-bar mode=\"indeterminate\"></mat-progress-bar>\r\n    </div>\r\n  </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row\" fxLayout=\"row\">\n    <div class=\"cell\" fxFlex=\"100\">\n      <mat-progress-bar mode=\"indeterminate\"></mat-progress-bar>\n    </div>\n  </div>\n</div>");
 
 /***/ }),
 
@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-h container-v h-100\">\r\n  <router-outlet></router-outlet>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-h container-v h-100\">\n  <router-outlet></router-outlet>\n</div>");
 
 /***/ }),
 
