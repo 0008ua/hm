@@ -3,8 +3,8 @@
     <div class="cell">
       <mat-button-toggle-group appearance="legacy" aria-label="Sort order" [ngModel]="sortToggle"
         (ngModelChange)="onToggle($event)">
-        <mat-button-toggle [value]="SortTypes.Views">Популярні</mat-button-toggle>
-        <mat-button-toggle [value]="SortTypes.CreatedAt">Останні</mat-button-toggle>
+        <mat-button-toggle [value]="SortTypes.Views">{{'popular' | translate}}</mat-button-toggle>
+        <mat-button-toggle [value]="SortTypes.CreatedAt">{{'last' | translate}}</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
   </div>

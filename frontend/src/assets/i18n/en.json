@@ -1,9 +1,8 @@
 {
-  "homePageTitle": "{{en}}",
-  "syllabusTitle": "{{en}}",
-  "aboutTitle": "{{en}}",
-  "contactTitle": "{{en}}",
-  "welcome": "Welcome"
-
+  "feedback": "Feedback",
+  "dashboard": "Dashboard",
+  "signin": "Sign in",
+  "logout": "Logout",
+  "popular": "Popular",
+  "last": "Last"
 }
-

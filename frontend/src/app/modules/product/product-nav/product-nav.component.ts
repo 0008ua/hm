@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { State } from 'src/app/reducers';
 import { LoadAppNavSuccess, LoadAppProductsSuccess, LoadAppProducts } from 'src/app/actions/app.actions';
 import { LoadingProducts, LoadProducts } from 'src/app/actions/product.actions';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-nav',
@@ -30,10 +31,13 @@ export class ProductNavComponent implements OnInit {
     private route: ActivatedRoute,
     private catalogService: CatalogService,
     private store: Store<State>,
-
+    private translate: TranslateService,
   ) { }
 
   ngOnInit() {
+    // this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    //   console.log('lang change+', event);
+    // });
     this.store.select('app')
       .subscribe((store) => {
         // console.log('store', store);

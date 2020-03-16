@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   link: any;
   productsUrl: boolean;
   environment = environment;
-  language = 'ua';
+  language = 'uk';
 
   constructor(
     private userService: UserService,
@@ -37,16 +37,18 @@ export class AppComponent implements OnInit {
     private metaService: Meta,
     private translate: TranslateService,
   ) {
-        // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang('ua');
+    // this language will be used as a fallback when a translation isn't found in the current language
+    translate.setDefaultLang('uk');
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translate.use('ua');
-   }
+    const browserLang = translate.getBrowserLang();
+    this.language = browserLang.match(/uk|ru/) ? 'uk' : 'en';
+    translate.use(this.language);
+  }
 
   ngOnInit() {
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-    console.log('lang change', event);
-  });
+    // this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    //   console.log('lang change', event);
+    // });
     const $routerEvents = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
@@ -55,9 +57,9 @@ export class AppComponent implements OnInit {
         } else {
           this.productsUrl = false;
         }
-    //   })
-    //   );
-    // $routerEvents.subscribe(_ => _);
+        //   })
+        //   );
+        // $routerEvents.subscribe(_ => _);
         gtag('config', 'UA-151728431-1',
           {
             page_path: event.urlAfterRedirects
@@ -112,17 +114,12 @@ export class AppComponent implements OnInit {
     this.userService.logout().subscribe(_ => this.router.navigate(['/']));
   }
 
-    switchLanguage(event?) {
+  switchLanguage(event?) {
     if (event) {
       event.stopPropagation();
     }
-    if (this.language === 'en') {
-      this.translate.use('fr');
-      this.language = 'fr';
-    } else {
-      this.translate.use('en');
-      this.language = 'en';
-    }
+    this.language === 'en' ? this.language = 'uk' : this.language = 'en';
+    this.translate.use(this.language);
   }
 
 }

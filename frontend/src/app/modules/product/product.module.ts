@@ -7,6 +7,7 @@ import { AppMaterialModule } from 'src/app/app-material.module';
 import { ProductNavComponent } from './product-nav/product-nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductBreadcrumbComponent } from './product-breadcrumb/product-breadcrumb.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -22,7 +23,10 @@ import { ProductBreadcrumbComponent } from './product-breadcrumb/product-breadcr
     FormsModule,
     ReactiveFormsModule,
     AppMaterialModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    TranslateModule.forChild({
+      extend: true,
+    })
   ],
   exports: [
     ProductNavComponent,

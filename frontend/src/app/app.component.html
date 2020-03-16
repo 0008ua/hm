@@ -15,12 +15,9 @@ contactTitle | section:
 
       "contactTitle": "Hello {{en}}", -> Hello Contacts -->
 
-      
 
-              <a mat-button class="link" (click)="switchLanguage()">
-      <i class="link__icon fas fa-globe fa-1x"></i>
-      <span class="link__icon-text">{{language}}</span>
-    </a>
+
+
   </div>
   <div fxShow="true" fxHide.lt-md="true" fxFlex="50" fxLayoutAlign="space-around center">
     <!-- <a *ngIf="allowTo('notUser')" mat-button [routerLink]="['/', 'user', 'login']"
@@ -31,16 +28,20 @@ contactTitle | section:
     <a mat-button class="link" [routerLink]="['/', 'feedback']" [routerLinkActive]="['link_active']"
       [routerLinkActiveOptions]="{exact: false}">
       <i class="link__icon far fa-envelope"></i>
-      <span class="link__icon-text">Написати мені</span>
+      <span class="link__icon-text">{{'feedback' | translate}}</span>
     </a>
     <a *ngIf="allowTo('manager')" mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
       [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
       <i class="link__icon fas fa-cogs"></i>
-      <span class="link__icon-text">Dashboard</span>
+      <span class="link__icon-text">{{'dashboard' | translate}}</span>
     </a>
     <a *ngIf="allowTo('guest')" mat-button class="link" (click)="logout()">
       <i class="link__icon fas fa-door-open"></i>
-      <span class="link__icon-text">Вийти</span>
+      <span class="link__icon-text">{{'logout' | translate}}</span>
+    </a>
+    <a mat-button class="link" (click)="switchLanguage()">
+      <i class="link__icon fas fa-globe fa-2x"></i>
+      <span class="link__icon-text">{{language}}</span>
     </a>
   </div>
   <div fxShow="true" fxHide.gt-sm="true" fxFlex="20" fxLayoutAlign="end center">
@@ -70,22 +71,29 @@ contactTitle | section:
             <a mat-button class="link" [routerLink]="['/', 'feedback']" [routerLinkActive]="['link_active']"
               [routerLinkActiveOptions]="{exact: false}">
               <i class="link__icon far fa-envelope"></i>
-              <span class="link__icon-text">Написати мені</span>
+              <span class="link__icon-text">{{'feedback' | translate}}</span>
             </a>
           </div>
           <div class="cell" fxFlex="100">
             <a *ngIf="allowTo('manager')" mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
               [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
               <i class="link__icon fas fa-cogs"></i>
-              <span class="link__icon-text">Dashboard</span>
+              <span class="link__icon-text">{{'dashboard' | translate}}</span>
             </a>
           </div>
           <div class="cell" fxFlex="100">
             <a *ngIf="allowTo('guest')" mat-button class="link" (click)="logout()">
               <i class="link__icon fas fa-door-open"></i>
-              <span class="link__icon-text">Вийти</span>
+              <span class="link__icon-text">{{'logout' | translate}}</span>
             </a>
           </div>
+          <div class="cell" fxFlex="100">
+            <a mat-button class="link" (click)="switchLanguage()">
+              <i class="link__icon fas fa-globe fa-1x"></i>
+              <span class="link__icon-text">{{language}}</span>
+            </a>
+          </div>
+
         </div>
       </div>
     </mat-sidenav>
