@@ -5,6 +5,22 @@
     </a>
   </div>
   <div fxFlex fxHide.lt-md="true">
+    <!-- {{environment.section.name | translate:environment.section}}
+contactTitle | section:
+    {
+      name: 'contactTitle',
+      en: 'Contacts',
+      icon: 'fas fa-home fa-2x',
+    },
+
+      "contactTitle": "Hello {{en}}", -> Hello Contacts -->
+
+      
+
+              <a mat-button class="link" (click)="switchLanguage()">
+      <i class="link__icon fas fa-globe fa-1x"></i>
+      <span class="link__icon-text">{{language}}</span>
+    </a>
   </div>
   <div fxShow="true" fxHide.lt-md="true" fxFlex="50" fxLayoutAlign="space-around center">
     <!-- <a *ngIf="allowTo('notUser')" mat-button [routerLink]="['/', 'user', 'login']"

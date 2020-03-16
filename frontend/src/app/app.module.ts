@@ -13,7 +13,7 @@ import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UserEffects } from './effects/user.effects';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ProductEffects } from './effects/product.effects';
@@ -24,6 +24,15 @@ import { ProductModule } from './modules/product/product.module';
 import { ModalComponent } from './modules/shared/modal/modal.component';
 import { ModalConfirmComponent } from './modules/shared/modal-confirm/modal-confirm.component';
 
+// Translator
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// AoT requires an exported function for factories
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -33,12 +42,21 @@ import { ModalConfirmComponent } from './modules/shared/modal-confirm/modal-conf
     BrowserModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutingModule,
     AppMaterialModule,
 
     SharedModule,
     ProductModule,
+
+    HttpClientModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'ua',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
 
     StoreModule.forRoot(reducers, {
       metaReducers,
