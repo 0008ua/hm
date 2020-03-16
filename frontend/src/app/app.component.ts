@@ -12,6 +12,7 @@ import { filter, map, mergeMap } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { combineLatest } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 declare let gtag: Function;
 
@@ -24,6 +25,8 @@ export class AppComponent implements OnInit {
   user: IUser;
   link: any;
   productsUrl: boolean;
+  environment = environment;
+  language = 'ua';
 
   constructor(
     private userService: UserService,
@@ -31,10 +34,19 @@ export class AppComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private titleService: Title,
-    private metaService: Meta
-  ) { }
+    private metaService: Meta,
+    private translate: TranslateService,
+  ) {
+        // this language will be used as a fallback when a translation isn't found in the current language
+    translate.setDefaultLang('ua');
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    translate.use('ua');
+   }
 
   ngOnInit() {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    console.log('lang change', event);
+  });
     const $routerEvents = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
@@ -98,6 +110,19 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.userService.logout().subscribe(_ => this.router.navigate(['/']));
+  }
+
+    switchLanguage(event?) {
+    if (event) {
+      event.stopPropagation();
+    }
+    if (this.language === 'en') {
+      this.translate.use('fr');
+      this.language = 'fr';
+    } else {
+      this.translate.use('en');
+      this.language = 'en';
+    }
   }
 
 }

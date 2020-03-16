@@ -71,7 +71,6 @@ private environment = environment;
    *
    */
   allowTo(permitedRole: string): boolean {
-
     const permissions = this.environment.permissions;
     if (!this.user._id && permitedRole === 'notUser') {
       return true;

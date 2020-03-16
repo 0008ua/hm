@@ -5,8 +5,24 @@
     </a>
   </div>
   <div fxFlex fxHide.lt-md="true">
+    <!-- {{environment.section.name | translate:environment.section}}
+contactTitle | section:
+    {
+      name: 'contactTitle',
+      en: 'Contacts',
+      icon: 'fas fa-home fa-2x',
+    },
+
+      "contactTitle": "Hello {{en}}", -> Hello Contacts -->
+
+      
+
+              <a mat-button class="link" (click)="switchLanguage()">
+      <i class="link__icon fas fa-globe fa-1x"></i>
+      <span class="link__icon-text">{{language}}</span>
+    </a>
   </div>
-  <div fxShow="true" fxHide.lt-md="true" fxFlex="50" fxLayoutAlign="center center">
+  <div fxShow="true" fxHide.lt-md="true" fxFlex="50" fxLayoutAlign="space-around center">
     <!-- <a *ngIf="allowTo('notUser')" mat-button [routerLink]="['/', 'user', 'login']"
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
       <span>Login</span>
@@ -15,23 +31,22 @@
     <a mat-button class="link" [routerLink]="['/', 'feedback']" [routerLinkActive]="['link_active']"
       [routerLinkActiveOptions]="{exact: false}">
       <i class="link__icon far fa-envelope"></i>
-      <span class="link__text">Написати мені</span>
+      <span class="link__icon-text">Написати мені</span>
     </a>
-    <a *ngIf="allowTo('user')" mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
+    <a *ngIf="allowTo('manager')" mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
       [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
       <i class="link__icon fas fa-cogs"></i>
-      <span class="link__text">Dashboard</span>
+      <span class="link__icon-text">Dashboard</span>
     </a>
     <a *ngIf="allowTo('guest')" mat-button class="link" (click)="logout()">
       <i class="link__icon fas fa-door-open"></i>
-      <span class="link__text">Вийти</span>
+      <span class="link__icon-text">Вийти</span>
     </a>
   </div>
-
-  <div class="toolbar__menu-button" fxShow="true" fxHide.gt-sm="true" fxFlex="20" fxLayoutAlign="end center">
-    <button mat-button (click)="sidenav.toggle()" aria-label="Menu">
-      <mat-icon *ngIf="sidenav.opened">format_indent_increase</mat-icon>
-      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+  <div fxShow="true" fxHide.gt-sm="true" fxFlex="20" fxLayoutAlign="end center">
+    <button class="link" mat-button (click)="sidenav.toggle()" aria-label="Menu">
+      <mat-icon class="link__icon" *ngIf="sidenav.opened">format_indent_increase</mat-icon>
+      <mat-icon class="link__icon" *ngIf="!sidenav.opened">menu</mat-icon>
     </button>
   </div>
 </header>
@@ -54,35 +69,25 @@
           <div class="cell" fxFlex="100">
             <a mat-button class="link" [routerLink]="['/', 'feedback']" [routerLinkActive]="['link_active']"
               [routerLinkActiveOptions]="{exact: false}">
-
               <i class="link__icon far fa-envelope"></i>
-              <span class="link__text">Написати мені</span>
-
+              <span class="link__icon-text">Написати мені</span>
             </a>
           </div>
           <div class="cell" fxFlex="100">
             <a *ngIf="allowTo('manager')" mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
               [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
-
               <i class="link__icon fas fa-cogs"></i>
-              <span class="link__text">Dashboard</span>
-
+              <span class="link__icon-text">Dashboard</span>
             </a>
           </div>
           <div class="cell" fxFlex="100">
             <a *ngIf="allowTo('guest')" mat-button class="link" (click)="logout()">
-
               <i class="link__icon fas fa-door-open"></i>
-              <span class="link__text">Вийти</span>
-
+              <span class="link__icon-text">Вийти</span>
             </a>
           </div>
-
-
         </div>
       </div>
-
-
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet></router-outlet>

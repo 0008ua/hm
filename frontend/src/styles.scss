@@ -364,10 +364,6 @@ mat-chip span {
 }
 
 .form {
-  // &__icon {
-  //   color: mat-color($primary);
-  //   font-size: mat-font-size($config, title);
-  // }
   border-radius: 10px;
   @include mat-elevation(2);
   &__button-wrapper {
@@ -383,7 +379,7 @@ mat-chip span {
   // border-radius: 4px;
   // min-width: 64px;
   &__icon,
-  &__text {
+  &__icon-text {
     @extend .item;
     vertical-align: middle; // align with siblings
   }
@@ -392,7 +388,7 @@ mat-chip span {
     // color: mat-color($primary);
 
   }
-  &__text {
+  &__icon-text {
     @extend .icon-text;
     // color: mat-color($primary, 800);
     // @include mat-typography-level-to-styles($config, body-1);
@@ -405,7 +401,7 @@ mat-chip span {
       @extend .icon_disabled;
       // color: mat-color($foreground, icon);
     }
-    .link__text {
+    .link__icon-text {
       @extend .icon-text_disabled;
       // color: mat-color($foreground, text);
     }
@@ -416,7 +412,7 @@ mat-chip span {
 
       // color: mat-color($accent);
     }
-    .link__text {
+    .link__icon-text {
       @extend .icon-text_active;
 
       // color: mat-color($accent, 800);
@@ -436,12 +432,12 @@ mat-chip span {
 }
 
 .icon-text {
-    color: mat-color($primary, 800);
+    color: mat-color($primary);
     @include mat-typography-level-to-styles($config, body-1);
   &_disabled {
     color: mat-color($foreground, text);
   }
   &_active {
-    color: mat-color($accent, 800);
+    color: mat-color($accent);
   }
 }

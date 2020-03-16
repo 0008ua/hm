@@ -4,8 +4,8 @@
 <div class="container-h container-v">
   <div class="container">
     <div class="row">
-      <div class="cell" fxFlex.gt-xs="10" fxFlex.gt-md="15"></div>
-      <div class="cell" fxFlex.gt-xs="80" fxFlex.gt-md="70">
+      <div class="cell" fxHide.lt-md fxFlex.gt-xs="10" fxFlex.gt-md="20"></div>
+      <div class="cell" fxFlex.lt-md="100" fxFlex.gt-xs="80" fxFlex.gt-md="60">
 
         <form class="form" #feedbackFormDirective="ngForm" [formGroup]="feedbackForm" novalidate>
           <div class="container">
@@ -89,7 +89,7 @@
                   <button mat-button aria-label="Send message" class="link"
                     [disabled]="!feedbackForm.valid || processing" (click)="onFeedbackFormSubmit()">
                             <i class="link__icon fas fa-share"></i>
-                            <span class="link__text">Написати</span>
+                            <span class="link__icon-text">Написати</span>
                     <!-- <mat-icon color="primary" *ngIf="feedbackForm.valid">message</mat-icon>
                      Написати мені -->
                   </button>

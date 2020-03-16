@@ -106,7 +106,15 @@ export const environment = {
   },
   seoTitle: 'HMADE - Майстерня творчості HandMADE. Ручна робота. Букети, іграшки, декор, оформлення',
   seoMeta: 'Цікаві ідеї для творчості. Солодкі букети з цекерок, букети з квітів, композиції з овочів та фруктів. Дизайн, декор, оформлення. Іграшки ручної роботи, в\'язання.',
+  
+  section:
+    {
+      name: 'contactTitle',
+      en: 'Contacts',
+      icon: 'fas fa-home fa-2x',
+    },
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

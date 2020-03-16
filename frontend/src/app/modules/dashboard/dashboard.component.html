@@ -3,12 +3,10 @@
     <div class="container">
       <div class="row" fxLayout="row">
         <div class="cell" *ngFor="let dashboardRootMenuItem of dashboardRootMenu" fxFlex="100" fxLayoutAlign="center">
-          <a [routerLink]="['/', 'dashboard', dashboardRootMenuItem._id]" [routerLinkActive]="['active']"
+          <a class="link" mat-button [routerLink]="['/', 'dashboard', dashboardRootMenuItem._id]" [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{exact: false}">
-                  <span>
-                    <i class="item fas fa-spa"></i>
-                    <span class="item">{{dashboardRootMenuItem.name}}</span>
-                  </span>
+                    <i class="link__icon fas fa-spa"></i>
+                    <span class="link__icon-text">{{dashboardRootMenuItem.name}}</span>
           </a>
         </div>
       </div>
@@ -19,9 +17,9 @@
       <div class="container">
         <div class="row">
           <div class="cell" fxShow="true" fxFlex="100" fxLayoutAlign="start center">
-            <button mat-button (click)="dashboardSidenav.toggle()" aria-label="Menu">
-              <span *ngIf="dashboardSidenav.opened"><i class="fas fa-chevron-left"></i></span>
-              <span *ngIf="!dashboardSidenav.opened"><i class="fas fa-chevron-right"></i></span>
+            <button class="link" mat-button (click)="dashboardSidenav.toggle()" aria-label="Menu">
+              <span *ngIf="dashboardSidenav.opened"><i class="link__icon fas fa-angle-left"></i></span>
+              <span *ngIf="!dashboardSidenav.opened"><i class="link__icon fas fa-angle-right"></i></span>
             </button>
           </div>
         </div>
