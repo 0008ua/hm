@@ -24,6 +24,13 @@ $warn: map-get($main-theme, accent);
 $foreground: map-get($main-theme, foreground);
 $background: map-get($main-theme, background);
 
+    // font-size: mat-font-size($config, title);
+    // font-family: mat-font-family($config);
+    // line-height: mat-line-height($config, title);
+    // font-weight: mat-font-weight($config, title);
+    
+    // @include mat-typography-level-to-styles($config, body-1);
+
 // @function mat-typography-config(
 //   $font-family:   'Roboto, "Helvetica Neue", sans-serif',
 //   $display-4:     mat-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),

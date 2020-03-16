@@ -390,11 +390,7 @@ mat-chip span {
   &__icon {
     @extend .icon;
     // color: mat-color($primary);
-    // font-size: mat-font-size($config, title);
 
-    // font-family: mat-font-family($config);
-    // line-height: mat-line-height($config, title);
-    // font-weight: mat-font-weight($config, title);
   }
   &__text {
     @extend .icon-text;
