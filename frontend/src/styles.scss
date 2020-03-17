@@ -101,10 +101,9 @@ i.fa {
   &__logo {
     padding: 0 16px;
   }
-
   &_header {
     @include gt-md {
-      height: 130px;
+      height: 100px;
       padding: 32px 16px 16px 16px;
     }
     @include md {
@@ -137,7 +136,7 @@ i.fa {
   @include responsive-padding-v(3);
   @include responsive-padding-h(1);
   @include gt-md {
-    height: calc(100vh - 130px); // footer 64px + toolbar 130px
+    height: calc(100vh - 100px); // footer 64px + toolbar 130px
   }
   @include md {
     height: calc(100vh - 100px); // footer 64px + toolbar 100px
@@ -152,7 +151,7 @@ i.fa {
 
 main {
   @include gt-md {
-    min-height: calc(100vh - 194px); // footer 64px + toolbar 130px
+    min-height: calc(100vh - 164px); // footer 64px + toolbar 130px
   }
   @include md {
     min-height: calc(100vh - 164px); // footer 64px + toolbar 100px
