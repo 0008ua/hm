@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  // host: 'https://hmade.work',
-  host: 'https://localhost:8082',
+  host: 'https://hmade.work',
+  // host: 'https://localhost:8082',
 
   cloudinary: {
     cloudName: 'hd1oejweg',
