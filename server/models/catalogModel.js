@@ -7,7 +7,11 @@ const CatalogSchema = new Schema({
     type: String,
     require: true,
   },
-  name: {
+  name_uk: {
+    type: String,
+    required: true,
+  },
+  name_en: {
     type: String,
     required: true,
   },
@@ -21,7 +25,7 @@ const CatalogSchema = new Schema({
   },
   picture: {
     type: String,
-    default: config.get('defaults.userPicture')
+    default: config.get('defaults.userPicture'),
   },
   auth: {
     type: String,
@@ -40,5 +44,5 @@ const CatalogSchema = new Schema({
   },
 });
 
-let CatalogModel = mongoose.model('catalogs', CatalogSchema);
+const CatalogModel = mongoose.model('catalogs', CatalogSchema);
 module.exports = CatalogModel;

@@ -23,6 +23,7 @@ export class ProductNavComponent implements OnInit {
   products: IProduct[];
   navLoading: boolean;
   SortTypes = SortTypes;
+  language: string;
 
   @Output() sidenavCloseEmitter: EventEmitter<any> = new EventEmitter();
 
@@ -35,9 +36,9 @@ export class ProductNavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-    //   console.log('lang change+', event);
-    // });
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.language = event.lang;
+    });
     this.store.select('app')
       .subscribe((store) => {
         // console.log('store', store);

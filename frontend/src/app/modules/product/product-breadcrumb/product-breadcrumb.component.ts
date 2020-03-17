@@ -7,6 +7,7 @@ import { State } from 'src/app/reducers';
 
 import { CatalogService } from '../../../services/catalog.service';
 import { ICatalog, IProduct } from '../../../interfaces';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-breadcrumb',
@@ -18,16 +19,21 @@ export class ProductBreadcrumbComponent implements OnInit {
   breadcrumb: ICatalog[];
   feedChildren: ICatalog[];
   navLoading: boolean;
+  language: string;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private catalogService: CatalogService,
     private store: Store<State>,
-
+    private translate: TranslateService,
   ) { }
 
   ngOnInit() {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.language = event.lang;
+    });
+
     this.store.select('app')
       .subscribe((store) => {
         this.breadcrumb = store.nav.breadcrumb;

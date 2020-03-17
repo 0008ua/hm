@@ -33,7 +33,8 @@ export interface IProduct {
 
 export interface ICatalog {
   _id: string;
-  name: string;
+  name_uk: string;
+  name_en: string;
   ancestors: string[];
   parent: string;
   picture: string;
