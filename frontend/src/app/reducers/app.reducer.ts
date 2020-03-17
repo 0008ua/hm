@@ -23,6 +23,7 @@ export interface AppState {
     breadcrumb: ICatalog[];
     navLoading: boolean;
   };
+  lang: string;
   error: any;
 }
 
@@ -43,27 +44,28 @@ export const initialState: AppState = {
     breadcrumb: [],
     navLoading: true,
   },
+  lang: 'en',
   error: null,
 };
 
 export function reducer(state = initialState, action: AppActions): AppState {
   switch (action.type) {
 
-    case AppActionTypes.LoadAppNav: { // set loading before fires effect on tis action
-
+    case AppActionTypes.LoadAppNav: { // set loading before fires effect on this action
       return { ...state, nav: { ...state.nav, navLoading: true } };
     }
 
     case AppActionTypes.LoadAppNavSuccess:
-
       return { ...state, nav: { ...state.nav, ...action.payload } };
+
+    case AppActionTypes.LoadAppLangSuccess:
+      return { ...state, ...action.payload };
 
     // case AppActionTypes.LoadAppProducts: { // set loading before fires effect on tis action
     //   return { ...state, products: { ...state.products, productsLoading: true} };
     // }
 
     case AppActionTypes.LoadAppProductsSuccess:
-
       return { ...state, products: { ...state.products, ...action.payload } };
 
     default:

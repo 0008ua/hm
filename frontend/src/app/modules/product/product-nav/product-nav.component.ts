@@ -1,13 +1,9 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { MatButtonToggleModule } from '@angular/material';
-import { ICatalog, IProduct, ISortOrder, SortTypes } from 'src/app/interfaces';
-import { Router, ActivatedRoute } from '@angular/router';
-import { CatalogService } from 'src/app/services/catalog.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ICatalog, IProduct, SortTypes } from 'src/app/interfaces';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/reducers';
-import { LoadAppNavSuccess, LoadAppProductsSuccess, LoadAppProducts } from 'src/app/actions/app.actions';
+import { LoadAppProducts } from 'src/app/actions/app.actions';
 import { LoadingProducts, LoadProducts } from 'src/app/actions/product.actions';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-nav',
@@ -23,29 +19,22 @@ export class ProductNavComponent implements OnInit {
   products: IProduct[];
   navLoading: boolean;
   SortTypes = SortTypes;
-  language: string;
+  lang: string;
 
   @Output() sidenavCloseEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private catalogService: CatalogService,
     private store: Store<State>,
-    private translate: TranslateService,
   ) { }
 
   ngOnInit() {
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.language = event.lang;
-    });
     this.store.select('app')
       .subscribe((store) => {
-        // console.log('store', store);
         this.feedSiblings = store.nav.feedSiblings;
         this.sortToggle = store.products.sort;
-
         this.navLoading = store.nav.navLoading;
+        // subscribe on static translation language changes
+        this.lang = store.lang;
       });
   }
 

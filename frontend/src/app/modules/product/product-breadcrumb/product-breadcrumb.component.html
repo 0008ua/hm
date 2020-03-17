@@ -12,7 +12,7 @@
       [routerLinkActiveOptions]="{exact: true}">
       <span>
         <!-- <i class="fas fa-check-double"></i> -->
-        <span *ngIf="language">{{breadcrumbItem['name_' + language]}}</span>
+        <span>{{breadcrumbItem['name_' + lang]}}</span>
       </span>
     </a>
   </ng-container>
@@ -20,7 +20,7 @@
     <a *ngFor="let child of feedChildren" class="br-menu__item br-menu__item_feed animationAppear05s"
       [routerLink]="['/products', child._id]" [queryParams]="{seoTitle: child.seoTitle, seoMeta: child.seoMeta}"
       [routerLinkActive]="['br-menu__item_active']" [routerLinkActiveOptions]="{exact: true}">
-      <span *ngIf="language">{{child['name_' + language]}}</span>
+      <span>{{child['name_' + lang]}}</span>
     </a>
   </ng-container>
 </div>

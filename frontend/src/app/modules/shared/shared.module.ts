@@ -21,7 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
     })
   ],
   exports: [
-    Page404Component
+    Page404Component,
   ]
 })
 export class SharedModule { }

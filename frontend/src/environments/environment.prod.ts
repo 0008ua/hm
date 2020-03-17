@@ -1,6 +1,8 @@
 export const environment = {
   production: true,
-  host: 'https://hmade.work',
+  // host: 'https://hmade.work',
+  host: 'https://localhost:8082',
+
   cloudinary: {
     cloudName: 'hd1oejweg',
     cloudHost: 'https://res.cloudinary.com',
@@ -100,10 +102,4 @@ export const environment = {
   },
   seoTitle: 'HMADE - Майстерня творчості HandMADE. Ручна робота. Букети, іграшки, декор, оформлення',
   seoMeta: 'Цікаві ідеї для творчості. Солодкі букети з цекерок, букети з квітів, композиції з овочів та фруктів. Дизайн, декор, оформлення. Іграшки ручної роботи, в\'язання.',
-  section:
-    {
-      name: 'homePageTitle',
-      en: 'Home',
-      icon: 'fas fa-home fa-2x',
-    },
 };

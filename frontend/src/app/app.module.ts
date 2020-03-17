@@ -50,6 +50,7 @@ export function createTranslateLoader(http: HttpClient) {
 
     HttpClientModule,
     TranslateModule.forRoot({
+      defaultLanguage: 'uk',
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),

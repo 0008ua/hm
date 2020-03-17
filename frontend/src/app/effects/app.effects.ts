@@ -6,7 +6,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, combineLatest, of } from 'rxjs';
 import { map, switchMap, catchError, mergeMap, withLatestFrom, filter, tap } from 'rxjs/operators';
 
-import { AppActionTypes, LoadAppNav, LoadAppNavSuccess, LoadAppProducts, LoadAppFailure, LoadAppProductsSuccess } from '../actions/app.actions';
+import { AppActionTypes, LoadAppNav, LoadAppNavSuccess, LoadAppProducts, LoadAppFailure, LoadAppProductsSuccess, LoadAppLangSuccess } from '../actions/app.actions';
 
 import { ICatalog, IProduct } from '../interfaces';
 
@@ -16,6 +16,7 @@ import { LoadProducts, LoadingProducts } from '../actions/product.actions';
 import { AppState } from '../reducers/app.reducer';
 import { State } from '../reducers';
 import { environment } from '../../environments/environment';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 
 @Injectable()
@@ -61,65 +62,92 @@ export class AppEffects {
     }),
     switchMap((combinedStoreWithPayload) => {
       return this.catalogService.getChildren(combinedStoreWithPayload.currentCategory)
-      .pipe(
-      switchMap((children: ICatalog[]) => {
-        if (combinedStoreWithPayload.currentCategory === 'products') {
-          // if root
-          return this.dbService.allItems('products',
-            combinedStoreWithPayload.display,
-            this.environment.sortQueries[combinedStoreWithPayload.sort],
-            combinedStoreWithPayload.skip,
-            combinedStoreWithPayload.limit
-          );
-        } else if (!children.length) {
-          // if no children - show items
-          this.children = [];
-          return this.dbService.itemsByParents('products',
-            [combinedStoreWithPayload.currentCategory],
-            combinedStoreWithPayload.display,
-            this.environment.sortQueries[combinedStoreWithPayload.sort],
-            combinedStoreWithPayload.skip,
-            combinedStoreWithPayload.limit
-          );
-        } else {
-          // show children (for menu) and all of every child items
-          this.children = children;
-          const childrenIds = children.map(item => item._id);
-          return this.dbService.itemsByParents('products',
-            childrenIds,
-            combinedStoreWithPayload.display,
-            this.environment.sortQueries[combinedStoreWithPayload.sort],
-            combinedStoreWithPayload.skip,
-            combinedStoreWithPayload.limit
-          );
-        }
-      }),
-      mergeMap((response: { items: IProduct[], total: number }) => {
-        const products = response.items;
-        const { total } = response;
-        const IncomingProductsAction = combinedStoreWithPayload.ProductsAction;
-        return [
-          new LoadAppProductsSuccess({
-            currentCategory: combinedStoreWithPayload.currentCategory,
-            display: combinedStoreWithPayload.display,
-            sort: combinedStoreWithPayload.sort,
-            skip: combinedStoreWithPayload.skip,
-            limit: combinedStoreWithPayload.limit,
-            total
+        .pipe(
+          switchMap((children: ICatalog[]) => {
+            if (combinedStoreWithPayload.currentCategory === 'products') {
+              // if root
+              return this.dbService.allItems('products',
+                combinedStoreWithPayload.display,
+                this.environment.sortQueries[combinedStoreWithPayload.sort],
+                combinedStoreWithPayload.skip,
+                combinedStoreWithPayload.limit
+              );
+            } else if (!children.length) {
+              // if no children - show items
+              this.children = [];
+              return this.dbService.itemsByParents('products',
+                [combinedStoreWithPayload.currentCategory],
+                combinedStoreWithPayload.display,
+                this.environment.sortQueries[combinedStoreWithPayload.sort],
+                combinedStoreWithPayload.skip,
+                combinedStoreWithPayload.limit
+              );
+            } else {
+              // show children (for menu) and all of every child items
+              this.children = children;
+              const childrenIds = children.map(item => item._id);
+              return this.dbService.itemsByParents('products',
+                childrenIds,
+                combinedStoreWithPayload.display,
+                this.environment.sortQueries[combinedStoreWithPayload.sort],
+                combinedStoreWithPayload.skip,
+                combinedStoreWithPayload.limit
+              );
+            }
           }),
-          new IncomingProductsAction({ products }),
-          new LoadingProducts({ loading: false })
-        ];
-      })
-    )}),
+          mergeMap((response: { items: IProduct[], total: number }) => {
+            const products = response.items;
+            const { total } = response;
+            const IncomingProductsAction = combinedStoreWithPayload.ProductsAction;
+            return [
+              new LoadAppProductsSuccess({
+                currentCategory: combinedStoreWithPayload.currentCategory,
+                display: combinedStoreWithPayload.display,
+                sort: combinedStoreWithPayload.sort,
+                skip: combinedStoreWithPayload.skip,
+                limit: combinedStoreWithPayload.limit,
+                total
+              }),
+              new IncomingProductsAction({ products }),
+              new LoadingProducts({ loading: false })
+            ];
+          })
+        );
+    }),
     catchError(error => of(new LoadAppFailure(error)))
   );
+
+
+  // @Effect()
+  // setLang: Observable<Action> = this.actions$
+  //   .pipe(
+  //     ofType(AppActionTypes.SetAppLang),
+  //     // map((action: LoadAppNav) => action.payload),
+  //     switchMap(lang => this.translate.use(lang)),
+  //     map((event: LangChangeEvent) => new LoadAppLangSuccess({
+  //       lang: event.lang,
+  //     })),
+  //     catchError(error => of(new LoadAppFailure(error)))
+  //   );
+
+  @Effect()
+  loadLang: Observable<Action> = this.actions$
+    .pipe(
+      ofType(AppActionTypes.LoadAppLang),
+      // map((action: LoadAppNav) => action.payload),
+      switchMap(_ => this.translate.onLangChange),
+      map((event: LangChangeEvent) => new LoadAppLangSuccess({
+        lang: event.lang,
+      })),
+      catchError(error => of(new LoadAppFailure(error)))
+    );
 
   constructor(
     private actions$: Actions,
     private store$: Store<State>,
     private catalogService: CatalogService,
     private dbService: DbService,
+    private translate: TranslateService,
   ) { }
 
 }

@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { ICatalog, IProduct, ISortOrder, SortTypes } from '../interfaces';
 import { ProductActionTypes, ProductActions } from './product.actions';
+import { LangChangeEvent } from '@ngx-translate/core';
 
 export enum AppActionTypes {
   LoadAppNav = '[App] Load App Nav',
@@ -8,6 +9,9 @@ export enum AppActionTypes {
 
   LoadAppProducts = '[App] Load App Products',
   LoadAppProductsSuccess = '[App] Load App Products Success',
+
+  LoadAppLang = '[App] Load App Lang',
+  LoadAppLangSuccess = '[App] Load App Lang Success',
 
   LoadApp = '[App] Load App',
   LoadAppSuccess = '[App] Load App Success',
@@ -54,6 +58,16 @@ export class LoadAppProductsSuccess implements Action {
   }) { }
 }
 
+export class LoadAppLang implements Action {
+  readonly type = AppActionTypes.LoadAppLang;
+  // constructor(public payload: { lang: string }) { }
+}
+
+export class LoadAppLangSuccess implements Action {
+  readonly type = AppActionTypes.LoadAppLangSuccess;
+  constructor(public payload: { lang: string }) { }
+}
+
 export class LoadApp implements Action {
   readonly type = AppActionTypes.LoadApp;
   constructor(public payload: { data: any }) { }
@@ -74,6 +88,8 @@ export type AppActions =
   | LoadAppNavSuccess
   | LoadAppProducts
   | LoadAppProductsSuccess
+  | LoadAppLang
+  | LoadAppLangSuccess
   | LoadApp
   | LoadAppSuccess
   | LoadAppFailure;

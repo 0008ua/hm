@@ -13,6 +13,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { combineLatest } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { LoadAppLangSuccess, LoadAppLang } from './actions/app.actions';
 
 declare let gtag: Function;
 
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit {
     private metaService: Meta,
     private translate: TranslateService,
   ) {
+    // static translation initialization
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('uk');
     // the lang to use, if the lang isn't available, it will use the current loader to get them
@@ -46,9 +48,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-    //   console.log('lang change', event);
-    // });
     const $routerEvents = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
@@ -57,9 +56,6 @@ export class AppComponent implements OnInit {
         } else {
           this.productsUrl = false;
         }
-        //   })
-        //   );
-        // $routerEvents.subscribe(_ => _);
         gtag('config', 'UA-151728431-1',
           {
             page_path: event.urlAfterRedirects
@@ -92,7 +88,7 @@ export class AppComponent implements OnInit {
         const attributeSelector = 'name="description"';
         this.metaService.removeTag(attributeSelector);
         this.metaService.addTag(tag, false);
-      })
+      });
 
 
     this.store.dispatch(new GetUser());
@@ -100,7 +96,14 @@ export class AppComponent implements OnInit {
       .subscribe(store => this.user = store.user);
 
     this.store.dispatch(new LoadScreens());
+
+    // set to store static translation language
+    this.store.dispatch(new LoadAppLang());
+
+    // this.store.select('app')
+    //   .subscribe(store => this.language = store.lang);
   }
+
 
   allowTo(permittedRole: string) {
     return this.userService.allowTo(permittedRole);
