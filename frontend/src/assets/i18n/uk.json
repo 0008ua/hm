@@ -7,10 +7,16 @@
   "last": "Останні",
   "feedbackForm": {
     "message": "Повідомлення",
-    "name": "Введіть ім'я",
-    "contacts": "Введіть контактний номер або email"
+    "name": "Ваше ім'я",
+    "contacts": "Контактний номер або email"
   },
   "buttons": {
     "send": "Надіслати"
+  },
+  "errors": {
+    "form": {
+      "length": "Довжина повинна бути від {{minLength}} до {{maxLength}} символів",
+      "required": "Будь ласка введіть "
+    }
   }
 }

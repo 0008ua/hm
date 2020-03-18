@@ -8,9 +8,15 @@
   "feedbackForm": {
     "message": "Message",
     "name": "Your name",
-    "contacts": "Your contact number or email"
+    "contacts": "Your phone number or email"
   },
   "buttons": {
     "send": "Send"
+  },
+  "errors": {
+    "form": {
+      "length": "Length should be from {{minLength}} to {{maxLength}} characters",
+      "required": "Please input "
+    }
   }
 }

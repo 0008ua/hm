@@ -31,13 +31,14 @@
                                                                   feedbackForm.get('message').errors?.maxlength ||
                                                                   feedbackForm.get('message').errors?.required) &&
                                                                   feedbackForm.get('message').touched">
-                          Довжина повинна бути від 3 до 500 символів
+                          {{'errors.form.length' | translate:({minLength: 3, maxLength: 500})}}
                         </mat-error>
                       </mat-form-field>
                     </div>
                   </div>
                 </div>
               </div>
+
 
               <div class="cell" fxFlex="100">
                 <div class="container-h">
@@ -51,14 +52,14 @@
                         <input matInput placeholder="{{'feedbackForm.name' | translate}}" formControlName="name" required>
                         <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
                                               feedbackForm.get('name').touched">
-                          Введіть ім'я
+                            {{'errors.form.required' | translate}} 
+                            <span translate>feedbackForm.name</span>
                         </mat-error>
                       </mat-form-field>
                     </div>
                   </div>
                 </div>
               </div>
-
 
               <div class="cell" fxFlex="100">
                 <div class="container-h">
@@ -72,7 +73,8 @@
                         <input matInput placeholder="{{'feedbackForm.contacts' | translate}}" formControlName="contacts" required>
                         <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
                                                               feedbackForm.get('contacts').touched">
-                          Введіть котактну інформацію
+                                      {{'errors.form.required' | translate}}
+                                      <span translate>feedbackForm.contacts</span>
                         </mat-error>
                       </mat-form-field>
                     </div>
