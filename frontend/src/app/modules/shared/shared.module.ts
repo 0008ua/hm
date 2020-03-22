@@ -7,7 +7,8 @@ import { ModalConfirmComponent } from './modal-confirm/modal-confirm.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     AppMaterialModule,
     ReactiveFormsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
     TranslateModule.forChild({
       extend: true,
     })

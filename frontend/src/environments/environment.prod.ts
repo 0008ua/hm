@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   host: 'https://hmade.work',
+  recaptchaSiteKey: '6Le5XoUUAAAAACCWkV0muQG0SFc75G_7udZzbqs1',
   // host: 'https://localhost:8082',
 
   cloudinary: {
@@ -100,6 +101,8 @@ export const environment = {
     CreatedAt: { createdAt: -1 },
     Views: { views: -1, createdAt: -1 },
   },
+  seoTitle_en: 'HMADE - Workshop of creativity HandMADE. Bouquets, toys, kids clothes, decorations, design',
+  seoMeta_en: 'Interesting ideas of creativity. Sweet bouquets, bouquets of sweets and chocolate, bouquets of flowers, compositions of vegetables and fruit. Design, decor, decorations. Handmade toys and kids clothes, knitting',
   seoTitle: 'HMADE - Майстерня творчості HandMADE. Ручна робота. Букети, іграшки, декор, оформлення',
-  seoMeta: 'Цікаві ідеї для творчості. Солодкі букети з цекерок, букети з квітів, композиції з овочів та фруктів. Дизайн, декор, оформлення. Іграшки ручної роботи, в\'язання.',
+  seoMeta: 'Цікаві ідеї для творчості. Солодкі букети з цекерок, букети з квітів, композиції з овочів та фруктів. Дизайн, декор, оформлення. Іграшки та дитячий одяг ручної роботи, в\'язання.',
 };

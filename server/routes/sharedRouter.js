@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const sharedController = require('../controllers/sharedController');
-const { authentication, authorization, sendFeedbackMessage } = require('../middlewares/');
+const { authentication, authorization, recaptcha, sendFeedbackMessage } = require('../middlewares/');
 
 router.post(
     '/upload-picture',
@@ -11,7 +11,7 @@ router.post(
 );
 
 router.post('/send-feedback-message',
-    // recaptcha,
+    recaptcha,
     sendFeedbackMessage,
 );
 

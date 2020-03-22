@@ -14,6 +14,7 @@ import { combineLatest } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { LoadAppLangSuccess, LoadAppLang } from './actions/app.actions';
+import { SharedService } from './services/shared.service';
 
 declare let gtag: Function;
 
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private sharedService: SharedService,
     private store: Store<State>,
     private router: Router,
     private route: ActivatedRoute,
@@ -45,10 +47,22 @@ export class AppComponent implements OnInit {
     const browserLang = translate.getBrowserLang();
     this.language = browserLang.match(/uk|ru/) ? 'uk' : 'en';
     translate.use(this.language);
+
+    // set to store static translation language
+    this.store.dispatch(new LoadAppLang());
   }
 
   ngOnInit() {
-    const $routerEvents = this.router.events.pipe(
+    this.store.dispatch(new GetUser());
+    this.store.select('auth')
+      .subscribe(store => this.user = store.user);
+
+    this.store.dispatch(new LoadScreens());
+
+    this.store.select('app')
+      .subscribe(store => this.language = store.lang);
+
+    const routerEvents$ = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
         if (event.url.split('/')[1] === 'products' || event.url.split('/')[1] === '') {
@@ -71,17 +85,25 @@ export class AppComponent implements OnInit {
       }),
       filter(route => route.outlet === 'primary'));
 
+    const store$ = this.store.select('app');
+
     combineLatest(
-      $routerEvents.pipe(mergeMap((route) => route.queryParamMap)), // query params
-      $routerEvents.pipe(mergeMap((route) => route.data)) // routing.module data
+      routerEvents$.pipe(mergeMap((route) => route.queryParamMap)), // query params
+      routerEvents$.pipe(mergeMap((route) => route.data)), // routing.module data
+      store$.pipe(map(appStore => appStore.lang)) // fires on lang changed
     )
       .subscribe((result) => {
         const paramMap = result[0];
         const data = result[1];
 
         // prioryty: 1. embeded to router 2. passed as queryParams 3.default values
-        const seoTitle = data.dataTitle || paramMap.get('seoTitle') || environment.seoTitle;
-        const seoMeta = data.dataMeta || paramMap.get('seoMeta') || environment.seoMeta;
+        const seoTitle = data.dataTitle || paramMap.get(this.sharedService.createLangField('seoTitle'))
+        || environment[this.sharedService.createLangField('seoTitle')];
+
+        const seoMeta = data.dataMeta || paramMap.get(this.sharedService.createLangField('seoMeta'))
+        || environment[this.sharedService.createLangField('seoMeta')];
+
+        console.log('seoTitle', seoMeta);
 
         this.titleService.setTitle(seoTitle);
         const tag = { name: 'description', content: seoMeta };
@@ -91,17 +113,7 @@ export class AppComponent implements OnInit {
       });
 
 
-    this.store.dispatch(new GetUser());
-    this.store.select('auth')
-      .subscribe(store => this.user = store.user);
 
-    this.store.dispatch(new LoadScreens());
-
-    // set to store static translation language
-    this.store.dispatch(new LoadAppLang());
-
-    // this.store.select('app')
-    //   .subscribe(store => this.language = store.lang);
   }
 
 

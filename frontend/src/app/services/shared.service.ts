@@ -6,6 +6,9 @@ import { environment } from '../../environments/environment';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { map } from 'rxjs/operators';
 import { ScreenState } from '../reducers/screen.reducer';
+import { Store } from '@ngrx/store';
+import { State } from '../reducers';
+import { AppState } from '../reducers/app.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +18,17 @@ import { ScreenState } from '../reducers/screen.reducer';
 export class SharedService {
   environment = environment;
   cloudinaryUrl = environment.cloudinary.cloudHost + '/' + environment.cloudinary.cloudName;
+  appStore: AppState;
 
   constructor(
     private http: HttpClient,
     public media: MediaObserver,
+    private store: Store<State>,
 
-  ) { }
+  ) {
+    this.store.select('app')
+      .subscribe(appStore => this.appStore = appStore);
+   }
 
   checkPictureFile(file: File): { err: string | null } {
     if (!file) {
@@ -145,17 +153,26 @@ export class SharedService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      // params: new HttpParams({
-      //   fromObject: {
-      //     recaptcha
-      //   }
-      // })
+      params: new HttpParams({
+        fromObject: {
+          recaptcha
+        }
+      })
     };
     return this.http.post<string>(
       'api/shared/send-feedback-message',
       feedback,
       httpOptions
     );
+  }
+
+  // for dynamic translate
+  createLangField(field: string) {
+    if (this.appStore.lang === this.appStore.defaultLang) {
+      return field;
+    } else {
+      return field + '_' + this.appStore.lang;
+    }
   }
 
 }

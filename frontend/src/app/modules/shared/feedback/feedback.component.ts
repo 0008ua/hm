@@ -39,30 +39,24 @@ export class FeedbackComponent implements OnInit {
       contacts: new FormControl('', [
         Validators.required,
       ]),
-      // recaptcha: new FormControl('', [
-      //   Validators.required
-      // ])
+      recaptcha: new FormControl('', [
+        Validators.required
+      ])
     });
   }
 
   onFeedbackFormSubmit() {
     this.processing = true;
     this.feedback = this.feedbackForm.value;
-    this.sharedService.sendFeedbackMessage(this.feedback, 'sddfsdf'
-      //  this.feedbackForm.get('recaptcha').value
-       )
+    this.sharedService.sendFeedbackMessage(this.feedback, this.feedbackForm.get('recaptcha').value)
       .subscribe(
         res => {
           this.matSnackBar.open(res, '', { duration: 3000 });
-          console.log('feedback ', res);
           this.processing = false;
           this.resetForm();
-          // this.location.back();
-
         },
         err => {
           this.processing = false;
-          console.log('feedback err ', err);
           this.matSnackBar.open(err.error.message, '', { duration: 3000 });
         }
       );

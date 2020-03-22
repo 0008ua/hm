@@ -25,8 +25,8 @@
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
 
-                        <textarea rows="5" matInput placeholder="{{'feedbackForm.message' | translate}}" formControlName="message"
-                          required></textarea>
+                        <textarea rows="5" matInput placeholder="{{'feedbackForm.message' | translate}}"
+                          formControlName="message" required></textarea>
                         <mat-error *ngIf="(feedbackForm.get('message').errors?.minlength ||
                                                                   feedbackForm.get('message').errors?.maxlength ||
                                                                   feedbackForm.get('message').errors?.required) &&
@@ -49,11 +49,12 @@
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
-                        <input matInput placeholder="{{'feedbackForm.name' | translate}}" formControlName="name" required>
-                        <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
+                        <input matInput placeholder="{{'feedbackForm.name' | translate}}" formControlName="name"
+                          required>
+                        <mat-error *ngIf="feedbackForm.get('name').errors?.required &&
                                               feedbackForm.get('name').touched">
-                            {{'errors.form.required' | translate}} 
-                            <span translate>feedbackForm.name</span>
+                          <span translate>errors.form.required</span>
+                          <span translate>feedbackForm.name</span>
                         </mat-error>
                       </mat-form-field>
                     </div>
@@ -70,11 +71,12 @@
                     </div>
                     <div class="cell" fxFlex>
                       <mat-form-field fxFlex>
-                        <input matInput placeholder="{{'feedbackForm.contacts' | translate}}" formControlName="contacts" required>
+                        <input matInput placeholder="{{'feedbackForm.contacts' | translate}}" formControlName="contacts"
+                          required>
                         <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
                                                               feedbackForm.get('contacts').touched">
-                                      {{'errors.form.required' | translate}}
-                                      <span translate>feedbackForm.contacts</span>
+                          <span translate>errors.form.required</span>
+                          <span translate>feedbackForm.contacts</span>
                         </mat-error>
                       </mat-form-field>
                     </div>
@@ -82,21 +84,24 @@
                 </div>
               </div>
 
-              <!-- <re-captcha [ngClass]="{'display-none':
-                      !feedbackForm.get('contacts').valid || !feedbackForm.get('contacts').valid ||
-                      !feedbackForm.get('message').valid}" [formControlName]="'recaptcha'" #recaptchaRef
-              siteKey="{{environment.recaptchaSiteKey}}">
-            </re-captcha> -->
+              <div class="cell" fxFlex="100">
+                <div class="container-h" fxLayoutAlign="center center">
+                  <re-captcha [ngClass]="{'display-none':
+                      !feedbackForm.get('name').valid || !feedbackForm.get('contacts').valid ||
+                      !feedbackForm.get('message').valid}" [formControlName]="'recaptcha'"
+                    siteKey="{{environment.recaptchaSiteKey}}">
+                  </re-captcha>
+                </div>
+              </div>
+
               <div class="cell" fxFlex="100">
                 <div class="container-h form__button-wrapper" fxLayoutAlign="center">
                   <button mat-button aria-label="Send message" class="link"
                     [disabled]="!feedbackForm.valid || processing" (click)="onFeedbackFormSubmit()">
-                            <i class="link__icon fas fa-share"></i>
-                            <span class="link__icon-text">{{'buttons.send' | translate}}</span>
-                    <!-- <mat-icon color="primary" *ngIf="feedbackForm.valid">message</mat-icon>
-                     Написати мені -->
+                    <i class="link__icon fas fa-share"></i>
+                    <span class="link__icon-text">{{'buttons.send' | translate}}</span>
                   </button>
-   
+
                 </div>
               </div>
 
@@ -107,84 +112,6 @@
     </div>
   </div>
 </div>
-
-
-<!-- 
-
-<div class="container">
-
-  <div class="row" fxLayout="column" fxLayout.gt-xs="row">
-    <div fxFlex.gt-xs="10" fxFlex.gt-md="15"></div>
-
-    <div class="cell" fxFlex.gt-xs="80" fxFlex.gt-md="70">
-
-      <mat-card>
-        <mat-card-content>
-          <div class="row">
-            <div class="cell" fxFlex>
-              <img src="./assets/images/hmade_logo_dark.svg" width="367px">
-            </div>
-          </div>
-
-          <form #fForm="ngForm" [formGroup]="feedbackForm" (submit)="onFeedbackFormSubmit()">c
-
-            <div fxLayout="row">
-              <div fxFlexAlign="center" class="mat-icon-wrapper">
-                <mat-icon color="primary">textsms</mat-icon>
-              </div>
-              <mat-form-field>
-                <textarea rows="5" matInput placeholder="Повідомлення" formControlName="message" required></textarea>
-                <mat-error *ngIf="(feedbackForm.get('message').errors?.minlength ||
-                                    feedbackForm.get('message').errors?.maxlength ||
-                                    feedbackForm.get('message').errors?.required) &&
-                                    feedbackForm.get('message').touched">
-                  Довжина повинна бути від 3 до 500 символів
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div fxLayout="row">
-              <div fxFlexAlign="center" class="mat-icon-wrapper">
-                <mat-icon color="primary">account_circle</mat-icon>
-              </div>
-              <mat-form-field>
-                <input matInput placeholder="Ваше ім'я" formControlName="name" required>
-                <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
-                        feedbackForm.get('name').touched">
-                  Введіть ім'я
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div fxLayout="row">
-              <div fxFlexAlign="center" class="mat-icon-wrapper">
-                <mat-icon color="primary">contacts</mat-icon>
-              </div>
-              <mat-form-field>
-                <input matInput placeholder="Контактний номер або email" formControlName="contacts" required>
-                <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
-                        feedbackForm.get('contacts').touched">
-                  Введіть котактну інформацію
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <re-captcha [ngClass]="{'display-none':
-          !feedbackForm.get('contacts').valid || !feedbackForm.get('contacts').valid ||
-          !feedbackForm.get('message').valid}" [formControlName]="'recaptcha'" #recaptchaRef
-              siteKey="{{environment.recaptchaSiteKey}}">
-            </re-captcha>
-            <div class="submit-button-wrapper">
-              <button mat-raised-button class="full-width" color="primary" aria-label="Send message"
-                [disabled]="!feedbackForm.valid || processing">
-                <mat-icon *ngIf="!processing">message</mat-icon> Написати мені
-              </button>
-            </div>
-
-          </form>
-        </mat-card-content>
-      </mat-card>
-
-
-    </div>
-  </div>
-</div> -->
+<div class="progress-bar">
+  <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
+</div>

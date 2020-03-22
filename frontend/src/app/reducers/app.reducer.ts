@@ -24,6 +24,7 @@ export interface AppState {
     navLoading: boolean;
   };
   lang: string;
+  defaultLang: string;
   error: any;
 }
 
@@ -45,6 +46,7 @@ export const initialState: AppState = {
     navLoading: true,
   },
   lang: 'en',
+  defaultLang: 'uk',
   error: null,
 };
 
