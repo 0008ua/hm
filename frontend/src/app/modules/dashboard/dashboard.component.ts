@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogService } from 'src/app/services/catalog.service';
 import { ICatalog } from 'src/app/interfaces';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private catalogService: CatalogService,
+    public sharedService: SharedService,
   ) { }
 
   ngOnInit() {

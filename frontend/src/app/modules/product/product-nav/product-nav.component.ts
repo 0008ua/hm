@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { State } from 'src/app/reducers';
 import { LoadAppProducts } from 'src/app/actions/app.actions';
 import { LoadingProducts, LoadProducts } from 'src/app/actions/product.actions';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-product-nav',
@@ -25,6 +26,7 @@ export class ProductNavComponent implements OnInit {
 
   constructor(
     private store: Store<State>,
+    public sharedService: SharedService,
   ) { }
 
   ngOnInit() {

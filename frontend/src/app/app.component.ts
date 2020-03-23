@@ -103,17 +103,12 @@ export class AppComponent implements OnInit {
         const seoMeta = data.dataMeta || paramMap.get(this.sharedService.createLangField('seoMeta'))
         || environment[this.sharedService.createLangField('seoMeta')];
 
-        console.log('seoTitle', seoMeta);
-
         this.titleService.setTitle(seoTitle);
         const tag = { name: 'description', content: seoMeta };
         const attributeSelector = 'name="description"';
         this.metaService.removeTag(attributeSelector);
         this.metaService.addTag(tag, false);
       });
-
-
-
   }
 
 

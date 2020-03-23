@@ -365,6 +365,12 @@ mat-chip span {
   // @include responsive-padding-h(1.5);
   // border-radius: 4px;
   // min-width: 64px;
+  &__photo {
+    width: 25px;
+    height: auto;
+    max-height: 25px;
+  }
+  &__photo,
   &__icon,
   &__icon-text {
     @extend .item;
@@ -373,7 +379,6 @@ mat-chip span {
   &__icon {
     @extend .icon;
     // color: mat-color($primary);
-
   }
   &__icon-text {
     @extend .icon-text;
@@ -419,8 +424,8 @@ mat-chip span {
 }
 
 .icon-text {
-    color: mat-color($primary);
-    @include mat-typography-level-to-styles($config, body-1);
+  color: mat-color($primary);
+  @include mat-typography-level-to-styles($config, body-1);
   &_disabled {
     color: mat-color($foreground, text);
   }

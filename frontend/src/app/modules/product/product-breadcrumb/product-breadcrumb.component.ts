@@ -4,6 +4,7 @@ import { mergeMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/reducers';
 import { ICatalog } from '../../../interfaces';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-product-breadcrumb',
@@ -19,6 +20,7 @@ export class ProductBreadcrumbComponent implements OnInit {
 
   constructor(
     private store: Store<State>,
+    public sharedService: SharedService,
   ) { }
 
   ngOnInit() {

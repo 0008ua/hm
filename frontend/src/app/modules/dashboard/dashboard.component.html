@@ -6,7 +6,7 @@
           <a class="link" mat-button [routerLink]="['/', 'dashboard', dashboardRootMenuItem._id]" [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{exact: false}">
                     <i class="link__icon fas fa-spa"></i>
-                    <span class="link__icon-text">{{dashboardRootMenuItem.name}}</span>
+                    <span class="link__icon-text">{{dashboardRootMenuItem[sharedService.createLangField('name')]}}</span>
           </a>
         </div>
       </div>

@@ -19,7 +19,7 @@ contactTitle | section:
 
 
   </div>
-  <div fxShow="true" fxHide.lt-md="true" fxFlex="50" fxLayoutAlign="space-around center">
+  <div fxShow="true" fxHide.lt-md="true" fxFlex="50" fxLayoutAlign="end center">
     <!-- <a *ngIf="allowTo('notUser')" mat-button [routerLink]="['/', 'user', 'login']"
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
       <span>Login</span>
@@ -30,14 +30,19 @@ contactTitle | section:
       <i class="link__icon far fa-envelope"></i>
       <span class="link__icon-text">{{'feedback' | translate}}</span>
     </a>
+    <a *ngIf="allowTo('user')" mat-button class="link" [routerLink]="['/', 'user', 'profile']"
+      [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
+      <img class="link__photo" src="{{user.photoUrl}}" aly="users picture">
+      <span class="link__icon-text">{{user.displayName}}</span>
+    </a>
     <a *ngIf="allowTo('manager')" mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
       [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
       <i class="link__icon fas fa-cogs"></i>
-      <span class="link__icon-text">{{'dashboard' | translate}}</span>
+      <!-- <span class="link__icon-text">{{'dashboard' | translate}}</span> -->
     </a>
     <a *ngIf="allowTo('guest')" mat-button class="link" (click)="logout()">
       <i class="link__icon fas fa-door-open"></i>
-      <span class="link__icon-text">{{'logout' | translate}}</span>
+      <!-- <span class="link__icon-text">{{'logout' | translate}}</span> -->
     </a>
     <a mat-button class="link" (click)="switchLanguage()">
       <i class="link__icon fas fa-globe fa-2x"></i>
@@ -74,15 +79,24 @@ contactTitle | section:
               <span class="link__icon-text">{{'feedback' | translate}}</span>
             </a>
           </div>
-          <div class="cell" fxFlex="100">
-            <a *ngIf="allowTo('manager')" mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
+
+          <div *ngIf="allowTo('user')" class="cell" fxFlex="100">
+            <a mat-button class="link" [routerLink]="['/', 'user', 'profile']" [routerLinkActive]="['link_active']"
+              [routerLinkActiveOptions]="{exact: false}">
+              <img class="link__photo" src="{{user.photoUrl}}" aly="users picture">
+              <span class="link__icon-text">{{user.displayName}}</span>
+            </a>
+          </div>
+
+          <div *ngIf="allowTo('manager')" class="cell" fxFlex="100">
+            <a mat-button class="link" [routerLink]="['/', 'dashboard', 'product-form']"
               [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
               <i class="link__icon fas fa-cogs"></i>
               <span class="link__icon-text">{{'dashboard' | translate}}</span>
             </a>
           </div>
-          <div class="cell" fxFlex="100">
-            <a *ngIf="allowTo('guest')" mat-button class="link" (click)="logout()">
+          <div *ngIf="allowTo('guest')" class="cell" fxFlex="100">
+            <a mat-button class="link" (click)="logout()">
               <i class="link__icon fas fa-door-open"></i>
               <span class="link__icon-text">{{'logout' | translate}}</span>
             </a>
