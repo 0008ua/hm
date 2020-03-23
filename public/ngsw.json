@@ -1,0 +1,102 @@
+{
+  "configVersion": 1,
+  "timestamp": 1584975977833,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/5-es2015.76325f7564db845d3e63.js",
+        "/5-es5.76325f7564db845d3e63.js",
+        "/6-es2015.8cdec4280cacda84cb3c.js",
+        "/6-es5.8cdec4280cacda84cb3c.js",
+        "/7-es2015.2c5416973b9603d9e020.js",
+        "/7-es5.2c5416973b9603d9e020.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main-es2015.58d4f98bb4285bbae21a.js",
+        "/main-es5.58d4f98bb4285bbae21a.js",
+        "/manifest.webmanifest",
+        "/polyfills-es2015.2987770fde9daa1d8a2e.js",
+        "/polyfills-es5.ef4b1e1fc703b3ff76e3.js",
+        "/runtime-es2015.be58352156eef90dd269.js",
+        "/runtime-es5.be58352156eef90dd269.js",
+        "/styles.01cd4d68f426a34927d7.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/i18n/en.json",
+        "/assets/i18n/uk.json",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/images/hmade_logo_dark.svg",
+        "/assets/images/hmade_logo_light.svg",
+        "/assets/images/loading.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/5-es2015.76325f7564db845d3e63.js": "925bd738da24dd97d0e6d72204c09f6bff485b4a",
+    "/5-es5.76325f7564db845d3e63.js": "916066a4c77633e1a3e89206163ea463479af96b",
+    "/6-es2015.8cdec4280cacda84cb3c.js": "6587bc0adea8dcb580db705f489800f1fe74ddf0",
+    "/6-es5.8cdec4280cacda84cb3c.js": "6587bc0adea8dcb580db705f489800f1fe74ddf0",
+    "/7-es2015.2c5416973b9603d9e020.js": "21a1f826ec1c9c6e06df8ea1ee06e6aaedcff46e",
+    "/7-es5.2c5416973b9603d9e020.js": "8dae9ee45bd71c7ae6e497c9450df06ade20e257",
+    "/assets/i18n/en.json": "50e8f177d61eb9de0d432cca8deefa023ca56e61",
+    "/assets/i18n/uk.json": "25a83264d152d1581043ef76e58da68703d92129",
+    "/assets/icons/icon-128x128.png": "f4add257111f856b15292518b01b1a7a3e491f9e",
+    "/assets/icons/icon-144x144.png": "1652aa9c18fc3967d2d82c438240405e8eb6a5b1",
+    "/assets/icons/icon-152x152.png": "920a38cd367caa60a2e5cf08feb153c79ef97591",
+    "/assets/icons/icon-192x192.png": "eb83a864bd30e4a692f75131db4321eddbc96f9d",
+    "/assets/icons/icon-384x384.png": "bf49d65d85724c5deef712803339b72bfc3ece63",
+    "/assets/icons/icon-512x512.png": "f83a9c2c59cd9aaf84512a432bf9d0bc121e66a5",
+    "/assets/icons/icon-72x72.png": "9baf4ca7f1de30e6f06f779c79b08835d0634fe2",
+    "/assets/icons/icon-96x96.png": "f5513f8cec37c41204b0e52fe7558de9fbac7d46",
+    "/assets/images/hmade_logo_dark.svg": "3d8cdad6d5a2a9461055c5ca618d2e8b8b197b2c",
+    "/assets/images/hmade_logo_light.svg": "41855ebb46f02b658a3ff27e919f57973d4928a4",
+    "/assets/images/loading.svg": "6f74a094eeaee031cbad1838e8b2fef706dc581c",
+    "/favicon.ico": "3581640704ffb32dca6a10acca86bcca2471514a",
+    "/index.html": "669bc5cc339fba184796d1e99527a714b545a5d9",
+    "/main-es2015.58d4f98bb4285bbae21a.js": "22b02425a202bb65c6718a8324ccc835695b1b6f",
+    "/main-es5.58d4f98bb4285bbae21a.js": "97bf078e6bd9677b58aa9d9df41f5b59284b7fa4",
+    "/manifest.webmanifest": "b6656e8121a0278c41a1ace1ff3000eb1ba29796",
+    "/polyfills-es2015.2987770fde9daa1d8a2e.js": "cf5cbfa9134716054fb479ab21362146cdf1f2ff",
+    "/polyfills-es5.ef4b1e1fc703b3ff76e3.js": "6bff0c03e05bb347d213ad1b3674045eb892d189",
+    "/runtime-es2015.be58352156eef90dd269.js": "d4f74fa449fa719fa6ca95f4ab9eb9ab04c5a7cf",
+    "/runtime-es5.be58352156eef90dd269.js": "b499fad6a9c47554cabfcd8eaad0ac5ae192d0c2",
+    "/styles.01cd4d68f426a34927d7.css": "8f0d47ad38015199b6df01497ea89d07e131ebc4"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
