@@ -215,6 +215,21 @@ $space-xs: 8px;
   }
 }
 
+.cell_product{
+  @include gt-md {
+    padding: calc(#{$space-gt-md} / 3);
+  }
+  @include md {
+    padding: calc(#{$space-md} / 3);
+  }
+  @include sm {
+    padding: calc(#{$space-sm} / 3);
+  }
+  @include xs {
+    padding: calc(#{$space-xs} / 3) 0;
+  }
+}
+
 .item {
   @include gt-md {
     @include first {

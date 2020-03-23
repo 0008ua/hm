@@ -12,8 +12,42 @@ $custom-typography: mat-typography-config(
 
 $config: mat-typography-config();
 
-$dark-theme: mat-dark-theme(mat-palette($mat-indigo), mat-palette($mat-light-blue), mat-palette($mat-red));
-$light-theme: mat-light-theme(mat-palette($mat-indigo), mat-palette($mat-light-blue), mat-palette($mat-red));
+$mat-custom-blue: (
+50 : #e9eaf5,
+    100 : #c8cbe5,
+    200 : #a4a9d4,
+    300 : #7f87c3,
+    400 : #636db6,
+    500 : #4853a9,
+    600 : #414ca2,
+    700 : #384298,
+    800 : #30398f,
+    900 : #21297e,
+    A100 : #bdc2ff,
+    A200 : #8a93ff,
+    A400 : #5764ff,
+    A700 : #3d4cff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$dark-theme: mat-dark-theme(mat-palette($mat-custom-blue), mat-palette($mat-blue), mat-palette($mat-red));
+$light-theme: mat-light-theme(mat-palette($mat-custom-blue), mat-palette($mat-light-blue), mat-palette($mat-red));
+
 
 $main-theme: $light-theme;
 @include angular-material-theme($main-theme);
@@ -23,6 +57,7 @@ $accent: map-get($main-theme, accent);
 $warn: map-get($main-theme, warn);
 $foreground: map-get($main-theme, foreground);
 $background: map-get($main-theme, background);
+
 
     // font-size: mat-font-size($config, title);
     // font-family: mat-font-family($config);
@@ -137,3 +172,4 @@ $background: map-get($main-theme, background);
 //   slider-off:        rgba(white, 0.3),
 //   slider-off-active: rgba(white, 0.3),
 // );
+

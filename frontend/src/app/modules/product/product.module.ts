@@ -8,6 +8,7 @@ import { ProductNavComponent } from './product-nav/product-nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductBreadcrumbComponent } from './product-breadcrumb/product-breadcrumb.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProductItComponent } from './product-it/product-it.component';
 
 
 
@@ -17,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ProductComponent,
     ProductNavComponent,
     ProductBreadcrumbComponent,
+    ProductItComponent,
   ],
   imports: [
     CommonModule,

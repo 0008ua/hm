@@ -1,12 +1,12 @@
-<div *ngIf="product" class="product" fxLayout="column">
-  <img class="product__picture" fxFlex (click)="openDialog()"
-  [src]="productPicture.link + '/' + product.picture" alt="product picture">
-  <div *ngIf="allowTo('manager')" class="product__editor" fxLayout="row">
+<div *ngIf="product" class="product-it" fxLayout="column">
+  <img class="product-it__picture" fxFlex (click)="openDialog()" [src]="productPicture.link + '/' + product.picture"
+    alt="product picture">
+  <div *ngIf="allowTo('manager')" class="product-it__editor" fxLayout="row">
     <button mat-button (click)="edit()" fxFlex>Редагувати</button>
     <button mat-button (click)="deleteProduct()" fxFlex>Видалити</button>
   </div>
-  <div class="product__info" fxLayout="row">
-    <div class="cell product__info-main" fxFlex="50">
+  <div class="product-it__info">
+    <div class="cell product-it__info-main">
       <p>
         <i class="item far fa-eye"></i>
         <span class="item">{{product.views}}</span>
@@ -16,7 +16,7 @@
         <span class="item">{{product.createdAt | date: 'dd-MM-yy'}}</span>
       </p>
     </div>
-    <div class="cell product__info-name" fxFlex="50" fxLayoutAlign="center center">
+    <div class="cell product-it__info-name" fxLayoutAlign="center center">
       <span>{{product.name}}</span>
     </div>
   </div>

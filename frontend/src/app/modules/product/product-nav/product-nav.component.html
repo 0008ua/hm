@@ -1,22 +1,21 @@
-<!-- <div class="container"> -->
-  <div class="row" fxLayout="row" fxLayoutAlign="center center">
-    <div class="cell">
-      <mat-button-toggle-group appearance="legacy" aria-label="Sort order" [ngModel]="sortToggle"
-        (ngModelChange)="onToggle($event)">
+<div class="container">
+  <div class="row" fxLayout="row">
+    <div class="cell" fxFlex="100" fxLayoutAlign="center center">
+      <mat-button-toggle-group aria-label="Sort order" [ngModel]="sortToggle" (ngModelChange)="onToggle($event)">
         <mat-button-toggle [value]="SortTypes.Views">{{'popular' | translate}}</mat-button-toggle>
         <mat-button-toggle [value]="SortTypes.CreatedAt">{{'last' | translate}}</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
   </div>
-<!-- </div>
-<div class="container animationAppear05s" *ngIf="!navLoading"> -->
+</div>
+<div class="container animationAppear05s" *ngIf="!navLoading">
   <div class="row" fxLayout="row" fxLayoutAlign="center center">
-    <div class="cell">
+    <div class="cell" fxFlex="100">
       <mat-chip-list aria-label="feed" fxLayoutAlign="center center">
         <mat-chip *ngFor="let feedItem of feedSiblings" fxFlex="100" fxLayoutAlign="center center"
           [routerLink]="['/products', feedItem._id]" (click)="sidenavClose()"
-          [queryParams]="{seoTitle: feedItem.seoTitle, seoMeta: feedItem.seoMeta}" [routerLinkActive]="['chips_active']"
-          [routerLinkActiveOptions]="{exact: true}">
+          [queryParams]="{seoTitle: feedItem[sharedService.createLangField('seoTitle')], seoMeta: feedItem[sharedService.createLangField('seoMeta')]}"
+          [routerLinkActive]="['chips_active']" [routerLinkActiveOptions]="{exact: true}">
           <span>
             {{feedItem[sharedService.createLangField('name')]}}
           </span>
@@ -24,4 +23,4 @@
       </mat-chip-list>
     </div>
   </div>
-<!-- </div> -->
+</div>

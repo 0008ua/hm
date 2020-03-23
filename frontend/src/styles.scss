@@ -235,17 +235,16 @@ a.fb {
   }
   &:hover {
     @include mat-elevation(1);
-    @include transform(translateX(1px) translateY(1px));
+    // @include transform(translateX(1px) translateY(1px));
   }
-  // position: relative;
-  border-radius: 10px 10px 5px 5px;
+  border-radius: 5px;
   background-color: mat-color($background, card);
   height: 100%;
   &__picture {
     @include xs {
       border-radius: 0;
     }
-    border-radius: 10px 10px 0 0;
+    border-radius: 5px 5px 0 0;
     width: 100%;
     height: auto;
   }
@@ -264,7 +263,7 @@ a.fb {
     }
     border-bottom: 1px solid mat-color($foreground, divider);
     border-radius: 0 0 5px 5px;
-    color: mat-color($foreground, icon);
+    color: mat-color($foreground, secondary-text);
   }
   &__info-name {
     @include mat-typography-level-to-styles($config, body-1);
@@ -322,30 +321,39 @@ mat-chip span {
   flex-flow: row wrap;
   &__item {
     @include responsive-padding-x(0.5, 1, 0.5, 1);
-    border-radius: 10px 10px 0 0;
-    background-color: mat-color($background, card);
-    color: mat-color($foreground, text);
+
+    border-radius: 5px 5px 0 0;
+    background-color: white;
+    // background-color: mat-color($background, card);
+    // color: mat-color($foreground, text);
+    color: mat-color($accent) !important;
+
     margin: 3px;
     text-align: center;
+
+    &:hover {
+      // @include mat-elevation(1);
+      @include transform(translateX(1px) translateY(1px));
+    }
     &_home {
-      background-color: mat-color($background, hover);
-      border-bottom: 2px solid mat-color($accent);
-      color: mat-color($foreground, icon);
+      // background-color: mat-color($background, hover);
+      border-bottom: 1px solid mat-color($accent);
+      @include mat-elevation(1);
+
     }
     &_current {
-      background-color: mat-color($background, hover);
-      border-bottom: 2px solid mat-color($accent);
-      &_active {
-        border-bottom: 2px solid mat-color($accent);
-      }
+      // background-color: mat-color($background, hover);
+      border-bottom: 1px solid mat-color($accent);
+      @include mat-elevation(1);
     }
     &_feed {
+      color: mat-color($primary) !important;
       display: flex;
       flex: 1 1 auto;
       justify-content: center;
     }
     &_active {
-      border-bottom: 2px solid mat-color($accent);
+      color: mat-color($accent) !important;
     }
   }
 }

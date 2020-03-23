@@ -1,5 +1,5 @@
-<div class="br-menu container-v">
-  <a  class="br-menu__item br-menu__item_home" [routerLink]="['/products', 'all']" [routerLinkActive]="['']"
+<div class="br-menu">
+  <a class="br-menu__item br-menu__item_home" [routerLink]="['/products', 'all']" [routerLinkActive]="['br-menu__item_active']"
     [routerLinkActiveOptions]="{exact: true}">
     <span>
       <i class="item fa fa-home"></i>
@@ -8,8 +8,8 @@
   <ng-container *ngIf="!navLoading">
     <a *ngFor="let breadcrumbItem of breadcrumb" class="br-menu__item br-menu__item_current animationAppear05s"
       [routerLink]="['/products', breadcrumbItem._id]"
-      [queryParams]="{seoTitle: breadcrumbItem.seoTitle, seoMeta: breadcrumbItem.seoMeta}" [routerLinkActive]="['']"
-      [routerLinkActiveOptions]="{exact: true}">
+      [queryParams]="{seoTitle: breadcrumbItem[sharedService.createLangField('seoTitle')], seoMeta: breadcrumbItem[sharedService.createLangField('seoMeta')]}"
+      [routerLinkActive]="['br-menu__item_active']" [routerLinkActiveOptions]="{exact: true}">
       <span>
         <!-- <i class="fas fa-check-double"></i> -->
         <span>{{breadcrumbItem[sharedService.createLangField('name')]}}</span>
@@ -18,8 +18,9 @@
   </ng-container>
   <ng-container *ngIf="!navLoading">
     <a *ngFor="let child of feedChildren" class="br-menu__item br-menu__item_feed animationAppear05s"
-      [routerLink]="['/products', child._id]" [queryParams]="{seoTitle: child.seoTitle, seoMeta: child.seoMeta}"
-      [routerLinkActive]="['br-menu__item_active']" [routerLinkActiveOptions]="{exact: true}">
+      [routerLink]="['/products', child._id]"
+      [queryParams]="{seoTitle: child[sharedService.createLangField('seoTitle')], seoMeta: child[sharedService.createLangField('seoMeta')]}"
+      [routerLinkActive]="['']" [routerLinkActiveOptions]="{exact: true}">
       <span>{{child[sharedService.createLangField('name')]}}</span>
     </a>
   </ng-container>
