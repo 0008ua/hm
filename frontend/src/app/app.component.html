@@ -19,6 +19,7 @@ contactTitle | section:
 
 
   </div>
+  
   <div fxShow="true" fxHide.lt-md="true" fxFlex="50" fxLayoutAlign="end center">
     <!-- <a *ngIf="allowTo('notUser')" mat-button [routerLink]="['/', 'user', 'login']"
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
@@ -90,7 +91,7 @@ contactTitle | section:
           <div *ngIf="allowTo('notUser')" class="cell" fxFlex="100">
             <a mat-button class="link" [routerLink]="['/', 'user', 'login']" [routerLinkActive]="['link_active']"
               [routerLinkActiveOptions]="{exact: false}">
-              <i class="fas fa-sign-in-alt"></i>
+              <i class="link__icon fas fa-sign-in-alt"></i>
               <span class="link__icon-text">{{'signin' | translate}}</span>
             </a>
           </div>
