@@ -30,6 +30,13 @@ contactTitle | section:
       <i class="link__icon far fa-envelope"></i>
       <span class="link__icon-text">{{'feedback' | translate}}</span>
     </a>
+
+    <a *ngIf="allowTo('notUser')" mat-button class="link" [routerLink]="['/', 'user', 'login']"
+      [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
+      <i class="link__icon fas fa-sign-in-alt"></i>
+      <span class="link__icon-text">{{'signin' | translate}}</span>
+    </a>
+
     <a *ngIf="allowTo('user')" mat-button class="link" [routerLink]="['/', 'user', 'profile']"
       [routerLinkActive]="['link_active']" [routerLinkActiveOptions]="{exact: false}">
       <img class="link__photo" src="{{user.photoUrl}}" aly="users picture">
@@ -77,6 +84,14 @@ contactTitle | section:
               [routerLinkActiveOptions]="{exact: false}">
               <i class="link__icon far fa-envelope"></i>
               <span class="link__icon-text">{{'feedback' | translate}}</span>
+            </a>
+          </div>
+
+          <div *ngIf="allowTo('notUser')" class="cell" fxFlex="100">
+            <a mat-button class="link" [routerLink]="['/', 'user', 'login']" [routerLinkActive]="['link_active']"
+              [routerLinkActiveOptions]="{exact: false}">
+              <i class="fas fa-sign-in-alt"></i>
+              <span class="link__icon-text">{{'signin' | translate}}</span>
             </a>
           </div>
 
