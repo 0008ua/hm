@@ -8,6 +8,10 @@ html {
   font-family: $mainFontFamily;
 }
 
+.canvas-wrapper {
+  border: 1px solid darkgray;
+}
+
 *,
 *:before,
 *:after {
@@ -280,9 +284,11 @@ a.fb {
   button {
     position: absolute;
   }
-  img {
-    max-width: 100%;
-    height: auto;
+  &__picture {
+    // max-width: 100%;
+    // height: auto;
+    width: 360px;
+    height: 270px;
   }
 }
 
@@ -339,7 +345,6 @@ mat-chip span {
       // background-color: mat-color($background, hover);
       border-bottom: 1px solid mat-color($accent);
       @include mat-elevation(1);
-
     }
     &_current {
       // background-color: mat-color($background, hover);

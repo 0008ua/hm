@@ -6,6 +6,7 @@ export enum ProductFormActionTypes {
   LoadProductFormsSuccess = '[ProductForm] Load ProductForms Success',
   LoadProductFormsFailure = '[ProductForm] Load ProductForms Failure',
   ResetProductForms = '[ProductForm] Reset ProductForms',
+  ResetProductFormsPictureField = '[ProductForm] Reset ProductForms Picture Field',
   AddProductForms = '[ProductForm] Add ProductForms',
 }
 
@@ -33,9 +34,14 @@ export class ResetProductForms implements Action {
   readonly type = ProductFormActionTypes.ResetProductForms;
 }
 
+export class ResetProductFormsPictureField implements Action {
+  readonly type = ProductFormActionTypes.ResetProductFormsPictureField;
+}
+
 export type ProductFormActions =
   LoadProductForms |
   LoadProductFormsSuccess |
   LoadProductFormsFailure |
   AddProductForms |
-  ResetProductForms;
+  ResetProductForms |
+  ResetProductFormsPictureField;

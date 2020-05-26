@@ -11,10 +11,14 @@ import { State } from 'src/app/reducers';
 import { ScreenState } from 'src/app/reducers/screen.reducer';
 import { ProductFormState } from 'src/app/reducers/product-form.reducer';
 import { CatalogService } from 'src/app/services/catalog.service';
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, filter, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
-import { LoadProductForms, ResetProductForms } from '../../../actions/product-form.actions';
+import { of, ReplaySubject } from 'rxjs';
+import { LoadProductForms, ResetProductForms, ResetProductFormsPictureField } from '../../../actions/product-form.actions';
+import 'fabric';
+import { Canvas, IEvent } from 'fabric/fabric-impl';
+
+declare const fabric: any;
 
 @Component({
   selector: 'app-product-form',
@@ -23,12 +27,16 @@ import { LoadProductForms, ResetProductForms } from '../../../actions/product-fo
   // encapsulation: ViewEncapsulation.None
 })
 
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, AfterViewInit {
   // for form reset
   @ViewChild('productFormDirective', { static: false }) productFormDirective: FormGroupDirective;
   // for reset file input after form reset
   @ViewChild('inputPictureDirective', { static: false }) inputPictureDirective: ElementRef;
 
+  canvas: Canvas;
+  @ViewChild('fabricCanvas', { static: false })
+
+  public canvasEl: ElementRef;
   environment = environment;
   productForm: FormGroup;
   processingLoadPicture: boolean;
@@ -36,6 +44,24 @@ export class ProductFormComponent implements OnInit {
   state: IProduct;
   initialState: IProduct;
   children = [];
+  image: fabric.Image;
+  private initialCanvasSize = {
+    width: 360,
+    height: 270,
+    get ratio() {
+      return this.height / this.width;
+    }
+  };
+
+  private canvasPristine = true;
+  canvasVisible = false;
+  objectMoving$: ReplaySubject<IEvent>;
+  objectScaling$: ReplaySubject<IEvent>;
+  cropRect: fabric.Rect;
+  outsideTop: fabric.Rect;
+  outsideRight: fabric.Rect;
+  outsideBottom: fabric.Rect;
+  outsideLeft: fabric.Rect;
 
   constructor(
     private sharedService: SharedService,
@@ -47,6 +73,153 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private location: Location,
   ) { }
+
+  ngAfterViewInit() {
+    this.canvas = new fabric.Canvas(this.canvasEl.nativeElement, this.initialCanvasSize);
+
+    this.objectMoving$ = new ReplaySubject(1);
+    this.objectScaling$ = new ReplaySubject(1);
+
+    this.objectScaling$
+      .pipe(filter(e => e.target === this.cropRect))
+      .subscribe(e => {
+        e.target.scale(e.target.scaleX).setCoords();
+
+        if (e.target.left < 0) {
+          e.target.set('left', 0).setCoords();
+        }
+
+        if (e.target.top < 0) {
+          e.target.set('top', 0).setCoords();
+        }
+
+        if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth() &&
+          e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
+          // scaling out of the right and the bottom borders
+          e.target
+            .set('width', this.canvas.getWidth() - e.target.left)
+            .set('height', this.canvas.getHeight() - e.target.top)
+            .set('scaleX', 1)
+            .set('scaleY', 1)
+            .setCoords();
+        } else if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth()) {
+          // scaling out of the right border
+          e.target
+            .set('width', this.canvas.getWidth() - e.target.left)
+            .set('scaleX', 1)
+            .set('scaleY', 1)
+            .setCoords();
+        } else if (e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
+          // scaling out of the bottom border
+          e.target
+            .set('width', (this.canvas.getHeight() - e.target.top) / this.initialCanvasSize.ratio)
+            .set('height', this.canvas.getHeight() - e.target.top)
+            .set('scaleX', 1)
+            .set('scaleY', 1)
+            .setCoords();
+        } else {
+          // scaled without crossing borders
+          e.target.setCoords();
+        }
+
+        // correction of ratio
+        if (e.target.height / e.target.width !== this.initialCanvasSize.ratio) {
+          const wRatio = this.initialCanvasSize.width / e.target.width;
+          const hRatio = this.initialCanvasSize.height / e.target.height;
+          const ratio = Math.min(wRatio, hRatio);
+
+          if (e.target.width < this.canvas.getWidth() - e.target.left) {
+            e.target
+              .set('height', e.target.width * this.initialCanvasSize.ratio)
+              .set('scaleX', 1)
+              .set('scaleY', 1)
+              .setCoords();
+          } else if (e.target.height < this.canvas.getHeight() - e.target.top) {
+            e.target
+              .set('width', e.target.height / ratio)
+              .set('scaleX', 1)
+              .set('scaleY', 1)
+              .setCoords();
+          } else if (this.initialCanvasSize.ratio < 1) {
+            // landscape
+            const cropRectOld = e.target.getBoundingRect();
+            if ((this.canvas.getWidth() - e.target.left) * this.initialCanvasSize.ratio <= this.canvas.getHeight() - e.target.top) {
+              e.target
+                .set('width', this.canvas.getWidth() - e.target.left)
+                .set('height', (this.canvas.getWidth() - e.target.left) * this.initialCanvasSize.ratio)
+                .set('scaleX', 1)
+                .set('scaleY', 1)
+                .setCoords();
+            } else {
+              e.target
+                .set('width', (this.canvas.getHeight() - cropRectOld.top) / this.initialCanvasSize.ratio)
+                .set('height', this.canvas.getHeight() - cropRectOld.top)
+                .set('scaleX', 1)
+                .set('scaleY', 1)
+                .setCoords();
+            }
+          } else if (this.initialCanvasSize.ratio >= 1) {
+            // portrait
+            e.target
+              .set('width', (this.canvas.getHeight() - e.target.top) / this.initialCanvasSize.ratio)
+              .set('height', this.canvas.getHeight() - e.target.top)
+              .set('scaleX', 1)
+              .set('scaleY', 1)
+              .setCoords();
+          } else {
+            // scaled without crossing borders
+            e.target.setCoords();
+          }
+        }
+        // this.canvas.renderAll();
+        this.canvas.requestRenderAll();
+      });
+
+    this.objectMoving$
+      .pipe(filter(e => e.target === this.cropRect))
+      .subscribe(e => {
+
+        const cropRectOld = e.target.getBoundingRect();
+
+        if (e.target.left < 0) {
+          e.target.set('left', 0).setCoords();
+        }
+
+        if (e.target.top < 0) {
+          e.target.set('top', 0).setCoords();
+        }
+
+        if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth() &&
+          e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
+          // moving out of the right and the bottom borders
+          e.target
+            .set('left', cropRectOld.left)
+            .set('top', cropRectOld.top)
+            .setCoords();
+        } else if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth()) {
+          // moving out of the right border
+          e.target
+            .set('left', cropRectOld.left)
+            .setCoords();
+        } else if (e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
+          // moving out of the bottom border
+          e.target
+            .set('top', cropRectOld.top)
+            .setCoords();
+        } else {
+          // object wasn't moved out of the border
+          e.target.setCoords();
+        }
+
+        this.canvas.renderAll();
+      });
+
+    // fabric.Image.fromURL('./assets/cell.png',
+    //   (oImg: fabric.Image) => {
+    //     this.canvas.add(oImg);
+    //   });
+
+  }
 
   ngOnInit() {
     this.productForm = new FormGroup({
@@ -177,32 +350,236 @@ export class ProductFormComponent implements OnInit {
     this.productForm.get('name').setValue('');
   }
 
+  // choose file event
   addPicture(event: Event) {
-    this.processingLoadPicture = true;
-    const file = (event.target as HTMLInputElement).files[0];
-    const error = this.sharedService.checkPictureFile(file).err;
 
+    if (!this.canvasPristine) {
+      this.resetCanvasSize();
+    }
+
+    const file = (event.target as HTMLInputElement).files[0];
+    if (!file) {
+      return;
+    }
+    this.processingLoadPicture = true;
+    this.canvasVisible = true;
+
+    // check file size and dimension
+    const error = this.sharedService.checkPictureFile(file).err;
     if (error) {
       this.matSnackBar.open(error, '', { duration: 2000 });
       this.processingLoadPicture = false;
     } else {
-      this.sharedService.uploadPicture(file, 'product', [
-        { width: 1100, height: 825, crop: 'fill', fetch_format: 'auto' }, // popup - lg, xl
-        { width: 760, height: 570, crop: 'fill', fetch_format: 'auto' }, // popp up - sm, md
-        { width: 590, height: 443, crop: 'fill', fetch_format: 'auto' }, // xs
-        { width: 460, height: 345, crop: 'fill', fetch_format: 'auto' }, // sm
-        { width: 360, height: 270, crop: 'fill', fetch_format: 'auto' }, // lg, xl
-        { width: 300, height: 225, crop: 'fill', fetch_format: 'auto' }, // md
-      ])
-        .subscribe(public_id => {
-          this.productForm.get('picture').setValue(public_id);
-          this.processingLoadPicture = false;
-          this.productForm.get('picture').markAsDirty();
-        },
-          err => this.matSnackBar.open(err.error.message, '', { duration: 2000 })
-        );
+
+      const fr = new FileReader();
+
+      /**
+       *  add listener on file readed
+       */
+      fr.onload = () => {
+        this.processingLoadPicture = false;
+
+        const src = fr.result as string;
+
+        fabric.Image.fromURL(src,
+          (oImg: fabric.Image) => {
+            if (this.canvasPristine) {
+              this.canvasPristine = false;
+
+              const imgRatio = oImg.height / oImg.width;
+
+              this.canvas.setDimensions({
+                width: this.initialCanvasSize.width + 'px',
+                height: this.initialCanvasSize.width * imgRatio + 'px'
+              }, { cssOnly: true });
+
+              this.canvas.setDimensions({
+                width: oImg.width,
+                height: oImg.height,
+              }, { backstoreOnly: true });
+
+              fabric.Object.prototype.transparentCorners = false;
+              fabric.Object.prototype.cornerColor = 'blue';
+              fabric.Object.prototype.cornerStyle = 'circle';
+
+              if (imgRatio >= 1) {
+                // portrait
+                this.cropRect = new fabric.Rect({
+                  width: oImg.width,
+                  height: oImg.width * this.initialCanvasSize.ratio,
+                  left: 0,
+                  top: (oImg.height - oImg.width * this.initialCanvasSize.ratio) / 2,
+                  // hasControls: false,
+                  fill: 'white',
+                  opacity: .4,
+                  strokeWidth: 0,
+                  transparentCorners: false,
+                  cornerSize: oImg.width * .03,
+                  cornerColor: 'black',
+                  cornerStyle: 'rect',
+                  lockRotation: true,
+                  hasRotatingPoint: false,
+                });
+              } else {
+                // landscape
+                this.cropRect = new fabric.Rect({
+                  width: oImg.height / this.initialCanvasSize.ratio,
+                  height: oImg.height,
+                  left: (oImg.width - oImg.height / this.initialCanvasSize.ratio) / 2,
+                  top: 0,
+                  // hasControls: false,
+                  fill: 'white',
+                  opacity: .4,
+                  strokeWidth: 0,
+                  transparentCorners: false,
+                  cornerSize: oImg.height * .03,
+                  cornerColor: 'black',
+                  cornerStyle: 'rect',
+                  lockRotation: true,
+                  hasRotatingPoint: false,
+                });
+              }
+
+            }
+            oImg.set('strokeWidth', 0);
+            oImg.set('selectable', false);
+            oImg.set('hasControls', false);
+            this.image = oImg;
+            this.canvas.add(this.image, this.cropRect);
+            this.canvas.setActiveObject(this.cropRect);
+            this.canvas.on({
+              'object:moving': (e) => this.objectMoving$.next(e),
+              'object:moved': (e) => this.objectMoving$.next(e),
+              'object:object:scaled': (e) => this.objectScaling$.next(e),
+              'object:scaling': (e) => this.objectScaling$.next(e),
+              // 'object:rotating': (e) => this.mouseMoving$.next(e),
+            });
+          }, { top: 0 });
+
+        /** stretch to canvas size
+         *
+         */
+        // fabric.Image.fromURL(src,
+        //   (oImg: fabric.Image) => {
+        //     if (this.canvasPristine) {
+        //       this.canvasPristine = false;
+        //       this.canvas.setDimensions({
+        //         width: this.initialCanvasSize.width + 'px',
+        //         height: this.initialCanvasSize.height + 'px'
+        //       }, { cssOnly: true })
+        //       const wRatio = this.canvas.getWidth() / oImg.width;
+        //       const hRatio = this.canvas.getHeight() / oImg.height;
+        //       const ratio = Math.min(wRatio, hRatio);
+        //       const canvasRatio = this.initialCanvasSize.height / this.initialCanvasSize.width;
+        //       const imgRatio = oImg.height / oImg.width;
+        //       this.canvas.setDimensions({
+        //         width: canvasRatio < imgRatio ? oImg.width : oImg.height / canvasRatio,
+        //         height: canvasRatio < imgRatio ? oImg.width * canvasRatio : oImg.height
+        //       },
+        //         { backstoreOnly: true });
+        //     }
+        //     this.canvas.add(oImg);
+        //   }, { top: 0 });
+      };
+      // read file
+      fr.readAsDataURL(file);
     }
   }
+
+  resetCanvasSize() {
+    this.canvasPristine = true;
+    this.canvas.clear();
+    this.canvas.setDimensions(this.initialCanvasSize, { backstoreOnly: true });
+    this.canvas.setDimensions({
+      width: this.initialCanvasSize.width + 'px',
+      height: this.initialCanvasSize.height + 'px',
+    }, { cssOnly: true });
+    this.canvasVisible = false;
+    this.store.dispatch(new ResetProductFormsPictureField());
+  }
+
+  uploadPicture() {
+    this.processingLoadPicture = true;
+
+    // // hide all controls
+    // this.canvas.getObjects().map((obj) => {
+    //   obj.hasControls = false;
+    // });
+    // this.canvas.renderAll();
+
+    this.canvas.setDimensions({
+      width: this.cropRect.width * this.cropRect.scaleX,
+      height: this.cropRect.height * this.cropRect.scaleY,
+    }, { backstoreOnly: true });
+
+    this.canvas.setDimensions({
+      width: this.initialCanvasSize.width + 'px',
+      height: this.initialCanvasSize.height + 'px',
+    }, { cssOnly: true });
+
+    const cropRectOld = this.cropRect.getBoundingRect();
+
+    this.canvas.remove(this.cropRect);
+
+    this.image
+      .set('left', -cropRectOld.left)
+      .set('top', -cropRectOld.top)
+      .setCoords();
+    this.canvas.renderAll();
+
+    this.canvasEl.nativeElement.toBlob((blob) => {
+      const file = new File([blob], 'img.png', { type: 'image/png' });
+      const error = this.sharedService.checkPictureFile(file).err;
+      if (error) {
+        this.matSnackBar.open(error, '', { duration: 2000 });
+        this.processingLoadPicture = false;
+      } else {
+        this.sharedService.uploadPicture(file, 'product', [
+          { width: 1100, height: 825, crop: 'fill', fetch_format: 'auto' }, // popup - lg, xl
+          { width: 760, height: 570, crop: 'fill', fetch_format: 'auto' }, // popp up - sm, md
+          { width: 590, height: 443, crop: 'fill', fetch_format: 'auto' }, // xs
+          { width: 460, height: 345, crop: 'fill', fetch_format: 'auto' }, // sm
+          { width: 360, height: 270, crop: 'fill', fetch_format: 'auto' }, // lg, xl
+          { width: 300, height: 225, crop: 'fill', fetch_format: 'auto' }, // md
+        ])
+          .subscribe(public_id => {
+            this.productForm.get('picture').setValue(public_id);
+            this.processingLoadPicture = false;
+            this.canvasVisible = false;
+            this.productForm.get('picture').markAsDirty();
+          },
+            err => this.matSnackBar.open(err.error.message, '', { duration: 2000 })
+          );
+      }
+    }, { type: 'image/png' });
+  }
+
+  // addPicture(event: Event) {
+  //   this.processingLoadPicture = true;
+  //   const file = (event.target as HTMLInputElement).files[0];
+  //   const error = this.sharedService.checkPictureFile(file).err;
+
+  //   if (error) {
+  //     this.matSnackBar.open(error, '', { duration: 2000 });
+  //     this.processingLoadPicture = false;
+  //   } else {
+  //     this.sharedService.uploadPicture(file, 'product', [
+  //       { width: 1100, height: 825, crop: 'fill', fetch_format: 'auto' }, // popup - lg, xl
+  //       { width: 760, height: 570, crop: 'fill', fetch_format: 'auto' }, // popp up - sm, md
+  //       { width: 590, height: 443, crop: 'fill', fetch_format: 'auto' }, // xs
+  //       { width: 460, height: 345, crop: 'fill', fetch_format: 'auto' }, // sm
+  //       { width: 360, height: 270, crop: 'fill', fetch_format: 'auto' }, // lg, xl
+  //       { width: 300, height: 225, crop: 'fill', fetch_format: 'auto' }, // md
+  //     ])
+  //       .subscribe(public_id => {
+  //         this.productForm.get('picture').setValue(public_id);
+  //         this.processingLoadPicture = false;
+  //         this.productForm.get('picture').markAsDirty();
+  //       },
+  //         err => this.matSnackBar.open(err.error.message, '', { duration: 2000 })
+  //       );
+  //   }
+  // }
 
   submitProductForm(): void {
     const product = {
@@ -229,6 +606,7 @@ export class ProductFormComponent implements OnInit {
   // reset to initial values
   resetProductForm() {
     this.store.dispatch(new ResetProductForms());
+    this.resetCanvasSize();
   }
 
   goBack() {

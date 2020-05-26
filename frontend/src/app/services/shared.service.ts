@@ -31,6 +31,7 @@ export class SharedService {
    }
 
   checkPictureFile(file: File): { err: string | null } {
+    console.log('file.type', file.type);
     if (!file) {
       return ({ err: 'Файл не вибрано' });
     } else if (file.size > 26215000) { // 25 * 1024 * 1024

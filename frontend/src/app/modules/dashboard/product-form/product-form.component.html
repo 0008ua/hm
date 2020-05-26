@@ -4,21 +4,52 @@
     <form [formGroup]="productForm" #productFormDirective="ngForm" novalidate>
       <div class="row">
         <div class="cell_full-width" fxFlex="100" fxLayoutAlign="center center">
-          <div class="pictureForm" fxLayoutAlign="center center">
-            <img class="pictureForm__picture" *ngIf="productForm.get('picture').value"
-              src="{{ productPicture.link + '/' + productForm.get('picture').value}}" alt="Picture">
-            <img class="pictureForm__picture" *ngIf="!productForm.get('picture').value"
-              src="{{ productPicture.link + '/' + environment.defaults.productPicture}}" alt="Picture">
-            <input #inputPictureDirective type="file" (change)="addPicture($event)"
-              accept=".jpg, .jpe, .jpeg, .bmp, .webp, .png, .gif, .svg" style="display:none;">
-            <mat-spinner *ngIf="processingLoadPicture" class="addPicture__spinner" [diameter]="24"></mat-spinner>
-            <button mat-mini-fab color="primary" *ngIf="!processingLoadPicture" type="button" aria-label="add"
-              (click)="inputPictureDirective.click()" [disabled]="processingLoadPicture">
-              <mat-icon *ngIf="!processingLoadPicture && !productForm.get('picture').dirty">add</mat-icon>
-              <mat-icon *ngIf="!processingLoadPicture && productForm.get('picture').dirty">redo</mat-icon>
-            </button>
+          <div [ngClass]="{'display-none': canvasVisible}">
+            <div class="pictureForm" fxLayoutAlign="center center">
+              <img class="pictureForm__picture" *ngIf="productForm.get('picture').value"
+                src="{{ productPicture.link + '/' + productForm.get('picture').value}}" alt="Picture">
+              <img class="pictureForm__picture" *ngIf="!productForm.get('picture').value"
+                src="{{ productPicture.link + '/' + environment.defaults.productPicture}}" alt="Picture">
+              <input #inputPictureDirective type="file" (change)="addPicture($event)"
+                accept=".jpg, .jpe, .jpeg, .bmp, .webp, .png, .gif, .svg" style="display:none;">
+              <!-- <mat-spinner *ngIf="processingLoadPicture" class="addPicture__spinner" [diameter]="24"></mat-spinner> -->
+              <button mat-mini-fab color="primary" *ngIf="!processingLoadPicture && productForm.get('picture').value === 'default_product'" type="button" aria-label="add"
+                (click)="inputPictureDirective.click()" [disabled]="processingLoadPicture">
+                <mat-icon>add</mat-icon>
+                <!-- <mat-icon *ngIf="!processingLoadPicture && productForm.get('picture').dirty">redo</mat-icon> -->
+              </button>
+            </div>
+          </div>
+
+
+          <div [ngClass]="{'display-none': !canvasVisible}" class="canvas-wrapper">
+            <canvas #fabricCanvas> </canvas>
+          </div>
+
+        </div>
+        <div class="progress-bar" fxFlex="100">
+          <mat-progress-bar *ngIf="processingLoadPicture" mode="indeterminate"></mat-progress-bar>
+        </div>
+        <div class="cell" fxFlex="100">
+          <div class="container-v">
+            <div class="row">
+              <div class="cell" fxFlex="50" fxLayoutAlign="end">
+                <button mat-raised-button color="primary" type="button" aria-label="upload" (click)="uploadPicture()"
+                  [disabled]="processingLoadPicture || !canvasVisible">
+                  upload
+                </button>
+              </div>
+              <div class="cell" fxFlex="50" fxLayoutAlign="start">
+                <button mat-raised-button color="primary" type="button" aria-label="upload" (click)="resetCanvasSize()"
+                  [disabled]="processingLoadPicture">
+                  reset
+                </button>
+              </div>
+            </div>
           </div>
         </div>
+
+
         <div class="cell" fxFlex="100">
           <div class="container-v">
             <div class="row">

@@ -30,6 +30,8 @@ export function productFormReducer(state = initialState, action: ProductFormActi
       return { ...state, ...initialState };
     case ProductFormActionTypes.ResetProductForms:
       return { ...state, ...initialState };
+    case ProductFormActionTypes.ResetProductFormsPictureField:
+      return { ...state, picture: initialState.picture };
     case ProductFormActionTypes.AddProductForms:
       return { ...state, ...action.payload };
     default:
