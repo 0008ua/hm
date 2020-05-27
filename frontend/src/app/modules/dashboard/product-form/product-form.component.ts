@@ -75,7 +75,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
-    this.canvas = new fabric.Canvas(this.canvasEl.nativeElement, this.initialCanvasSize);
+    this.canvas = new fabric.Canvas(this.canvasEl.nativeElement, this.initialCanvasSize, { noScaleCache: true});
 
     this.objectMoving$ = new ReplaySubject(1);
     this.objectScaling$ = new ReplaySubject(1);
@@ -172,7 +172,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
           }
         }
         // this.canvas.renderAll();
-        this.canvas.requestRenderAll();
+        // this.canvas.requestRenderAll();
       });
 
     this.objectMoving$
@@ -211,7 +211,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
           e.target.setCoords();
         }
 
-        this.canvas.requestRenderAll();
+        // this.canvas.requestRenderAll();
       });
 
     // fabric.Image.fromURL('./assets/cell.png',
@@ -449,8 +449,8 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
             this.canvas.setActiveObject(this.cropRect);
             this.canvas.on({
               'object:moving': (e) => this.objectMoving$.next(e),
-              'object:moved': (e) => this.objectMoving$.next(e),
-              'object:object:scaled': (e) => this.objectScaling$.next(e),
+              'object:moved': (e) => this.canvas.requestRenderAll(),
+              'object:object:scaled': (e) => this.canvas.requestRenderAll(),
               'object:scaling': (e) => this.objectScaling$.next(e),
               // 'object:rotating': (e) => this.mouseMoving$.next(e),
             });
@@ -517,15 +517,13 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
       height: this.initialCanvasSize.height + 'px',
     }, { cssOnly: true });
 
-    const cropRectOld = this.cropRect.getBoundingRect();
+    this.image
+      .set('left', -this.cropRect.left)
+      .set('top', -this.cropRect.top)
+      .setCoords();
 
     this.canvas.remove(this.cropRect);
-
-    this.image
-      .set('left', -cropRectOld.left)
-      .set('top', -cropRectOld.top)
-      .setCoords();
-    this.canvas.requestRenderAll();
+    this.canvas.renderAll();
 
     this.canvasEl.nativeElement.toBlob((blob) => {
       const file = new File([blob], 'img.png', { type: 'image/png' });
@@ -534,6 +532,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
         this.matSnackBar.open(error, '', { duration: 2000 });
         this.processingLoadPicture = false;
       } else {
+
         this.sharedService.uploadPicture(file, 'product', [
           { width: 1100, height: 825, crop: 'fill', fetch_format: 'auto' }, // popup - lg, xl
           { width: 760, height: 570, crop: 'fill', fetch_format: 'auto' }, // popp up - sm, md

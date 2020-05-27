@@ -13,8 +13,9 @@
               <input #inputPictureDirective type="file" (change)="addPicture($event)"
                 accept=".jpg, .jpe, .jpeg, .bmp, .webp, .png, .gif, .svg" style="display:none;">
               <!-- <mat-spinner *ngIf="processingLoadPicture" class="addPicture__spinner" [diameter]="24"></mat-spinner> -->
-              <button mat-mini-fab color="primary" *ngIf="!processingLoadPicture && productForm.get('picture').value === 'default_product'" type="button" aria-label="add"
-                (click)="inputPictureDirective.click()" [disabled]="processingLoadPicture">
+              <button mat-mini-fab color="primary"
+                *ngIf="!processingLoadPicture && productForm.get('picture').value === 'default_product'" type="button"
+                aria-label="add" (click)="inputPictureDirective.click()" [disabled]="processingLoadPicture">
                 <mat-icon>add</mat-icon>
                 <!-- <mat-icon *ngIf="!processingLoadPicture && productForm.get('picture').dirty">redo</mat-icon> -->
               </button>
