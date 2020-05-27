@@ -211,7 +211,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
           e.target.setCoords();
         }
 
-        this.canvas.renderAll();
+        this.canvas.requestRenderAll();
       });
 
     // fabric.Image.fromURL('./assets/cell.png',
@@ -525,7 +525,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
       .set('left', -cropRectOld.left)
       .set('top', -cropRectOld.top)
       .setCoords();
-    this.canvas.renderAll();
+    this.canvas.requestRenderAll();
 
     this.canvasEl.nativeElement.toBlob((blob) => {
       const file = new File([blob], 'img.png', { type: 'image/png' });
