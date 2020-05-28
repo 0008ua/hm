@@ -75,7 +75,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
-    this.canvas = new fabric.Canvas(this.canvasEl.nativeElement, this.initialCanvasSize, { noScaleCache: true});
+    this.canvas = new fabric.Canvas(this.canvasEl.nativeElement, this.initialCanvasSize);
 
     this.objectMoving$ = new ReplaySubject(1);
     this.objectScaling$ = new ReplaySubject(1);
@@ -449,8 +449,14 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
             this.canvas.setActiveObject(this.cropRect);
             this.canvas.on({
               'object:moving': (e) => this.objectMoving$.next(e),
-              'object:moved': (e) => this.canvas.requestRenderAll(),
-              'object:object:scaled': (e) => this.canvas.requestRenderAll(),
+              'object:moved': (e) => {
+                this.canvas.requestRenderAll();
+                this.cropRect.setCoords();
+              },
+              'object:object:scaled': (e) => {
+                this.canvas.requestRenderAll();
+                this.cropRect.setCoords();
+              },
               'object:scaling': (e) => this.objectScaling$.next(e),
               // 'object:rotating': (e) => this.mouseMoving$.next(e),
             });
