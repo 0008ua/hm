@@ -1,0 +1,104 @@
+{
+  "configVersion": 1,
+  "timestamp": 1590664900134,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/5-es2015.da6be055c1fd57d71a4c.js",
+        "/5-es5.da6be055c1fd57d71a4c.js",
+        "/6-es2015.dedbcda34990ec5735a3.js",
+        "/6-es5.dedbcda34990ec5735a3.js",
+        "/7-es2015.dfd69abc3a00955bc622.js",
+        "/7-es5.dfd69abc3a00955bc622.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main-es2015.a32478a0a3f99dfa21a0.js",
+        "/main-es5.a32478a0a3f99dfa21a0.js",
+        "/manifest.webmanifest",
+        "/polyfills-es2015.5b10b8fd823b6392f1fd.js",
+        "/polyfills-es5.8e50a9832860f7cf804a.js",
+        "/runtime-es2015.5088ef02aa03ae7846d2.js",
+        "/runtime-es5.5088ef02aa03ae7846d2.js",
+        "/styles.98bc1ec4bfd83e6d9efb.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/cell.png",
+        "/assets/i18n/en.json",
+        "/assets/i18n/uk.json",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/images/hmade_logo_dark.svg",
+        "/assets/images/hmade_logo_light.svg",
+        "/assets/images/loading.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/5-es2015.da6be055c1fd57d71a4c.js": "48b0514b8c01c50f39c36f9c6fdbec7977f53d65",
+    "/5-es5.da6be055c1fd57d71a4c.js": "4051429891fd84bde6f57983cae388f4bbc1eaff",
+    "/6-es2015.dedbcda34990ec5735a3.js": "001471e1de3f3645c9eb23686eccb719e010bbd5",
+    "/6-es5.dedbcda34990ec5735a3.js": "001471e1de3f3645c9eb23686eccb719e010bbd5",
+    "/7-es2015.dfd69abc3a00955bc622.js": "d74f8ef7434dc86b9f3917e83584580087e47fea",
+    "/7-es5.dfd69abc3a00955bc622.js": "3d62168784a2944ab68a96b3fc12bbc4135c00fb",
+    "/assets/cell.png": "58f9fab6ffdd7785afcb2faf98c9561aed8a4905",
+    "/assets/i18n/en.json": "50e8f177d61eb9de0d432cca8deefa023ca56e61",
+    "/assets/i18n/uk.json": "25a83264d152d1581043ef76e58da68703d92129",
+    "/assets/icons/icon-128x128.png": "f4add257111f856b15292518b01b1a7a3e491f9e",
+    "/assets/icons/icon-144x144.png": "1652aa9c18fc3967d2d82c438240405e8eb6a5b1",
+    "/assets/icons/icon-152x152.png": "920a38cd367caa60a2e5cf08feb153c79ef97591",
+    "/assets/icons/icon-192x192.png": "eb83a864bd30e4a692f75131db4321eddbc96f9d",
+    "/assets/icons/icon-384x384.png": "bf49d65d85724c5deef712803339b72bfc3ece63",
+    "/assets/icons/icon-512x512.png": "f83a9c2c59cd9aaf84512a432bf9d0bc121e66a5",
+    "/assets/icons/icon-72x72.png": "9baf4ca7f1de30e6f06f779c79b08835d0634fe2",
+    "/assets/icons/icon-96x96.png": "f5513f8cec37c41204b0e52fe7558de9fbac7d46",
+    "/assets/images/hmade_logo_dark.svg": "3d8cdad6d5a2a9461055c5ca618d2e8b8b197b2c",
+    "/assets/images/hmade_logo_light.svg": "41855ebb46f02b658a3ff27e919f57973d4928a4",
+    "/assets/images/loading.svg": "e515b13cc79c383c3fe0594e593cc24b669ca81c",
+    "/favicon.ico": "3581640704ffb32dca6a10acca86bcca2471514a",
+    "/index.html": "301f26647ad8ad471e5abd895ca683390e522299",
+    "/main-es2015.a32478a0a3f99dfa21a0.js": "f25d366b95983fcb9f4f0b1d44714e6c0e812c71",
+    "/main-es5.a32478a0a3f99dfa21a0.js": "b35d3d74e32141f5d1e7a057ab7be9e6393b023f",
+    "/manifest.webmanifest": "620922b1f6ffec266ca85a94052385bbe13180e0",
+    "/polyfills-es2015.5b10b8fd823b6392f1fd.js": "9abfe15f17820a646e3d51c420908d9f8f7b69b8",
+    "/polyfills-es5.8e50a9832860f7cf804a.js": "29c3227e54cf420fa789aa877c2e4194ffd959c7",
+    "/runtime-es2015.5088ef02aa03ae7846d2.js": "69409d42e7bd030db527275ffc811956ce588cd6",
+    "/runtime-es5.5088ef02aa03ae7846d2.js": "d867b38aac7a8f07f1b9e950b4edd2d4b20f9140",
+    "/styles.98bc1ec4bfd83e6d9efb.css": "2d6f5c1a429d26667c906b466c6b580f39515624"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
