@@ -398,10 +398,6 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                 height: oImg.height,
               }, { backstoreOnly: true });
 
-              fabric.Object.prototype.transparentCorners = false;
-              fabric.Object.prototype.cornerColor = 'blue';
-              fabric.Object.prototype.cornerStyle = 'circle';
-
               if (imgRatio >= 1) {
                 // portrait
                 this.cropRect = new fabric.Rect({
@@ -450,12 +446,12 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
             this.canvas.on({
               'object:moving': (e) => this.objectMoving$.next(e),
               'object:moved': (e) => {
-                this.canvas.requestRenderAll();
                 this.cropRect.setCoords();
+                this.canvas.requestRenderAll();
               },
               'object:object:scaled': (e) => {
-                this.canvas.requestRenderAll();
                 this.cropRect.setCoords();
+                this.canvas.requestRenderAll();
               },
               'object:scaling': (e) => this.objectScaling$.next(e),
               // 'object:rotating': (e) => this.mouseMoving$.next(e),
