@@ -445,4 +445,14 @@ mat-chip span {
   &_active {
     color: mat-color($accent);
   }
+
+
+
 }
+
+  .h1 {
+    color: mat-color($primary);
+    @include mat-typography-level-to-styles($config, headline);
+    padding: 0;
+    margin: 0;
+  }

@@ -26,6 +26,7 @@ export class ProductComponent implements OnInit {
   screenStore: ScreenState;
   currentCategory: string;
   topProgressBarActive = true;
+  mainPage = false;
 
   prevVal: any;
   constructor(
@@ -40,7 +41,10 @@ export class ProductComponent implements OnInit {
       .subscribe(paramMap => {
         this.currentCategory = paramMap.get('currentCategory');
         if (this.currentCategory === 'all') {
+          this.mainPage = true;
           this.currentCategory = 'products';
+        } else {
+          this.mainPage = false;
         }
         this.store.dispatch(new LoadAppNav({ currentCategory: this.currentCategory }));
         this.store.dispatch(new LoadingProducts({ loading: true }));

@@ -18,5 +18,10 @@
       "length": "Length should be from {{minLength}} to {{maxLength}} characters",
       "required": "Please input "
     }
+  },
+  "headings": {
+    "mainPage": "Welcome to workshop of creativity!",
+    "feedback": "leave a message"
+
   }
 }

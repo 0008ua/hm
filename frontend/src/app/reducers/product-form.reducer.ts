@@ -8,6 +8,7 @@ export interface ProductFormState {
   parent: string;
   _id: string;
   name: string;
+  description: string;
   picture: string;
   display: boolean;
 }
@@ -16,6 +17,7 @@ export const initialState: ProductFormState = {
   parent: 'products',
   _id: '',
   name: '',
+  description: '',
   picture: environment.defaults.productPicture,
   display: true,
 };

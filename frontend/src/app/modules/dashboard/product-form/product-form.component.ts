@@ -226,6 +226,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
       parents: new FormArray([this.initParents()]),
       _id: new FormControl('', [Validators.required]),
       name: new FormControl(''),
+      description: new FormControl(''),
       picture: new FormControl('', [Validators.required]),
       display: new FormControl('', [Validators.required]),
     });
@@ -346,8 +347,8 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
       );
   }
 
-  clearNameField() {
-    this.productForm.get('name').setValue('');
+  clearField(fieldName: string) {
+    this.productForm.get(fieldName).setValue('');
   }
 
   // choose file event
@@ -587,9 +588,11 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
       parent: (this.productForm.get('parents') as FormArray).at((this.productForm.get('parents') as FormArray).length - 1).value,
       _id: this.productForm.get('_id').value,
       name: this.productForm.get('name').value,
+      description: this.productForm.get('description').value,
       picture: this.productForm.get('picture').value,
       display: this.productForm.get('display').value,
     };
+    console.log('product', product);
     this.productService.upsertProduct(product)
       .subscribe(
         result => {

@@ -1,6 +1,6 @@
 <div *ngIf="product" class="product" fxLayout="column">
   <img class="product__picture" fxFlex (click)="openDialog()"
-  [src]="productPicture.link + '/' + product.picture" alt="product picture">
+  [src]="productPicture.link + '/' + product.picture" [alt]="product.description || 'product picture'">
   <div *ngIf="allowTo('manager')" class="product__editor" fxLayout="row">
     <button mat-button (click)="edit()" fxFlex>Редагувати</button>
     <button mat-button (click)="deleteProduct()" fxFlex>Видалити</button>

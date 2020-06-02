@@ -23,6 +23,11 @@ const ProductSchema = new Schema({
     default: 0,
     require: true,
   },
+  description: {
+    type: String,
+    default: 'Product picture',
+    require: true,
+  },
   createdAt: {
     type: Number,
     default: Date.now,

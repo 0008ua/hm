@@ -41,6 +41,7 @@ export class ProductService {
   }
 
   upsertProduct(product: IProduct): Observable<string> {
+    console.log('product', product);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

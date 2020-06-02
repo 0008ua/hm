@@ -19,6 +19,7 @@ getProduct = (req, res, next) => {
 
 upsertProduct = (req, res, next) => {
   const product = req.body;
+  console.log('product', product);
   ProductModel.findOneAndUpdate(
       { _id: product._id },
       { $set: product },

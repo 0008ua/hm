@@ -95,9 +95,8 @@ export class AppComponent implements OnInit {
       .subscribe((result) => {
         const paramMap = result[0];
         const data = result[1];
-
         // prioryty: 1. embeded to router 2. passed as queryParams 3.default values
-        const seoTitle = data.dataTitle || paramMap.get(this.sharedService.createLangField('seoTitle'))
+        const seoTitle = data.dataTitle || paramMap.get('seoTitle')
         || environment[this.sharedService.createLangField('seoTitle')];
 
         const seoMeta = data.dataMeta || paramMap.get(this.sharedService.createLangField('seoMeta'))

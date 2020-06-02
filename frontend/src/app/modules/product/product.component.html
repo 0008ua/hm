@@ -7,6 +7,9 @@
       <div class="cell" fxFlex="100">
         <app-product-breadcrumb></app-product-breadcrumb>
       </div>
+      <div *ngIf="mainPage" class="cell" fxFlex="100" fxLayoutAlign="start">
+        <h1 class="h1">{{'headings.mainPage' | translate}}</h1>
+      </div>
       <div class="cell" fxHide.lt-md fxFlex.md="25" fxFlex.gt-md="20">
         <router-outlet></router-outlet>
       </div>

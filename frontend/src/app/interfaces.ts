@@ -25,6 +25,7 @@ export interface IProduct {
   _id: string;
   parent: string;
   picture: string;
+  description?: string;
   name?: string;
   views?: number;
   createdAt?: number;
