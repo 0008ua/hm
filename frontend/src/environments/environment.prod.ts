@@ -80,7 +80,7 @@ export const environment = {
     productPicture: 'default_product',
     userPicture: 'default_avatar',
     picturesOnPage: {
-      xs: 6,
+      xs: 2,
       sm: 6,
       md: 9,
       lg: 12,
