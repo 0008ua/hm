@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const passport = require('./server/config/passport');
 const csrf = require('csurf');
+const prerender = require('prerender-node');
+const config = require('./server/config');
 
 const { router } = require('./server/routes');
 const userRouter = require('./server/routes/userRouter');
@@ -56,6 +58,8 @@ app.use(setFrontendAuthCookie);
 //     status: '404',
 //   })),
 // );
+
+app.use(prerender.set('prerenderToken', config.get('PRERENDERER_TOKEN')));
 
 /**
  * all apis, api/404 will be handled here
