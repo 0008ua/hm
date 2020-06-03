@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { Page404Component } from './modules/shared/page404/page404.component';
 import { AuthGuard } from './services/auth.guard';
 import { FeedbackComponent } from './modules/shared/feedback/feedback.component';
+import { PrivacyComponent } from './modules/shared/privacy/privacy.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'feedback',
     component: FeedbackComponent,
+  },
+  {
+    path: 'privacy',
+    component: PrivacyComponent,
   },
   {
     path: 'products',

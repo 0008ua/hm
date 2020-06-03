@@ -4,22 +4,8 @@
       <img src="./assets/images/hmade_logo_dark.svg" height="36px" alt="logo">
     </a>
   </div>
-  <div fxFlex fxHide.lt-md="true">
-    <!-- {{environment.section.name | translate:environment.section}}
-contactTitle | section:
-    {
-      name: 'contactTitle',
-      en: 'Contacts',
-      icon: 'fas fa-home fa-2x',
-    },
+  <div fxFlex fxHide.lt-md="true"></div>
 
-      "contactTitle": "Hello {{en}}", -> Hello Contacts -->
-
-
-
-
-  </div>
-  
   <div fxShow="true" fxHide.lt-md="true" fxFlex="50" fxLayoutAlign="end center">
     <!-- <a *ngIf="allowTo('notUser')" mat-button [routerLink]="['/', 'user', 'login']"
       [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: false}">
@@ -54,7 +40,7 @@ contactTitle | section:
     </a>
     <a mat-button class="link" (click)="switchLanguage()">
       <i class="link__icon fas fa-globe fa-2x"></i>
-      <span class="link__icon-text">{{language}}</span>
+      <span class="link__icon-text">{{'language' | translate}}</span>
     </a>
   </div>
   <div fxShow="true" fxHide.gt-sm="true" fxFlex="20" fxLayoutAlign="end center">
@@ -133,9 +119,17 @@ contactTitle | section:
   </mat-sidenav-container>
 </main>
 <footer class="toolbar toolbar_footer" fxLayout="row">
-  <div class="toolbar__logo" fxLayoutAlign="start center">
+  <div class="toolbar__logo" fxFlex="50" fxLayoutAlign="start center">
     <a href="">
       <img src="./assets/images/hmade_logo_dark.svg" height="36px" alt="logo">
+    </a>
+  </div>
+  <div fxFlex="50" fxLayoutAlign="end center">
+
+    <a mat-button class="link" [routerLink]="['/', 'privacy']" [routerLinkActive]="['link_active']"
+      [routerLinkActiveOptions]="{exact: false}">
+      <!-- <i class="link__icon far fa-envelope"></i> -->
+      <span class="link__icon-text">{{'headings.privacy' | translate}}</span>
     </a>
   </div>
 </footer>

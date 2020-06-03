@@ -19,7 +19,8 @@ html {
 }
 
 body,
-p {
+.h1, .h2, .h3, .h4, .h5, .h6,
+.p {
   padding: 0;
   margin: 0;
 }
@@ -445,14 +446,28 @@ mat-chip span {
   &_active {
     color: mat-color($accent);
   }
-
-
-
 }
 
-  .h1 {
-    color: mat-color($primary);
-    @include mat-typography-level-to-styles($config, headline);
-    padding: 0;
-    margin: 0;
-  }
+// texting
+
+
+
+h1 {
+  color: mat-color($primary);
+}
+
+.h1 {
+  @include mat-typography-level-to-styles($config, headline);
+}
+
+.h2 {
+  @include mat-typography-level-to-styles($config, title);
+}
+
+.h3 {
+  @include mat-typography-level-to-styles($config, subheading-2);
+}
+
+.text-justify {
+  text-align: justify;
+}

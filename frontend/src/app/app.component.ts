@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, Inject } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
+
 import { UserService } from './services/user.service';
 import { IUser, PictureTypes } from './interfaces';
 import { Store } from '@ngrx/store';
@@ -9,7 +12,7 @@ import { LoadScreens } from './actions/screen.actions';
 import { ScreenState } from './reducers/screen.reducer';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { Title, Meta } from '@angular/platform-browser';
+
 import { combineLatest } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -24,11 +27,13 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   user: IUser;
   link: any;
   productsUrl: boolean;
   environment = environment;
   language = 'uk';
+
 
   constructor(
     private userService: UserService,
@@ -39,6 +44,8 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private metaService: Meta,
     private translate: TranslateService,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
   ) {
     // static translation initialization
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -95,6 +102,9 @@ export class AppComponent implements OnInit {
       .subscribe((result) => {
         const paramMap = result[0];
         const data = result[1];
+        const currentLanguage = result[2];
+        this.renderer.setAttribute(document.querySelector('html'), 'lang', currentLanguage);
+
         // prioryty: 1. embeded to router 2. passed as queryParams 3.default values
         const seoTitle = data.dataTitle || paramMap.get('seoTitle')
         || environment[this.sharedService.createLangField('seoTitle')];

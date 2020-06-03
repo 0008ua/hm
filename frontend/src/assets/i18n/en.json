@@ -1,4 +1,5 @@
 {
+  "language": "Українська",
   "feedback": "Feedback",
   "dashboard": "Dashboard",
   "signin": "Sign in",
@@ -21,7 +22,7 @@
   },
   "headings": {
     "mainPage": "Welcome to workshop of creativity!",
-    "feedback": "leave a message"
-
+    "feedback": "leave a message",
+    "privacy": "Privacy"
   }
 }

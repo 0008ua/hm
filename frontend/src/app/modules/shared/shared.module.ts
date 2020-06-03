@@ -9,10 +9,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 
 @NgModule({
-  declarations: [Page404Component, ModalComponent, ModalConfirmComponent, FeedbackComponent],
+  declarations: [
+    Page404Component,
+    ModalComponent,
+    ModalConfirmComponent,
+    FeedbackComponent,
+    PrivacyComponent,
+  ],
   imports: [
     CommonModule,
     AppMaterialModule,
@@ -25,6 +32,7 @@ import { RecaptchaFormsModule } from 'ng-recaptcha';
   ],
   exports: [
     Page404Component,
+    // PrivacyComponent,
   ]
 })
 export class SharedModule { }
