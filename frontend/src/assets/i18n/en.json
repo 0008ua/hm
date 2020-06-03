@@ -6,6 +6,7 @@
   "logout": "Logout",
   "popular": "Popular",
   "last": "Last",
+  "homePage": "Back the Home page",
   "feedbackForm": {
     "message": "Message",
     "name": "Your name",
@@ -18,7 +19,8 @@
     "form": {
       "length": "Length should be from {{minLength}} to {{maxLength}} characters",
       "required": "Please input "
-    }
+    },
+    "notFound": "Page not found - 404"
   },
   "headings": {
     "mainPage": "Welcome to workshop of creativity!",
