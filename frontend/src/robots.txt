@@ -1,0 +1,2 @@
+Sitemap: https://hmade.work/sitemap.xml
+User-agent:*

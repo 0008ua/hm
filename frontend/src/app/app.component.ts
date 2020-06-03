@@ -50,9 +50,12 @@ export class AppComponent implements OnInit {
     // static translation initialization
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('uk');
+
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    const browserLang = translate.getBrowserLang();
-    this.language = browserLang.match(/uk|ru/) ? 'uk' : 'en';
+    this.language = 'uk';
+    // for automatic lang detection
+    // const browserLang = translate.getBrowserLang();
+    // this.language = browserLang.match(/uk|ru/) ? 'uk' : 'en';
     translate.use(this.language);
 
     // set to store static translation language
@@ -72,6 +75,7 @@ export class AppComponent implements OnInit {
     const routerEvents$ = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
+
         if (event.url.split('/')[1] === 'products' || event.url.split('/')[1] === '') {
           this.productsUrl = true;
         } else {
@@ -103,14 +107,15 @@ export class AppComponent implements OnInit {
         const paramMap = result[0];
         const data = result[1];
         const currentLanguage = result[2];
+
         this.renderer.setAttribute(document.querySelector('html'), 'lang', currentLanguage);
 
         // prioryty: 1. embeded to router 2. passed as queryParams 3.default values
         const seoTitle = data.dataTitle || paramMap.get('seoTitle')
-        || environment[this.sharedService.createLangField('seoTitle')];
+          || environment[this.sharedService.createLangField('seoTitle')];
 
         const seoMeta = data.dataMeta || paramMap.get(this.sharedService.createLangField('seoMeta'))
-        || environment[this.sharedService.createLangField('seoMeta')];
+          || environment[this.sharedService.createLangField('seoMeta')];
 
         this.titleService.setTitle(seoTitle);
         const tag = { name: 'description', content: seoMeta };
