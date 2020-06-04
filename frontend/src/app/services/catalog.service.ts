@@ -12,6 +12,18 @@ export class CatalogService {
     private http: HttpClient,
   ) { }
 
+  checkCategoryExists(_id: string): Observable<{ exists: boolean }> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.http.get<{ exists: boolean }>(
+      'api/catalog/check-category-exists/' + _id,
+      httpOptions
+    );
+  }
+
   getPrefix(_id: string): Observable<{ prefix: string }> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -59,7 +71,7 @@ export class CatalogService {
 
   /**
    * Get all siblings of category(_id)
-   ???* included current category
+   * ???included current category
    *
    */
   getAllSiblingsOfCurrentCategory(_id: string): Observable<ICatalog[]> {

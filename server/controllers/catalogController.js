@@ -1,6 +1,13 @@
 const CatalogModel = require('../models/catalogModel');
 const { DbError } = require('../errors');
 
+checkCategoryExists = (req, res, next) => {
+  const _id = req.params._id;
+  CatalogModel.findOne({ _id })
+      .then((result) => res.status(200).json(!!result))
+      .catch((err) => next(new DbError()));
+};
+
 getPrefix = (req, res, next) => {
   const _id = req.params._id;
   CatalogModel.findOne({ _id }, { prefix: 1, _id: 0 })
@@ -135,6 +142,7 @@ getAllSiblingsOfCurrentCategory = (req, res, next) => {
 };
 
 module.exports = {
+  checkCategoryExists,
   getPrefix,
   getChildren,
   getAllParentsInclCurrentCategory,

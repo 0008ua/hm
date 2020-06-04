@@ -10,7 +10,8 @@ import { LoadingProducts, ProductActionTypes, LoadProducts, AddProducts } from '
 import { AppState } from 'src/app/reducers/app.reducer';
 import { MediaObserver } from '@angular/flex-layout';
 import { ScreenState } from 'src/app/reducers/screen.reducer';
-import { map, distinctUntilChanged, takeLast, take } from 'rxjs/operators';
+import { map, distinctUntilChanged, takeLast, take, switchMap } from 'rxjs/operators';
+import { CatalogService } from 'src/app/services/catalog.service';
 
 
 @Component({
@@ -30,15 +31,16 @@ export class ProductComponent implements OnInit {
 
   prevVal: any;
   constructor(
-    private productService: ProductService,
+    private catalogService: CatalogService,
     private store: Store<State>,
     private router: Router,
     private route: ActivatedRoute,
     private media: MediaObserver,
 
   ) {
-    this.route.paramMap
-      .subscribe(paramMap => {
+    this.route.paramMap.pipe(
+      switchMap(paramMap => {
+        // check category exists
         this.currentCategory = paramMap.get('currentCategory');
         if (this.currentCategory === 'all') {
           this.mainPage = true;
@@ -46,16 +48,25 @@ export class ProductComponent implements OnInit {
         } else {
           this.mainPage = false;
         }
+        return this.catalogService.checkCategoryExists(this.currentCategory);
+      }))
+      .subscribe(exists => {
+        // if category doesn't exist than show main page
+        if (!exists) {
+          this.mainPage = true;
+          this.currentCategory = 'products';
+        }
         this.store.dispatch(new LoadAppNav({ currentCategory: this.currentCategory }));
         this.store.dispatch(new LoadingProducts({ loading: true }));
         this.store.dispatch(new LoadAppProducts({
           currentCategory: this.currentCategory,
           ProductsAction: LoadProducts,
-          skip: 0 }));
+          skip: 0
+        }));
       });
   }
-  ngOnInit() {
 
+  ngOnInit() {
     this.store.select(selectProductLoadingAndEntities)
       .subscribe((productsStore) => {
         this.compareChanges(productsStore.products);
