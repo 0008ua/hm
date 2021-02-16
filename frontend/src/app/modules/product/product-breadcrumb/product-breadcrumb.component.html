@@ -25,37 +25,3 @@
     </a>
   </ng-container>
 </div>
-<!-- 
-<div class="container">
-  <div class="row">
-    <div class="cell">---</div>
-  </div>
-</div>
-<div class="row" fxLayout="row">
-  <mat-chip-list class="cell" aria-label="Breadcrumb">
-    <mat-chip [routerLink]="['/products', 'all']" [routerLinkActive]="['chips_active']"
-      [routerLinkActiveOptions]="{exact: true}">
-      <span>
-        <i class="item fa fa-home"></i>
-      </span>
-    </mat-chip>
-    <ng-container *ngIf="!navLoading">
-      <mat-chip *ngFor="let breadcrumbItem of breadcrumb" class="animationAppear05s"
-        [routerLink]="['/products', breadcrumbItem._id]"
-        [queryParams]="{seoTitle: breadcrumbItem.seoTitle, seoMeta: breadcrumbItem.seoMeta}"
-        [routerLinkActive]="['chips_active']" [routerLinkActiveOptions]="{exact: true}">
-        <span>
-          <span class="item">{{breadcrumbItem.name}}</span>
-          <i class="fas fa-angle-right"></i>
-        </span>
-      </mat-chip>
-    </ng-container>
-    <ng-container *ngIf="!navLoading">
-      <mat-chip class="chips_primary animationAppear05s" *ngFor="let child of feedChildren"
-        [routerLink]="['/products', child._id]" [queryParams]="{seoTitle: child.seoTitle, seoMeta: child.seoMeta}"
-        [routerLinkActive]="['chips-active']" [routerLinkActiveOptions]="{exact: true}">
-        <span>{{child.name}}</span>
-      </mat-chip>
-    </ng-container>
-  </mat-chip-list>
-</div> -->

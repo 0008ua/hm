@@ -24,10 +24,9 @@ declare let gtag: Function;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
   user: IUser;
   link: any;
   productsUrl: boolean;
@@ -45,7 +44,7 @@ export class AppComponent implements OnInit {
     private metaService: Meta,
     private translate: TranslateService,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
   ) {
     // static translation initialization
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -65,64 +64,63 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new GetUser());
     this.store.select('auth')
-      .subscribe(store => this.user = store.user);
+        .subscribe((store) => this.user = store.user);
 
     this.store.dispatch(new LoadScreens());
 
     this.store.select('app')
-      .subscribe(store => this.language = store.lang);
+        .subscribe((store) => this.language = store.lang);
 
     const routerEvents$ = this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => {
-
-        if (event.url.split('/')[1] === 'products' || event.url.split('/')[1] === '') {
-          this.productsUrl = true;
-        } else {
-          this.productsUrl = false;
-        }
-        gtag('config', 'UA-151728431-1',
-          {
-            page_path: event.urlAfterRedirects
+        filter((event) => event instanceof NavigationEnd),
+        map((event: NavigationEnd) => {
+          if (event.url.split('/')[1] === 'products' || event.url.split('/')[1] === '') {
+            this.productsUrl = true;
+          } else {
+            this.productsUrl = false;
           }
-        );
-      }),
-      map(() => this.route),
-      map((route) => {
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
-        return route;
-      }),
-      filter(route => route.outlet === 'primary'));
+          gtag('config', 'UA-151728431-1',
+              {
+                page_path: event.urlAfterRedirects,
+              },
+          );
+        }),
+        map(() => this.route),
+        map((route) => {
+          while (route.firstChild) {
+            route = route.firstChild;
+          }
+          return route;
+        }),
+        filter((route) => route.outlet === 'primary'));
 
     const store$ = this.store.select('app');
 
-    combineLatest(
+    combineLatest([
       routerEvents$.pipe(mergeMap((route) => route.queryParamMap)), // query params
       routerEvents$.pipe(mergeMap((route) => route.data)), // routing.module data
-      store$.pipe(map(appStore => appStore.lang)) // fires on lang changed
-    )
-      .subscribe((result) => {
-        const paramMap = result[0];
-        const data = result[1];
-        const currentLanguage = result[2];
+      store$.pipe(map((appStore) => appStore.lang)), // fires on lang changed
+    ])
+        .subscribe((result) => {
+          const paramMap = result[0];
+          const data = result[1];
+          const currentLanguage = result[2];
 
-        this.renderer.setAttribute(document.querySelector('html'), 'lang', currentLanguage);
+          this.renderer.setAttribute(document.querySelector('html'), 'lang', currentLanguage);
 
-        // prioryty: 1. embeded to router 2. passed as queryParams 3.default values
-        const seoTitle = data.dataTitle || paramMap.get('seoTitle')
-          || environment[this.sharedService.createLangField('seoTitle')];
+          // prioryty: 1. embeded to router 2. passed as queryParams 3.default values
+          const seoTitle = data.dataTitle || paramMap.get('seoTitle') ||
+          environment[this.sharedService.createLangField('seoTitle')];
 
-        const seoMeta = data.dataMeta || paramMap.get(this.sharedService.createLangField('seoMeta'))
-          || environment[this.sharedService.createLangField('seoMeta')];
+          const seoMeta = data.dataMeta || paramMap.get(this.sharedService.createLangField('seoMeta')) ||
+          environment[this.sharedService.createLangField('seoMeta')];
 
-        this.titleService.setTitle(seoTitle);
-        const tag = { name: 'description', content: seoMeta };
-        const attributeSelector = 'name="description"';
-        this.metaService.removeTag(attributeSelector);
-        this.metaService.addTag(tag, false);
-      });
+          this.titleService.setTitle(seoTitle);
+          const tag = { name: 'description', content: seoMeta };
+          const attributeSelector = 'name="description"';
+          this.metaService.removeTag(attributeSelector);
+          this.metaService.addTag(tag, false);
+        });
   }
 
 
@@ -135,7 +133,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.userService.logout().subscribe(_ => this.router.navigate(['/']));
+    this.userService.logout().subscribe((_) => this.router.navigate(['/']));
   }
 
   switchLanguage(event?) {
@@ -145,5 +143,4 @@ export class AppComponent implements OnInit {
     this.language === 'en' ? this.language = 'uk' : this.language = 'en';
     this.translate.use(this.language);
   }
-
 }

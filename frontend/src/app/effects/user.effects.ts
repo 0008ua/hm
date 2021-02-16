@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of, from } from 'rxjs';
 import { map, switchMap, delay, catchError, timeout } from 'rxjs/operators';
 
@@ -14,8 +14,8 @@ import { User } from '../interfaces';
 @Injectable()
 export class UserEffects {
 
-  @Effect()
-  getUser: Observable<Action> = this.actions$.pipe(
+  
+  getUser: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(UserActionTypes.getUser),
     map((action: GetUser) => action.payload),
     switchMap(payload => this.userService.getUser().pipe(
@@ -30,7 +30,7 @@ export class UserEffects {
       })
     )),
     catchError(err => of(new AuthError()))
-  );
+  ));
 
   // @Effect()
   // login: Observable<Action> = this.actions$.pipe(

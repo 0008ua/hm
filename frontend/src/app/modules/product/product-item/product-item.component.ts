@@ -8,7 +8,7 @@ import { State } from 'src/app/reducers';
 import { ScreenState } from 'src/app/reducers/screen.reducer';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { ProductService } from 'src/app/services/product.service';
 import { AppState } from 'src/app/reducers/app.reducer';

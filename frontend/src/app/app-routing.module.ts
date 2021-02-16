@@ -9,11 +9,11 @@ import { PrivacyComponent } from './modules/shared/privacy/privacy.component';
 const routes: Routes = [
   {
     path: 'user',
-    loadChildren: './modules/user/user.module#UserModule',
+    loadChildren: () => import('./modules/user/user.module').then((m) => m.UserModule),
   },
   {
     path: 'dashboard',
-    loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
     canActivate: [AuthGuard],
     data: { auth: 'manager' },
   },
@@ -27,12 +27,12 @@ const routes: Routes = [
   },
   {
     path: 'products',
-    loadChildren: './modules/product/product.module#ProductModule',
+    loadChildren: () => import('./modules/product/product.module').then((m) => m.ProductModule),
   },
   {
     path: '',
     redirectTo: 'products',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
@@ -41,7 +41,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

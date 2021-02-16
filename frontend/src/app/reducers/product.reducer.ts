@@ -21,13 +21,11 @@ export const initialState: ProductState = adapter.getInitialState({
 });
 
 export function reducer(
-  state = initialState,
-  action: ProductActions
+    state = initialState,
+    action: ProductActions,
 ): ProductState {
-  // console.log('product reducer', action.type);
 
   switch (action.type) {
-
     case ProductActionTypes.LoadingProducts: { // listening on loading state changes
       return { ...state, loading: action.payload.loading };
     }
@@ -66,7 +64,7 @@ export function reducer(
     }
 
     case ProductActionTypes.LoadProducts: {
-      return adapter.addAll(action.payload.products, state);
+      return adapter.setAll(action.payload.products, state);
     }
 
     case ProductActionTypes.ClearProducts: {

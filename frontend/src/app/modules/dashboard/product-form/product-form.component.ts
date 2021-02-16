@@ -3,7 +3,9 @@ import { Location } from '@angular/common';
 import { FormGroup, FormArray, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { SharedService } from 'src/app/services/shared.service';
-import { MatSnackBar, MatRadioButton, MatSelectChange } from '@angular/material';
+import { MatRadioButton } from '@angular/material/radio';
+import { MatSelectChange } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from 'src/app/services/product.service';
 import { IProduct, PictureTypes, IPictureState, ICatalog } from 'src/app/interfaces';
 import { Store } from '@ngrx/store';
@@ -29,12 +31,12 @@ declare const fabric: any;
 
 export class ProductFormComponent implements OnInit, AfterViewInit {
   // for form reset
-  @ViewChild('productFormDirective', { static: false }) productFormDirective: FormGroupDirective;
+  @ViewChild('productFormDirective') productFormDirective: FormGroupDirective;
   // for reset file input after form reset
-  @ViewChild('inputPictureDirective', { static: false }) inputPictureDirective: ElementRef;
+  @ViewChild('inputPictureDirective') inputPictureDirective: ElementRef;
 
   canvas: Canvas;
-  @ViewChild('fabricCanvas', { static: false })
+  @ViewChild('fabricCanvas')
 
   public canvasEl: ElementRef;
   environment = environment;
@@ -50,7 +52,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     height: 270,
     get ratio() {
       return this.height / this.width;
-    }
+    },
   };
 
   private canvasPristine = true;
@@ -81,144 +83,142 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     this.objectScaling$ = new ReplaySubject(1);
 
     this.objectScaling$
-      .pipe(filter(e => e.target === this.cropRect))
-      .subscribe(e => {
-        e.target.scale(e.target.scaleX).setCoords();
+        .pipe(filter((e) => e.target === this.cropRect))
+        .subscribe((e) => {
+          e.target.scale(e.target.scaleX).setCoords();
 
-        if (e.target.left < 0) {
-          e.target.set('left', 0).setCoords();
-        }
+          if (e.target.left < 0) {
+            e.target.set('left', 0).setCoords();
+          }
 
-        if (e.target.top < 0) {
-          e.target.set('top', 0).setCoords();
-        }
+          if (e.target.top < 0) {
+            e.target.set('top', 0).setCoords();
+          }
 
-        if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth() &&
+          if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth() &&
           e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
           // scaling out of the right and the bottom borders
-          e.target
-            .set('width', this.canvas.getWidth() - e.target.left)
-            .set('height', this.canvas.getHeight() - e.target.top)
-            .set('scaleX', 1)
-            .set('scaleY', 1)
-            .setCoords();
-        } else if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth()) {
-          // scaling out of the right border
-          e.target
-            .set('width', this.canvas.getWidth() - e.target.left)
-            .set('scaleX', 1)
-            .set('scaleY', 1)
-            .setCoords();
-        } else if (e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
-          // scaling out of the bottom border
-          e.target
-            .set('width', (this.canvas.getHeight() - e.target.top) / this.initialCanvasSize.ratio)
-            .set('height', this.canvas.getHeight() - e.target.top)
-            .set('scaleX', 1)
-            .set('scaleY', 1)
-            .setCoords();
-        } else {
-          // scaled without crossing borders
-          e.target.setCoords();
-        }
-
-        // correction of ratio
-        if (e.target.height / e.target.width !== this.initialCanvasSize.ratio) {
-          const wRatio = this.initialCanvasSize.width / e.target.width;
-          const hRatio = this.initialCanvasSize.height / e.target.height;
-          const ratio = Math.min(wRatio, hRatio);
-
-          if (e.target.width < this.canvas.getWidth() - e.target.left) {
             e.target
-              .set('height', e.target.width * this.initialCanvasSize.ratio)
-              .set('scaleX', 1)
-              .set('scaleY', 1)
-              .setCoords();
-          } else if (e.target.height < this.canvas.getHeight() - e.target.top) {
-            e.target
-              .set('width', e.target.height / ratio)
-              .set('scaleX', 1)
-              .set('scaleY', 1)
-              .setCoords();
-          } else if (this.initialCanvasSize.ratio < 1) {
-            // landscape
-            const cropRectOld = e.target.getBoundingRect();
-            if ((this.canvas.getWidth() - e.target.left) * this.initialCanvasSize.ratio <= this.canvas.getHeight() - e.target.top) {
-              e.target
                 .set('width', this.canvas.getWidth() - e.target.left)
-                .set('height', (this.canvas.getWidth() - e.target.left) * this.initialCanvasSize.ratio)
+                .set('height', this.canvas.getHeight() - e.target.top)
                 .set('scaleX', 1)
                 .set('scaleY', 1)
                 .setCoords();
-            } else {
-              e.target
-                .set('width', (this.canvas.getHeight() - cropRectOld.top) / this.initialCanvasSize.ratio)
-                .set('height', this.canvas.getHeight() - cropRectOld.top)
-                .set('scaleX', 1)
-                .set('scaleY', 1)
-                .setCoords();
-            }
-          } else if (this.initialCanvasSize.ratio >= 1) {
-            // portrait
+          } else if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth()) {
+          // scaling out of the right border
             e.target
-              .set('width', (this.canvas.getHeight() - e.target.top) / this.initialCanvasSize.ratio)
-              .set('height', this.canvas.getHeight() - e.target.top)
-              .set('scaleX', 1)
-              .set('scaleY', 1)
-              .setCoords();
+                .set('width', this.canvas.getWidth() - e.target.left)
+                .set('scaleX', 1)
+                .set('scaleY', 1)
+                .setCoords();
+          } else if (e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
+          // scaling out of the bottom border
+            e.target
+                .set('width', (this.canvas.getHeight() - e.target.top) / this.initialCanvasSize.ratio)
+                .set('height', this.canvas.getHeight() - e.target.top)
+                .set('scaleX', 1)
+                .set('scaleY', 1)
+                .setCoords();
           } else {
-            // scaled without crossing borders
+          // scaled without crossing borders
             e.target.setCoords();
           }
-        }
+
+          // correction of ratio
+          if (e.target.height / e.target.width !== this.initialCanvasSize.ratio) {
+            const wRatio = this.initialCanvasSize.width / e.target.width;
+            const hRatio = this.initialCanvasSize.height / e.target.height;
+            const ratio = Math.min(wRatio, hRatio);
+
+            if (e.target.width < this.canvas.getWidth() - e.target.left) {
+              e.target
+                  .set('height', e.target.width * this.initialCanvasSize.ratio)
+                  .set('scaleX', 1)
+                  .set('scaleY', 1)
+                  .setCoords();
+            } else if (e.target.height < this.canvas.getHeight() - e.target.top) {
+              e.target
+                  .set('width', e.target.height / ratio)
+                  .set('scaleX', 1)
+                  .set('scaleY', 1)
+                  .setCoords();
+            } else if (this.initialCanvasSize.ratio < 1) {
+            // landscape
+              const cropRectOld = e.target.getBoundingRect();
+              if ((this.canvas.getWidth() - e.target.left) * this.initialCanvasSize.ratio <= this.canvas.getHeight() - e.target.top) {
+                e.target
+                    .set('width', this.canvas.getWidth() - e.target.left)
+                    .set('height', (this.canvas.getWidth() - e.target.left) * this.initialCanvasSize.ratio)
+                    .set('scaleX', 1)
+                    .set('scaleY', 1)
+                    .setCoords();
+              } else {
+                e.target
+                    .set('width', (this.canvas.getHeight() - cropRectOld.top) / this.initialCanvasSize.ratio)
+                    .set('height', this.canvas.getHeight() - cropRectOld.top)
+                    .set('scaleX', 1)
+                    .set('scaleY', 1)
+                    .setCoords();
+              }
+            } else if (this.initialCanvasSize.ratio >= 1) {
+            // portrait
+              e.target
+                  .set('width', (this.canvas.getHeight() - e.target.top) / this.initialCanvasSize.ratio)
+                  .set('height', this.canvas.getHeight() - e.target.top)
+                  .set('scaleX', 1)
+                  .set('scaleY', 1)
+                  .setCoords();
+            } else {
+            // scaled without crossing borders
+              e.target.setCoords();
+            }
+          }
         // this.canvas.renderAll();
         // this.canvas.requestRenderAll();
-      });
+        });
 
     this.objectMoving$
-      .pipe(filter(e => e.target === this.cropRect))
-      .subscribe(e => {
+        .pipe(filter((e) => e.target === this.cropRect))
+        .subscribe((e) => {
+          const cropRectOld = e.target.getBoundingRect();
 
-        const cropRectOld = e.target.getBoundingRect();
+          if (e.target.left < 0) {
+            e.target.set('left', 0).setCoords();
+          }
 
-        if (e.target.left < 0) {
-          e.target.set('left', 0).setCoords();
-        }
+          if (e.target.top < 0) {
+            e.target.set('top', 0).setCoords();
+          }
 
-        if (e.target.top < 0) {
-          e.target.set('top', 0).setCoords();
-        }
-
-        if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth() &&
+          if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth() &&
           e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
           // moving out of the right and the bottom borders
-          e.target
-            .set('left', cropRectOld.left)
-            .set('top', cropRectOld.top)
-            .setCoords();
-        } else if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth()) {
+            e.target
+                .set('left', cropRectOld.left)
+                .set('top', cropRectOld.top)
+                .setCoords();
+          } else if (e.target.left + e.target.width * e.target.scaleX > this.canvas.getWidth()) {
           // moving out of the right border
-          e.target
-            .set('left', cropRectOld.left)
-            .setCoords();
-        } else if (e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
+            e.target
+                .set('left', cropRectOld.left)
+                .setCoords();
+          } else if (e.target.top + e.target.height * e.target.scaleY > this.canvas.getHeight()) {
           // moving out of the bottom border
-          e.target
-            .set('top', cropRectOld.top)
-            .setCoords();
-        } else {
+            e.target
+                .set('top', cropRectOld.top)
+                .setCoords();
+          } else {
           // object wasn't moved out of the border
-          e.target.setCoords();
-        }
+            e.target.setCoords();
+          }
 
         // this.canvas.requestRenderAll();
-      });
+        });
 
     // fabric.Image.fromURL('./assets/cell.png',
     //   (oImg: fabric.Image) => {
     //     this.canvas.add(oImg);
     //   });
-
   }
 
   ngOnInit() {
@@ -232,23 +232,23 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     });
 
     this.store.select('productForm')
-      .subscribe((store: ProductFormState) => {
-        this.state = store;
-        this.initWithState();
-      });
+        .subscribe((store: ProductFormState) => {
+          this.state = store;
+          this.initWithState();
+        });
 
     this.route.queryParamMap.subscribe(
-      paramMap => {
-        const _id = paramMap.get('_id');
-        const parent = paramMap.get('parent');
-        this.store.dispatch(new LoadProductForms({ _id, parent, product: null }));
-      }
+        (paramMap) => {
+          const _id = paramMap.get('_id');
+          const parent = paramMap.get('parent');
+          this.store.dispatch(new LoadProductForms({ _id, parent, product: null }));
+        },
     );
 
     this.store.select('screen')
-      .subscribe((store: ScreenState) => {
-        this.productPicture = store.pictureLink[PictureTypes.ProductPicture];
-      });
+        .subscribe((store: ScreenState) => {
+          this.productPicture = store.pictureLink[PictureTypes.ProductPicture];
+        });
   }
 
   initWithState() {
@@ -264,7 +264,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     }
 
     this.productForm.patchValue(
-      this.state
+        this.state,
     );
     this.spinUpParents(this.state.parent || 'products');
   }
@@ -272,41 +272,40 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
   spinUpParents(currentParent: string) {
     if (currentParent === 'products') {
       this.catalogService.getChildren('products')
-        .subscribe(
-          (result: ICatalog[]) => this.children[0] = result,
-          err => console.log('помилка завантаження категорій', err.error.message)
-        );
+          .subscribe(
+              (result: ICatalog[]) => this.children[0] = result,
+              (err) => console.log('помилка завантаження категорій', err.error.message),
+          );
     } else {
       this.catalogService.getAllParentsInclCurrentCategory(currentParent, 'products')
-        .subscribe(allParents => {
-          allParents.forEach((parent, level) => {
-            const parentId = parent._id;
+          .subscribe((allParents) => {
+            allParents.forEach((parent, level) => {
+              const parentId = parent._id;
 
-            // don't need children of last element
-            if (level + 1 < allParents.length) {
-
-              if (level !== 0) {
+              // don't need children of last element
+              if (level + 1 < allParents.length) {
+                if (level !== 0) {
                 // control[0] of FormArray was created at init step
-                this.addParents();
-                // 0 element of allParents[] is root,
-                // 1 element of allParents[] is control[0] value
+                  this.addParents();
+                  // 0 element of allParents[] is root,
+                  // 1 element of allParents[] is control[0] value
+                  (this.productForm.get('parents') as FormArray).at(level - 1).patchValue(parent._id);
+                }
+
+                this.catalogService.getChildren(parentId)
+                    .subscribe((children: ICatalog[]) => {
+                      if (children.length) {
+                        this.children[level] = children;
+                      }
+                    },
+                    (err) => console.log(err.error.message),
+                    );
+              } else {
+              // last element of allParents[] is control[last - 1] value
                 (this.productForm.get('parents') as FormArray).at(level - 1).patchValue(parent._id);
               }
-
-              this.catalogService.getChildren(parentId)
-                .subscribe((children: ICatalog[]) => {
-                  if (children.length) {
-                    this.children[level] = children;
-                  }
-                },
-                  err => console.log(err.error.message)
-                );
-            } else {
-              // last element of allParents[] is control[last - 1] value
-              (this.productForm.get('parents') as FormArray).at(level - 1).patchValue(parent._id);
-            }
+            });
           });
-        });
     }
   }
 
@@ -333,18 +332,18 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     }
 
     this.catalogService.getChildren(parentId)
-      .subscribe((children: ICatalog[]) => {
-        if (children.length) {
-          this.children[level + 1] = children;
-          this.addParents();
-          this.productForm.get('_id').patchValue('');
-        } else {
-          this.productService.generateSku(parentId)
-            .subscribe(sku => this.productForm.get('_id').patchValue(sku));
-        }
-      },
-        err => console.log(err.error.message)
-      );
+        .subscribe((children: ICatalog[]) => {
+          if (children.length) {
+            this.children[level + 1] = children;
+            this.addParents();
+            this.productForm.get('_id').patchValue('');
+          } else {
+            this.productService.generateSku(parentId)
+                .subscribe((sku) => this.productForm.get('_id').patchValue(sku));
+          }
+        },
+        (err) => console.log(err.error.message),
+        );
   }
 
   clearField(fieldName: string) {
@@ -353,7 +352,6 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
 
   // choose file event
   addPicture(event: Event) {
-
     if (!this.canvasPristine) {
       this.resetCanvasSize();
     }
@@ -371,7 +369,6 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
       this.matSnackBar.open(error, '', { duration: 2000 });
       this.processingLoadPicture = false;
     } else {
-
       const fr = new FileReader();
 
       /**
@@ -383,81 +380,78 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
         const src = fr.result as string;
 
         fabric.Image.fromURL(src,
-          (oImg: fabric.Image) => {
-            if (this.canvasPristine) {
-              this.canvasPristine = false;
+            (oImg: fabric.Image) => {
+              if (this.canvasPristine) {
+                this.canvasPristine = false;
 
-              const imgRatio = oImg.height / oImg.width;
+                const imgRatio = oImg.height / oImg.width;
 
-              this.canvas.setDimensions({
-                width: this.initialCanvasSize.width + 'px',
-                height: this.initialCanvasSize.width * imgRatio + 'px'
-              }, { cssOnly: true });
+                this.canvas.setDimensions({
+                  width: this.initialCanvasSize.width + 'px',
+                  height: this.initialCanvasSize.width * imgRatio + 'px',
+                }, { cssOnly: true });
 
-              this.canvas.setDimensions({
-                width: oImg.width,
-                height: oImg.height,
-              }, { backstoreOnly: true });
-
-              if (imgRatio >= 1) {
-                // portrait
-                this.cropRect = new fabric.Rect({
+                this.canvas.setDimensions({
                   width: oImg.width,
-                  height: oImg.width * this.initialCanvasSize.ratio,
-                  left: 0,
-                  top: (oImg.height - oImg.width * this.initialCanvasSize.ratio) / 2,
-                  // hasControls: false,
-                  fill: 'white',
-                  opacity: .4,
-                  strokeWidth: 0,
-                  transparentCorners: false,
-                  cornerSize: oImg.width * .03,
-                  cornerColor: 'black',
-                  cornerStyle: 'rect',
-                  lockRotation: true,
-                  hasRotatingPoint: false,
-                });
-              } else {
-                // landscape
-                this.cropRect = new fabric.Rect({
-                  width: oImg.height / this.initialCanvasSize.ratio,
                   height: oImg.height,
-                  left: (oImg.width - oImg.height / this.initialCanvasSize.ratio) / 2,
-                  top: 0,
-                  // hasControls: false,
-                  fill: 'white',
-                  opacity: .4,
-                  strokeWidth: 0,
-                  transparentCorners: false,
-                  cornerSize: oImg.height * .03,
-                  cornerColor: 'black',
-                  cornerStyle: 'rect',
-                  lockRotation: true,
-                  hasRotatingPoint: false,
-                });
-              }
+                }, { backstoreOnly: true });
 
-            }
-            oImg.set('strokeWidth', 0);
-            oImg.set('selectable', false);
-            oImg.set('hasControls', false);
-            this.image = oImg;
-            this.canvas.add(this.image, this.cropRect);
-            this.canvas.setActiveObject(this.cropRect);
-            this.canvas.on({
-              'object:moving': (e) => this.objectMoving$.next(e),
-              'object:moved': (e) => {
+                if (imgRatio >= 1) {
+                // portrait
+                  this.cropRect = new fabric.Rect({
+                    width: oImg.width,
+                    height: oImg.width * this.initialCanvasSize.ratio,
+                    left: 0,
+                    top: (oImg.height - oImg.width * this.initialCanvasSize.ratio) / 2,
+                    // hasControls: false,
+                    fill: 'white',
+                    opacity: .4,
+                    strokeWidth: 0,
+                    transparentCorners: false,
+                    cornerSize: oImg.width * .03,
+                    cornerColor: 'black',
+                    cornerStyle: 'rect',
+                    lockRotation: true,
+                    hasRotatingPoint: false,
+                  });
+                } else {
+                // landscape
+                  this.cropRect = new fabric.Rect({
+                    width: oImg.height / this.initialCanvasSize.ratio,
+                    height: oImg.height,
+                    left: (oImg.width - oImg.height / this.initialCanvasSize.ratio) / 2,
+                    top: 0,
+                    // hasControls: false,
+                    fill: 'white',
+                    opacity: .4,
+                    strokeWidth: 0,
+                    transparentCorners: false,
+                    cornerSize: oImg.height * .03,
+                    cornerColor: 'black',
+                    cornerStyle: 'rect',
+                    lockRotation: true,
+                    hasRotatingPoint: false,
+                  });
+                }
+              }
+              oImg.set('strokeWidth', 0);
+              oImg.set('selectable', false);
+              oImg.set('hasControls', false);
+              this.image = oImg;
+              this.canvas.add(this.image, this.cropRect);
+              this.canvas.setActiveObject(this.cropRect);
+              this.canvas.on('object:moving', (e) => this.objectMoving$.next(e));
+              this.canvas.on('object:moved', (e) => {
                 this.cropRect.setCoords();
                 this.canvas.requestRenderAll();
-              },
-              'object:object:scaled': (e) => {
+              });
+              this.canvas.on('object:object:scaled', (e) => {
                 this.cropRect.setCoords();
                 this.canvas.requestRenderAll();
-              },
-              'object:scaling': (e) => this.objectScaling$.next(e),
+              });
+              this.canvas.on('object:scaling', (e) => this.objectScaling$.next(e));
               // 'object:rotating': (e) => this.mouseMoving$.next(e),
-            });
-          }, { top: 0 });
+            }, { top: 0 });
 
         /** stretch to canvas size
          *
@@ -521,9 +515,9 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     }, { cssOnly: true });
 
     this.image
-      .set('left', -this.cropRect.left)
-      .set('top', -this.cropRect.top)
-      .setCoords();
+        .set('left', -this.cropRect.left)
+        .set('top', -this.cropRect.top)
+        .setCoords();
 
     this.canvas.remove(this.cropRect);
     this.canvas.renderAll();
@@ -535,7 +529,6 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
         this.matSnackBar.open(error, '', { duration: 2000 });
         this.processingLoadPicture = false;
       } else {
-
         this.sharedService.uploadPicture(file, 'product', [
           { width: 1100, height: 825, crop: 'fill', fetch_format: 'auto' }, // popup - lg, xl
           { width: 760, height: 570, crop: 'fill', fetch_format: 'auto' }, // popp up - sm, md
@@ -544,14 +537,14 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
           { width: 360, height: 270, crop: 'fill', fetch_format: 'auto' }, // lg, xl
           { width: 300, height: 225, crop: 'fill', fetch_format: 'auto' }, // md
         ])
-          .subscribe(public_id => {
-            this.productForm.get('picture').setValue(public_id);
-            this.processingLoadPicture = false;
-            this.canvasVisible = false;
-            this.productForm.get('picture').markAsDirty();
-          },
-            err => this.matSnackBar.open(err.error.message, '', { duration: 2000 })
-          );
+            .subscribe((public_id) => {
+              this.productForm.get('picture').setValue(public_id);
+              this.processingLoadPicture = false;
+              this.canvasVisible = false;
+              this.productForm.get('picture').markAsDirty();
+            },
+            (err) => this.matSnackBar.open(err.error.message, '', { duration: 2000 }),
+            );
       }
     }, { type: 'image/png' });
   }
@@ -594,17 +587,17 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     };
     console.log('product', product);
     this.productService.upsertProduct(product)
-      .subscribe(
-        result => {
-          this.resetProductForm();
-          this.matSnackBar.open('Успішно добавлено/оновлено', '', { duration: 2000 });
-          this.router.navigate(['/']);
-        },
-        err => {
-          this.store.dispatch(new LoadProductForms({ _id: null, parent: null, product }));
-          this.matSnackBar.open(err.error.message, '', { duration: 2000 });
-        }
-      );
+        .subscribe(
+            (result) => {
+              this.resetProductForm();
+              this.matSnackBar.open('Успішно добавлено/оновлено', '', { duration: 2000 });
+              this.router.navigate(['/']);
+            },
+            (err) => {
+              this.store.dispatch(new LoadProductForms({ _id: null, parent: null, product }));
+              this.matSnackBar.open(err.error.message, '', { duration: 2000 });
+            },
+        );
   }
 
   // reset to initial values

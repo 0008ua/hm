@@ -17,7 +17,7 @@ import { CatalogService } from 'src/app/services/catalog.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
   products: IProduct[] = [];
@@ -39,44 +39,44 @@ export class ProductComponent implements OnInit {
 
   ) {
     this.route.paramMap.pipe(
-      switchMap(paramMap => {
+        switchMap((paramMap) => {
         // check category exists
-        this.currentCategory = paramMap.get('currentCategory');
-        if (this.currentCategory === 'all') {
-          this.mainPage = true;
-          this.currentCategory = 'products';
-        } else {
-          this.mainPage = false;
-        }
-        return this.catalogService.checkCategoryExists(this.currentCategory);
-      }))
-      .subscribe(exists => {
+          this.currentCategory = paramMap.get('currentCategory');
+          if (this.currentCategory === 'all') {
+            this.mainPage = true;
+            this.currentCategory = 'products';
+          } else {
+            this.mainPage = false;
+          }
+          return this.catalogService.checkCategoryExists(this.currentCategory);
+        }))
+        .subscribe((exists) => {
         // if category doesn't exist than show main page
-        if (!exists) {
-          this.mainPage = true;
-          this.currentCategory = 'products';
-        }
-        this.store.dispatch(new LoadAppNav({ currentCategory: this.currentCategory }));
-        this.store.dispatch(new LoadingProducts({ loading: true }));
-        this.store.dispatch(new LoadAppProducts({
-          currentCategory: this.currentCategory,
-          ProductsAction: LoadProducts,
-          skip: 0
-        }));
-      });
+          if (!exists) {
+            this.mainPage = true;
+            this.currentCategory = 'products';
+          }
+          this.store.dispatch(new LoadAppNav({ currentCategory: this.currentCategory }));
+          this.store.dispatch(new LoadingProducts({ loading: true }));
+          this.store.dispatch(new LoadAppProducts({
+            currentCategory: this.currentCategory,
+            ProductsAction: LoadProducts,
+            skip: 0,
+          }));
+        });
   }
 
   ngOnInit() {
     this.store.select(selectProductLoadingAndEntities)
-      .subscribe((productsStore) => {
-        this.compareChanges(productsStore.products);
-        this.loading = productsStore.loading;
-      });
+        .subscribe((productsStore) => {
+          this.compareChanges(productsStore.products);
+          this.loading = productsStore.loading;
+        });
 
     this.store.select('app')
-      .subscribe((appStore) => {
-        this.appStore = appStore;
-      });
+        .subscribe((appStore) => {
+          this.appStore = appStore;
+        });
   }
 
   compareChanges(newProducts: IProduct[]) {
@@ -88,9 +88,9 @@ export class ProductComponent implements OnInit {
     }
 
     for (let i = 0; i < this.products.length; i++) {
-      if (!newProducts[i]
-        || this.products[i]._id !== newProducts[i]._id
-        || this.products[i].views !== newProducts[i].views) {
+      if (!newProducts[i] ||
+        this.products[i]._id !== newProducts[i]._id ||
+        this.products[i].views !== newProducts[i].views) {
         theSame = false;
         break;
       }

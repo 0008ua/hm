@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { ScreenActionTypes, LoadScreens, ChangedScreens } from '../actions/screen.actions';
@@ -12,8 +12,8 @@ import { LoadApp, LoadAppProductsSuccess } from '../actions/app.actions';
 @Injectable()
 export class ScreenEffects {
 
-  @Effect()
-  getScreens: Observable<Action> = this.actions$.pipe(
+  
+  getScreens: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(ScreenActionTypes.LoadScreens),
     // map((action: LoadScreens) => console.log('action', action)),
     switchMap(_ => this.sharedService.loadScreens().pipe(
@@ -22,7 +22,7 @@ export class ScreenEffects {
         new LoadAppProductsSuccess({limit: state.picturesOnPage})
       ])
     )),
-  );
+  ));
 
   constructor(
     private actions$: Actions,

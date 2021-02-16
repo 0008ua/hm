@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RedirectionAfterOauthComponent } from './redirection-after-oauth.component';
 
@@ -6,7 +6,7 @@ describe('RedirAfterOauthComponent', () => {
   let component: RedirectionAfterOauthComponent;
   let fixture: ComponentFixture<RedirectionAfterOauthComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RedirectionAfterOauthComponent ]
     })

@@ -4,7 +4,7 @@ import { FormGroup, FormGroupDirective, FormControl, Validators } from '@angular
 import { IFeedback } from 'src/app/interfaces';
 import { SharedService } from 'src/app/services/shared.service';
 import { Location } from '@angular/common';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -16,7 +16,7 @@ export class FeedbackComponent implements OnInit {
   environment = environment;
   feedbackForm: FormGroup;
   feedback: IFeedback;
-  @ViewChild('feedbackFormDirective', { static: false }) feedbackFormDirective: FormGroupDirective;
+  @ViewChild('feedbackFormDirective') feedbackFormDirective: FormGroupDirective;
   processing = false;
 
   constructor(

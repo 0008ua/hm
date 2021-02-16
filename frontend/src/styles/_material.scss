@@ -45,8 +45,8 @@ $mat-custom-blue: (
     )
 );
 
-$dark-theme: mat-dark-theme(mat-palette($mat-custom-blue), mat-palette($mat-blue), mat-palette($mat-red));
-$light-theme: mat-light-theme(mat-palette($mat-custom-blue), mat-palette($mat-light-blue), mat-palette($mat-red));
+$dark-theme: mat-dark-theme(mat-palette($mat-indigo), mat-palette($mat-teal), mat-palette($mat-red));
+$light-theme: mat-light-theme(mat-palette($mat-indigo), mat-palette($mat-teal), mat-palette($mat-red));
 
 
 $main-theme: $light-theme;
@@ -63,7 +63,7 @@ $background: map-get($main-theme, background);
     // font-family: mat-font-family($config);
     // line-height: mat-line-height($config, title);
     // font-weight: mat-font-weight($config, title);
-    
+
     // @include mat-typography-level-to-styles($config, body-1);
 
 // @function mat-typography-config(
