@@ -8,6 +8,7 @@
     "extends": [
         "google"
     ],
+
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -20,15 +21,10 @@
         "object-curly-spacing": 0,
         "require-jsdoc": 0,
         "camelcase": 0,
-        "indent": [
-            "error",
-            2
-        ],
-        "new-cap": 0,
         "max-len": [
             2,
             {
-                "code": 180,
+                "code": 120,
                 "tabWidth": 2,
                 "ignoreUrls": true
             }
