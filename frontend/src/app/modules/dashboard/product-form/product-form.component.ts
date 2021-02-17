@@ -438,7 +438,9 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
               oImg.set('selectable', false);
               oImg.set('hasControls', false);
               this.image = oImg;
-              this.canvas.add(this.image, this.cropRect);
+              this.canvas.add(this.image);
+              this.canvas.add(this.cropRect);
+              this.canvas.requestRenderAll();
               this.canvas.setActiveObject(this.cropRect);
               this.canvas.on('object:moving', (e) => this.objectMoving$.next(e));
               this.canvas.on('object:moved', (e) => {
@@ -451,32 +453,9 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
               });
               this.canvas.on('object:scaling', (e) => this.objectScaling$.next(e));
               // 'object:rotating': (e) => this.mouseMoving$.next(e),
-            }, { top: 0 });
+              console.log('objects', this.canvas.getObjects());
 
-        /** stretch to canvas size
-         *
-         */
-        // fabric.Image.fromURL(src,
-        //   (oImg: fabric.Image) => {
-        //     if (this.canvasPristine) {
-        //       this.canvasPristine = false;
-        //       this.canvas.setDimensions({
-        //         width: this.initialCanvasSize.width + 'px',
-        //         height: this.initialCanvasSize.height + 'px'
-        //       }, { cssOnly: true })
-        //       const wRatio = this.canvas.getWidth() / oImg.width;
-        //       const hRatio = this.canvas.getHeight() / oImg.height;
-        //       const ratio = Math.min(wRatio, hRatio);
-        //       const canvasRatio = this.initialCanvasSize.height / this.initialCanvasSize.width;
-        //       const imgRatio = oImg.height / oImg.width;
-        //       this.canvas.setDimensions({
-        //         width: canvasRatio < imgRatio ? oImg.width : oImg.height / canvasRatio,
-        //         height: canvasRatio < imgRatio ? oImg.width * canvasRatio : oImg.height
-        //       },
-        //         { backstoreOnly: true });
-        //     }
-        //     this.canvas.add(oImg);
-        //   }, { top: 0 });
+            }, { top: 0 });
       };
       // read file
       fr.readAsDataURL(file);
