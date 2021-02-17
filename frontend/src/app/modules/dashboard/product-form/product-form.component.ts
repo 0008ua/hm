@@ -408,12 +408,12 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                     opacity: .4,
                     strokeWidth: 0,
                     transparentCorners: false,
-                    cornerSize: oImg.width * .03,
+                    cornerSize: oImg.width * .04,
                     cornerColor: 'black',
                     cornerStyle: 'rect',
                     lockRotation: true,
                     hasRotatingPoint: false,
-                    objectCashing: false,
+                    objectCaching: true,
                   });
                 } else {
                 // landscape
@@ -427,12 +427,12 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                     opacity: .4,
                     strokeWidth: 0,
                     transparentCorners: false,
-                    cornerSize: oImg.height * .03,
+                    cornerSize: oImg.height * .04,
                     cornerColor: 'black',
                     cornerStyle: 'rect',
                     lockRotation: true,
                     hasRotatingPoint: false,
-                    objectCashing: false,
+                    objectCaching: true,
                   });
                 }
               }
@@ -457,7 +457,10 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
               // 'object:rotating': (e) => this.mouseMoving$.next(e),
               console.log('objects', this.canvas.getObjects());
 
-            }, { top: 0 });
+            }, {
+              top: 0,
+              objectCaching: true,
+            });
       };
       // read file
       fr.readAsDataURL(file);
