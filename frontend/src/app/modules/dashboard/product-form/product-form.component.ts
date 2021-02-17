@@ -413,6 +413,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                     cornerStyle: 'rect',
                     lockRotation: true,
                     hasRotatingPoint: false,
+                    objectCashing: false,
                   });
                 } else {
                 // landscape
@@ -431,6 +432,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                     cornerStyle: 'rect',
                     lockRotation: true,
                     hasRotatingPoint: false,
+                    objectCashing: false,
                   });
                 }
               }
@@ -447,7 +449,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                 this.cropRect.setCoords();
                 this.canvas.requestRenderAll();
               });
-              this.canvas.on('object:object:scaled', (e) => {
+              this.canvas.on('object:scaled', (e) => {
                 this.cropRect.setCoords();
                 this.canvas.requestRenderAll();
               });
