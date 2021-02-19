@@ -8,8 +8,10 @@
             <div class="pictureForm" fxLayoutAlign="center center">
               <img class="pictureForm__picture" *ngIf="productForm.get('picture').value"
                 src="{{ productPicture.link + '/' + productForm.get('picture').value}}" alt="Picture">
-              <img class="pictureForm__picture" *ngIf="!productForm.get('picture').value"
+              <img class="pictureForm__picture" *ngIf="!productForm.get('picture').value && !imgUrl"
                 src="{{ productPicture.link + '/' + environment.defaults.productPicture}}" alt="Picture">
+              <img class="pictureForm__picture" *ngIf="(!productForm.get('picture').value) && (imgUrl)" [src]="imgUrl"
+                alt="Picture" width="360" height="270">
               <input #inputPictureDirective type="file" (change)="addPicture($event)"
                 accept=".jpg, .jpe, .jpeg, .bmp, .webp, .png, .gif, .svg" style="display:none;">
               <!-- <mat-spinner *ngIf="processingLoadPicture" class="addPicture__spinner" [diameter]="24"></mat-spinner> -->
@@ -31,6 +33,10 @@
         <div class="progress-bar" fxFlex="100">
           <mat-progress-bar *ngIf="processingLoadPicture" mode="indeterminate"></mat-progress-bar>
         </div>
+        <!-- <div *ngIf="imgUrl">
+          <img [src]="imgUrl" width="450" height="337.5" alt="pic">
+          <img src="./assets/2.jpg" width="450" height="975" alt="pic">
+        </div> -->
         <div class="cell" fxFlex="100">
           <div class="container-v">
             <div class="row">
@@ -88,7 +94,7 @@
             </button>
           </mat-form-field>
         </div>
-        
+
         <div class="cell" fxFlex="100">
           <div class="container-v">
             <div class="row">
@@ -134,6 +140,6 @@
           </div>
         </div>
       </div>
-    </form>
+      </ form>
   </div>
 </div>

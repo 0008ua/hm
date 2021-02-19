@@ -71,6 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     CookieService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+    { provide: Window, useValue: window },
   ],
   entryComponents: [
     ModalComponent,
