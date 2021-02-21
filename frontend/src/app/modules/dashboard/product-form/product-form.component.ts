@@ -48,7 +48,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
   image: fabric.Image;
   private initialCanvasSize = {
     width: 360,
-    height: 270,
+    height: 540,
     get ratio() {
       return this.height / this.width;
     },
@@ -417,12 +417,18 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                   opacity: .4,
                   strokeWidth: 0,
                   transparentCorners: false,
-                  cornerSize: 5,
-                  cornerColor: 'black',
-                  cornerStyle: 'rect',
+                  cornerSize: 10,
+                  cornerStyle: 'circle',
                   lockRotation: true,
-                  hasRotatingPoint: false,
-                  // objectCaching: false,
+
+                  cornerColor: 'rgba(102,153,255,0.8)',
+                  objectCaching: true,
+                }).setControlsVisibility({
+                  'mtr': false,
+                  'mt': false,
+                  'mr': false,
+                  'ml': false,
+                  'mb': false,
                 });
               } else {
                 // landscape
@@ -442,12 +448,18 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                   opacity: .4,
                   strokeWidth: 0,
                   transparentCorners: false,
-                  cornerSize: 5,
-                  cornerColor: 'black',
-                  cornerStyle: 'rect',
+                  cornerSize: 10,
+                  cornerStyle: 'circle',
                   lockRotation: true,
-                  hasRotatingPoint: false,
-                  // objectCaching: true,
+                  setControlsVisibility: { 'mtr': false },
+                  cornerColor: 'rgba(102,153,255,0.8)',
+                  objectCaching: true,
+                }).setControlsVisibility({
+                  'mtr': false,
+                  'mt': false,
+                  'mr': false,
+                  'ml': false,
+                  'mb': false,
                 });
               }
               this.canvas.setDimensions({
@@ -545,9 +557,15 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     }
 
     // this.canvas.remove(this.cropRect);
-    this.imgUrl = this.image.scale(1).toDataURL(cropOptions);
+    this.imgUrl = this.image.set({
+      scaleX: 1,
+      scaleY: 1,
+    }).toDataURL(cropOptions);
     console.log('this.imgUrl', this.imgUrl);
-    const tmpCanvas = this.image.scale(1).toCanvasElement(cropOptions);
+    const tmpCanvas = this.image.set({
+      scaleX: 1,
+      scaleY: 1,
+    }).toCanvasElement(cropOptions);
 
     tmpCanvas.toBlob((blob) => {
       const file = new File([blob], 'img.png', { type: 'image/png' });
@@ -556,29 +574,38 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
         this.matSnackBar.open(error, '', { duration: 2000 });
         this.processingLoadPicture = false;
       } else {
+        // this.sharedService.uploadPicture(file, 'product', [
+        //   { width: 1100, height: 825, crop: 'fill', fetch_format: 'auto' }, // popup - lg, xl
+        //   { width: 760, height: 570, crop: 'fill', fetch_format: 'auto' }, // popp up - sm, md
+        //   { width: 590, height: 443, crop: 'fill', fetch_format: 'auto' }, // xs
+        //   { width: 460, height: 345, crop: 'fill', fetch_format: 'auto' }, // sm
+        //   { width: 360, height: 270, crop: 'fill', fetch_format: 'auto' }, // lg, xl
+        //   { width: 300, height: 225, crop: 'fill', fetch_format: 'auto' }, // md
+        // ])
         this.sharedService.uploadPicture(file, 'product', [
-          { width: 1100, height: 825, crop: 'fill', fetch_format: 'auto' }, // popup - lg, xl
-          { width: 760, height: 570, crop: 'fill', fetch_format: 'auto' }, // popp up - sm, md
-          { width: 590, height: 443, crop: 'fill', fetch_format: 'auto' }, // xs
-          { width: 460, height: 345, crop: 'fill', fetch_format: 'auto' }, // sm
-          { width: 360, height: 270, crop: 'fill', fetch_format: 'auto' }, // lg, xl
-          { width: 300, height: 225, crop: 'fill', fetch_format: 'auto' }, // md
+          { width: 1100, height: 1650, crop: 'fill', fetch_format: 'auto' }, // popup - lg, xl
+          { width: 760, height: 1140, crop: 'fill', fetch_format: 'auto' }, // popp up - sm, md
+          { width: 590, height: 885, crop: 'fill', fetch_format: 'auto' }, // xs
+          { width: 460, height: 690, crop: 'fill', fetch_format: 'auto' }, // sm
+          { width: 360, height: 540, crop: 'fill', fetch_format: 'auto' }, // lg, xl
+          { width: 300, height: 250, crop: 'fill', fetch_format: 'auto' }, // md
         ])
           .subscribe((public_id) => {
             this.productForm.get('picture').setValue(public_id);
             this.processingLoadPicture = false;
             this.canvasVisible = false;
+            this.imgUrl = null;
             this.productForm.get('picture').markAsDirty();
           },
             (err) => this.matSnackBar.open(err.error.message, '', { duration: 2000 }),
           );
       }
-    }, 'image/png' );
+    }, 'image/png');
 
-//     this.canvas.getObjects().map((x) => {
-// console.log('x', x);
-//        x.scale(1);
-//     })
+    //     this.canvas.getObjects().map((x) => {
+    // console.log('x', x);
+    //        x.scale(1);
+    //     })
     // this.canvas.renderAll();
     // this.imgUrl = this.canvas.toDataURL({ format: 'image/png'});
 

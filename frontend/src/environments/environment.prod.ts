@@ -11,67 +11,67 @@ export const environment = {
       ProductPicture: {
         xs: {
           w: 590,
-          h: 443
+          h: 885
         },
         sm: {
           w: 460,
-          h: 345
+          h: 690
         },
         md: {
           w: 300,
-          h: 225
+          h: 450
         },
         lg: {
           w: 360,
-          h: 270
+          h: 540
         },
         xl: {
           w: 360,
-          h: 270
+          h: 540
         }
       },
       DashboardProductPicture: {
         xs: {
           w: 590,
-          h: 443
+          h: 885
         },
         sm: {
           w: 460,
-          h: 345
+          h: 690
         },
         md: {
           w: 300,
-          h: 225
+          h: 450
         },
         lg: {
           w: 360,
-          h: 270
+          h: 540
         },
         xl: {
           w: 360,
-          h: 270
+          h: 540
         }
       },
       ModalProductPicture: {
         xs: {
           w: 590,
-          h: 443
+          h: 885
         },
         sm: {
-          w: 900,
-          h: 675
+          w: 760,
+          h: 1140
         },
         md: {
-          w: 1100,
-          h: 825
+          w: 760,
+          h: 1140
         },
         lg: {
           w: 1100,
-          h: 825
+          h: 1650
         },
         xl: {
           w: 1100,
-          h: 825
+          h: 1650
         }
       }
     }
