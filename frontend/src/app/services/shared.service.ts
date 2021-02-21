@@ -65,7 +65,7 @@ export class SharedService {
 
   createPictureOptions(productPictureSize: IPictureSize, screenType: ScreenTypes) {
     // tslint:disable-next-line: max-line-length
-    return `c_fill,w_${productPictureSize[screenType].w},h_${productPictureSize[screenType].h},f_auto/w_${(productPictureSize[screenType].w) * 0.5},g_south_east,x_5,y_5,l_hmade_logo_light_watermark`;
+    return `c_fill,w_${productPictureSize[screenType].w},h_${productPictureSize[screenType].h},f_auto/w_${(productPictureSize[screenType].w) * 0.5},g_south_east,x_50,y_80,l_hmade_logo_light_watermark`;
   }
 
   createPictureLink(pictureType: PictureTypes, screenType: ScreenTypes) {
