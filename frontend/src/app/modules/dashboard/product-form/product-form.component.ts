@@ -382,6 +382,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     if (error) {
       this.matSnackBar.open(error, '', { duration: 2000 });
       this.processingLoadPicture = false;
+      this.canvasVisible = false;
     } else {
       const fr = new FileReader();
 
@@ -399,8 +400,8 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
               this.canvasPristine = false;
 
               const imgRatio = oImg.height / oImg.width;
-              if (imgRatio >= 1) {
-                // portrait
+              if (imgRatio >= 1.5) {
+                // portrait v1
                 this.workingScale = this.initialCanvasSize.width / oImg.width;
                 this.workingCanvasSize = {
                   width: this.initialCanvasSize.width,
@@ -410,9 +411,8 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                   width: this.initialCanvasSize.width,
                   height: this.initialCanvasSize.height,
                   left: 0,
-                  top: 0,
+                  top: (this.workingCanvasSize.height - this.initialCanvasSize.height) / 2,
                   // top: (oImg.height - oImg.width * this.initialCanvasSize.ratio) / 2,
-                  // hasControls: false,
                   fill: 'white',
                   opacity: .4,
                   strokeWidth: 0,
@@ -420,7 +420,6 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                   cornerSize: 10,
                   cornerStyle: 'circle',
                   lockRotation: true,
-
                   cornerColor: 'rgba(102,153,255,0.8)',
                   objectCaching: true,
                 }).setControlsVisibility({
@@ -430,20 +429,19 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                   'ml': false,
                   'mb': false,
                 });
-              } else {
-                // landscape
+
+              } else if (imgRatio < 1.5 && imgRatio >= 1) {
+                // portrait v2
                 this.workingScale = this.initialCanvasSize.height / oImg.height;
                 this.workingCanvasSize = {
-                  width: this.initialCanvasSize.height * imgRatio,
-                  height: this.initialCanvasSize.height,
+                  width: oImg.width * this.workingScale,
+                  height: this.initialCanvasSize.height
                 };
                 this.cropRect = new fabric.Rect({
                   width: this.initialCanvasSize.width,
                   height: this.initialCanvasSize.height,
-                  left: 0,
-                  // left: (oImg.width - oImg.height / this.initialCanvasSize.ratio) / 2,
+                  left: (this.workingCanvasSize.width - this.initialCanvasSize.width) / 2,
                   top: 0,
-                  // hasControls: false,
                   fill: 'white',
                   opacity: .4,
                   strokeWidth: 0,
@@ -451,7 +449,36 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
                   cornerSize: 10,
                   cornerStyle: 'circle',
                   lockRotation: true,
-                  setControlsVisibility: { 'mtr': false },
+                  cornerColor: 'rgba(102,153,255,0.8)',
+                  objectCaching: true,
+                }).setControlsVisibility({
+                  'mtr': false,
+                  'mt': false,
+                  'mr': false,
+                  'ml': false,
+                  'mb': false,
+                });
+              }
+
+              else {
+                // landscape
+                this.workingScale = this.initialCanvasSize.height / oImg.height;
+                this.workingCanvasSize = {
+                  width: this.initialCanvasSize.width / imgRatio,
+                  height: this.initialCanvasSize.height,
+                };
+                this.cropRect = new fabric.Rect({
+                  width: this.initialCanvasSize.width,
+                  height: this.initialCanvasSize.height,
+                  left: (this.workingCanvasSize.width - this.initialCanvasSize.width) / 2,
+                  top: 0,
+                  fill: 'white',
+                  opacity: .4,
+                  strokeWidth: 0,
+                  transparentCorners: false,
+                  cornerSize: 10,
+                  cornerStyle: 'circle',
+                  lockRotation: true,
                   cornerColor: 'rgba(102,153,255,0.8)',
                   objectCaching: true,
                 }).setControlsVisibility({
