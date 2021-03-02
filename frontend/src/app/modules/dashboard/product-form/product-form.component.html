@@ -10,8 +10,7 @@
                 src="{{ productPicture.link + '/' + productForm.get('picture').value}}" alt="Picture">
               <img class="pictureForm__picture" *ngIf="!productForm.get('picture').value && !imgUrl"
                 src="{{ productPicture.link + '/' + environment.defaults.productPicture}}" alt="Picture">
-              <img class="pictureForm__picture" *ngIf="imgUrl" [src]="imgUrl"
-                alt="Picture" width="360" height="540">
+              <img class="pictureForm__picture" *ngIf="imgUrl" [src]="imgUrl" alt="Picture" width="360" height="540">
               <input #inputPictureDirective type="file" (change)="addPicture($event)"
                 accept=".jpg, .jpe, .jpeg, .bmp, .webp, .png, .gif, .svg" style="display:none;">
               <!-- <mat-spinner *ngIf="processingLoadPicture" class="addPicture__spinner" [diameter]="24"></mat-spinner> -->

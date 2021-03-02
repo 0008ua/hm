@@ -1,4 +1,4 @@
-const newLocal = "never";
+const newLocal = 'never';
 module.exports = {
   'env': {
     'browser': true,
@@ -29,6 +29,7 @@ module.exports = {
     'new-cap': 0,
     'require-jsdoc': 0,
     'no-invalid-this': 0,
-    'camelcase': ['error', { allow: ['(.*?)_id(.*?)'] }],
+    'camelcase': ['error', { allow: ['(.*?)_id(.*?)', '(.*?)_format(.*?)']}],
+    'linebreak-style': 0,
   },
 };

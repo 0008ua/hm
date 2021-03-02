@@ -2,10 +2,13 @@
   <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 </div>
 <div class="container-h">
+  <app-product-breadcrumb></app-product-breadcrumb>
+
+</div>
+<div class="container-h">
   <div class="container">
     <div class="row" fxLayout="row">
       <div class="cell" fxFlex="100">
-        <app-product-breadcrumb></app-product-breadcrumb>
       </div>
       <div *ngIf="mainPage" class="cell" fxFlex="100" fxLayoutAlign="start">
         <h1 class="h1">{{'headings.mainPage' | translate}}</h1>
@@ -16,8 +19,8 @@
       <div class="cell_full-width" fxFlex.lt-md="100" fxFlex.md="75" fxFlex.gt-md="80">
         <div class="container">
           <div class="row" fxLayout="row">
-            <div *ngFor="let product of products" class="cell_product animationAppear05s" fxFlex.xs="100"
-              fxFlex.sm="50" fxFlex.md="33.3" fxFlex.lg="25" fxFlex.xl="20">
+            <div *ngFor="let product of products" class="cell_product animationAppear05s" fxFlex.xs="100" fxFlex.sm="50"
+              fxFlex.md="33.3" fxFlex.lg="25" fxFlex.xl="20">
               <app-product-item [product]="product" [loading]="loading"></app-product-item>
             </div>
           </div>
@@ -37,7 +40,7 @@
         </div>
       </div>
       <div class="container">
-      
+
       </div>
     </div>
   </div>

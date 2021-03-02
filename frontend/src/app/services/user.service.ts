@@ -8,96 +8,95 @@ import { Store } from '@ngrx/store';
 import { State } from '../reducers';
 import { environment } from '../../environments/environment';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
 private user: IUser;
 private environment = environment;
 
-  constructor(
+constructor(
     private http: HttpClient,
     private cookieService: CookieService,
     private store: Store<State>,
-  ) {
-    this.store.select('auth')
-      .subscribe(storeState => this.user = storeState.user);
+) {
+  this.store.select('auth')
+      .subscribe((storeState) => this.user = storeState.user);
+}
+
+getUser(): Observable<IUser | null> {
+  const cookie = this.cookieService.get('hm');
+  if (cookie) {
+    const helper = new JwtHelperService();
+    const user = helper.decodeToken(cookie).sub;
+    return of(user);
   }
+  return of(null);
+}
 
-  getUser(): Observable<IUser | null> {
-    const cookie = this.cookieService.get('hm');
-    if (cookie) {
-      const helper = new JwtHelperService();
-      const user = helper.decodeToken(cookie).sub;
-      return of(user);
-    }
-    return of(null);
-  }
+logout(): Observable<string> {
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
 
-  logout(): Observable<string> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    };
-
-    return this.http.get<string>(
+  return this.http.get<string>(
       'api/user/logout',
-      httpOptions
-    );
-  }
+      httpOptions,
+  );
+}
 
-  /** Session
+/** Session
    * Used for router guard (canActivate)
    *
    */
-  userCheckAuthorization(requiredRoleForAuthentication: string): Observable<boolean> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-      params: new HttpParams({ fromString: `role=${requiredRoleForAuthentication}` })
+userCheckAuthorization(requiredRoleForAuthentication: string): Observable<boolean> {
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+    params: new HttpParams({ fromString: `role=${requiredRoleForAuthentication}` }),
 
-    };
-    return this.http.get<boolean>(
+  };
+  return this.http.get<boolean>(
       'api/user/checkAuthorization',
-      httpOptions
-    );
-  }
+      httpOptions,
+  );
+}
 
-  /**
+/**
    * Helper for frontend authorization
    * Check user permittion for some restricted actions
    * like menu displaying..
    *
    */
-  allowTo(permitedRole: string): boolean {
-    const permissions = this.environment.permissions;
-    if (!this.user._id && permitedRole === 'notUser') {
-      return true;
-    }
-    if (!this.user._id) {
-      return false;
-    }
-    const roleFromCookie = this.user.role;
-    if (permissions[roleFromCookie].indexOf(permitedRole) >= 0) {
-      return true;
-    } else {
-      return false;
-    }
+allowTo(permitedRole: string): boolean {
+  const permissions = this.environment.permissions;
+  if (!this.user._id && permitedRole === 'notUser') {
+    return true;
   }
-
-  restrictTo(restrictedRoles: string[]): boolean {
-    if (!this.user) {
-      return true;
-    }
-    const roleFromCookie = this.user.role;
-    if (restrictedRoles.indexOf(roleFromCookie) >= 0) {
-      return false;
-    } else {
-      return true;
-    }
+  if (!this.user._id) {
+    return false;
   }
+  const roleFromCookie = this.user.role;
+  if (permissions[roleFromCookie].indexOf(permitedRole) >= 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
+restrictTo(restrictedRoles: string[]): boolean {
+  if (!this.user) {
+    return true;
+  }
+  const roleFromCookie = this.user.role;
+  if (restrictedRoles.indexOf(roleFromCookie) >= 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
 }
 
 

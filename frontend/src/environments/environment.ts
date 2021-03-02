@@ -15,70 +15,70 @@ export const environment = {
       ProductPicture: {
         xs: {
           w: 590,
-          h: 885
+          h: 885,
         },
         sm: {
           w: 460,
-          h: 690
+          h: 690,
         },
         md: {
           w: 300,
-          h: 450
+          h: 450,
         },
         lg: {
           w: 360,
-          h: 540
+          h: 540,
         },
         xl: {
           w: 360,
-          h: 540
-        }
+          h: 540,
+        },
       },
       DashboardProductPicture: {
         xs: {
           w: 590,
-          h: 885
+          h: 885,
         },
         sm: {
           w: 460,
-          h: 690
+          h: 690,
         },
         md: {
           w: 300,
-          h: 450
+          h: 450,
         },
         lg: {
           w: 360,
-          h: 540
+          h: 540,
         },
         xl: {
           w: 360,
-          h: 540
-        }
+          h: 540,
+        },
       },
       ModalProductPicture: {
         xs: {
           w: 590,
-          h: 885
+          h: 885,
         },
         sm: {
           w: 760,
-          h: 1140
+          h: 1140,
         },
         md: {
           w: 760,
-          h: 1140
+          h: 1140,
         },
         lg: {
           w: 1100,
-          h: 1650
+          h: 1650,
         },
         xl: {
           w: 1100,
-          h: 1650
-        }
-      }
-    }
+          h: 1650,
+        },
+      },
+    },
     // pictureSize: {
     //   ProductPicture: {
     //     xs: {
@@ -156,8 +156,8 @@ export const environment = {
       sm: 6,
       md: 9,
       lg: 12,
-      xl: 15
-    }
+      xl: 15,
+    },
   },
   permissions: {
     admin: ['casual', 'guest', 'user', 'manager', 'admin', 'google', 'facebook'],
@@ -166,7 +166,7 @@ export const environment = {
     google: ['casual', 'guest', 'user', 'google'],
     facebook: ['casual', 'guest', 'user', 'facebook'],
     guest: ['casual', 'guest'],
-    casual: ['casual']
+    casual: ['casual'],
   },
 
   sortQueries: {

@@ -5,7 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { UserService } from './user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
   constructor(
@@ -13,14 +13,13 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+      next: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const requiredRoleForAuthorization = next.data.auth; // from routing.module
     return this.userService.userCheckAuthorization(requiredRoleForAuthorization)
-      .pipe(
-        map((permission) => permission),
-        catchError(err => of(false))
-      );
+        .pipe(
+            map((permission) => permission),
+            catchError((err) => of(false)),
+        );
   }
 }
