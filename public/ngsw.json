@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1614679147078,
+  "timestamp": 1667971968061,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -75,10 +75,10 @@
     "/assets/images/hmade_logo_light.svg": "41855ebb46f02b658a3ff27e919f57973d4928a4",
     "/assets/images/loading.svg": "e515b13cc79c383c3fe0594e593cc24b669ca81c",
     "/favicon.ico": "3581640704ffb32dca6a10acca86bcca2471514a",
-    "/index.html": "e4c592f51cbfd30b94394530a02637e66a2803d9",
+    "/index.html": "6a4259ffd3c2c5a30696cc1eced8fd81068f2f9f",
     "/main-es2015.55f37dfdff6dc8c7d06a.js": "86c72b378b4f0d14a69ba1ceed65985c4b28b86a",
     "/main-es5.55f37dfdff6dc8c7d06a.js": "22f8d44ac7202c1c7e43f04775d9b1ffeb06c774",
-    "/manifest.webmanifest": "620922b1f6ffec266ca85a94052385bbe13180e0",
+    "/manifest.webmanifest": "82677efe634215ea713ff7c61cf1f1b2eff47182",
     "/polyfills-es2015.61453aece985628de441.js": "e0beba5d1ab83a602698e7bd630f7552b06cb1e1",
     "/polyfills-es5.f1ac11c663e31a52f700.js": "043d6b14f3af6d5f7b58a8409fef1c905e65012f",
     "/runtime-es2015.1f9f9544591215269986.js": "8ca7037bae09b4920434625dd669b65a38d2378a",
